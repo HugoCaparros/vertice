@@ -1,0 +1,195 @@
+/* Ruta: /assets/css/components/footer.css
+   Descripción: Estilos para el pie de página global con diseño de marca e información de contacto. */
+
+.site-footer {
+    background-color: var(--color-negro);
+    color: var(--text-inverse);
+    
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-6);
+    
+    font-family: var(--font-sans);
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid var(--color-gris-oscuro);
+}
+
+.footer-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ==========================================================================
+   SECCIÓN SUPERIOR (Marca y Navegación)
+   ========================================================================== */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-12);
+    margin-bottom: var(--space-8);
+}
+
+/* Marca y Logo */
+.footer-brand {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.footer-slogan {
+    font-family: var(--font-sans);
+    font-size: var(--size-h2);
+    font-weight: var(--weight-semibold);
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--text-inverse);
+    letter-spacing: 0.02em;
+}
+
+/* Selector ajustado al HTML del paso anterior */
+.footer-logo-img {
+    height: 24px; /* Tamaño texto elegante */
+    width: auto;
+    display: block;
+    /* No hace falta filtro si usas logo_blanco.svg */
+}
+
+/* Navegación */
+.footer-nav {
+    display: flex;
+    gap: var(--space-12);
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    min-width: 140px;
+}
+
+.footer-col h4 {
+    font-size: var(--size-small);
+    font-weight: 700;
+    color: var(--text-inverse);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: var(--space-3);
+}
+
+.footer-col ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: var(--size-small);
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+}
+
+.footer-col ul li a:hover {
+    color: var(--text-inverse);
+}
+
+/* ==========================================================================
+   DIVISOR
+   ========================================================================== */
+.footer-divider {
+    border: 0;
+    border-top: 1px solid var(--color-gris-oscuro);
+    margin-bottom: var(--space-4);
+}
+
+/* ==========================================================================
+   SECCIÓN INFERIOR (Legales y Social)
+   ========================================================================== */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+}
+
+/* Links Legales */
+.footer-legal {
+    display: flex;
+    gap: var(--space-8);
+}
+
+.footer-legal a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px; /* Un poco más pequeño que el body */
+    text-transform: uppercase;
+    font-weight: var(--weight-medium);
+    transition: color var(--transition-fast);
+}
+
+.footer-legal a:hover {
+    color: var(--text-inverse);
+}
+
+/* Redes Sociales */
+.footer-social {
+    display: flex;
+    gap: var(--space-6);
+}
+
+.footer-social a {
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.footer-social a:hover {
+    color: var(--text-inverse);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
+    .footer-top {
+        flex-direction: column;
+        gap: var(--space-8);
+        margin-bottom: var(--space-6);
+    }
+    
+    .footer-brand {
+        max-width: 100%;
+        margin-bottom: var(--space-4);
+    }
+    
+    .footer-slogan {
+        font-size: 24px;
+    }
+
+    .footer-nav {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8) var(--space-4);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+}

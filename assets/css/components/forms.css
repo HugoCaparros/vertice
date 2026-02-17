@@ -1,0 +1,39 @@
+/* Ruta: /assets/css/components/forms.css
+   Descripción: Estilos para elementos de formulario e inputs. */
+
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+label {
+  display: block;
+  font: var(--font-small);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-2);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-control {
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 var(--space-4);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--border-fuerte);
+}
+
+/* Validación */
+.form-control.error {
+  border-color: var(--text-error);
+  color: var(--text-error);
+}

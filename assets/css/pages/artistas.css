@@ -1,0 +1,81 @@
+/* Ruta: /assets/css/pages/artistas.css
+   Descripción: Estilos para la lista y el grid de artistas con soporte para skeleton loading. */
+
+.page-header {
+    padding: var(--space-header) var(--container-padding) var(--space-8);
+    text-align: left;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.page-header h1 {
+    font: var(--font-h1);
+    font-size: 72px; /* Tamaño Hero */
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: var(--space-4);
+}
+
+.page-header p {
+    font: var(--font-body);
+    color: var(--text-muted);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    max-width: 600px;
+}
+
+/* Grid de Artistas */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+    padding: 0 var(--container-padding) var(--space-16);
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* Esqueleto de carga (Skeleton) con tus tokens */
+.skeleton {
+    background: var(--color-gris-claro);
+    background: linear-gradient(90deg, 
+        var(--color-gris-claro) 25%, 
+        var(--hover-blanco) 50%, 
+        var(--color-gris-claro) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+}
+
+.skeleton-text {
+    height: 20px;
+    margin-bottom: var(--space-3);
+    border-radius: var(--input-radius);
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+/* Responsive */
+@media(max-width: 1024px) {
+    .artists-grid { grid-template-columns: repeat(3, 1fr); }
+    .page-header h1 { font-size: 56px; }
+}
+
+@media(max-width: 768px) {
+    .artists-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .page-header h1 { font-size: 42px; }
+}
+
+@media(max-width: 480px) {
+    .artists-grid { grid-template-columns: 1fr; }
+}

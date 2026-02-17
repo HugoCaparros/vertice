@@ -1,0 +1,49 @@
+/* Ruta: /assets/css/components/buttons.css
+   Descripción: Estilos para botones reutilizables del sitio. */
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font: var(--font-button);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+/* Botón Principal (Rojo Marca) */
+.btn-primary {
+  background-color: var(--bg-accent);
+  color: var(--text-inverse);
+}
+
+.btn-primary:hover {
+  background-color: var(--hover-rojo);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Botón Secundario (Negro) */
+.btn-secondary {
+  background-color: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--hover-negro);
+}
+
+/* Botón Outline (Borde) */
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--border-fuerte);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-inverse);
+  color: var(--text-inverse);
+}

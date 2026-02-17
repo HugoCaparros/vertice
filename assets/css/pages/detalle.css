@@ -1,0 +1,222 @@
+/* ==========================================================================
+   OBRA DETALLE - ADN VÉRTICE (AJUSTE DE PRECISIÓN)
+   ========================================================================== */
+
+.detalle-container {
+    padding-top: var(--space-header); 
+    padding-bottom: var(--space-16);
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    background-color: var(--bg-page);
+}
+
+/* 1. Layout con Grid: Ajustado para dar más aire al texto */
+.obra-view {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-16); /* Aumentado para separar imagen de info */
+    align-items: start;
+}
+
+/* 2. Galería / Media */
+.obra-media {
+    position: sticky;
+    top: calc(var(--space-header) + var(--space-4));
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-sutil);
+    overflow: hidden;
+    /* Limitamos altura para evitar scroll excesivo de la imagen */
+    max-height: 75vh;
+}
+
+.main-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* Cambiado a cover para llenar el contenedor como en la captura */
+    transition: transform var(--transition-smooth);
+}
+
+.obra-media:hover .main-img {
+    transform: scale(1.02);
+}
+
+/* 3. Panel de Información: Alineación corregida */
+.obra-info-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 75vh; /* Sincronizado con la altura de la imagen */
+}
+
+.info-header {
+    margin-bottom: var(--space-8);
+}
+
+.categoria-label {
+    font: var(--font-small);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.obra-titulo {
+    font: var(--font-h1);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.obra-artista {
+    font: var(--font-h3);
+    color: var(--text-secondary);
+}
+
+/* Nombre del artista resaltado en rojo según captura */
+.obra-artista strong {
+    color: var(--color-rojo);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+}
+
+/* 4. Bloque de Metadatos (Pestañas ajustadas) */
+.tabs-container { 
+    margin: var(--space-12) 0 var(--space-6); 
+}
+
+.tab-header {
+    display: flex;
+    gap: var(--space-6);
+    border-bottom: 1px solid var(--border-sutil);
+    margin-bottom: var(--space-6);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: var(--space-2) 0;
+    font: var(--font-small);
+    color: var(--text-muted);
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    transition: color var(--transition-fast);
+    font-weight: var(--weight-medium);
+}
+
+.tab-btn.active {
+    color: var(--text-primary);
+    font-weight: var(--weight-semibold);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-rojo); /* Línea de acento roja */
+}
+
+.obra-meta {
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--border-sutil);
+    border-bottom: 1px solid var(--border-sutil);
+}
+
+.obra-descripcion {
+    font: var(--font-body);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Bloque Inferior: Empujado al final del panel */
+.price-action-block {
+    margin-top: auto; 
+    padding-top: var(--space-12);
+}
+
+.obra-precio {
+    font: var(--font-h2);
+    color: var(--color-rojo) !important;
+    margin-bottom: var(--space-6);
+}
+
+/* 6. Botones de Acción: Más robustos */
+.obra-actions {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.btn-primary {
+    flex: 1;
+    height: 56px; /* Aumentado para coincidir con captura */
+    background-color: var(--color-negro);
+    color: var(--text-inverse);
+    border: none;
+    font: var(--font-button);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-negro);
+}
+
+.btn-secondary {
+    width: 56px;
+    height: 56px;
+    background: transparent;
+    border: 1px solid var(--border-fuerte);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+/* --- RECOMENDACIONES --- */
+.related-works-section {
+    background-color: var(--bg-secondary);
+    padding: var(--space-16) var(--container-padding);
+    margin-top: var(--space-16);
+}
+
+.related-title {
+    font: var(--font-h2);
+    text-align: center;
+    margin-bottom: var(--space-12);
+    letter-spacing: 0.1em;
+}
+
+/* 7. Adaptación Móvil */
+@media (max-width: 1024px) {
+    .obra-view {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+    
+    .obra-media {
+        position: relative;
+        top: 0;
+        max-height: 50vh;
+    }
+
+    .obra-info-panel {
+        min-height: auto;
+    }
+
+    .obra-titulo {
+        font-size: 32px;
+    }
+}

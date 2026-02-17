@@ -1,0 +1,44 @@
+/* Ruta: /assets/css/main.css
+   Descripción: Archivo maestro de estilos que importa y orquestra toda la arquitectura CSS. */
+
+/* --------------------------------------------------------------------------
+   1. BASE (Los cimientos)
+   Debe ir primero porque define las variables de color y resetea el navegador.
+   -------------------------------------------------------------------------- */
+@import 'base/variables.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+
+/* --------------------------------------------------------------------------
+   2. COMPONENTES (Piezas reutilizables)
+   Botones, barras de navegación, pies de página, inputs...
+   -------------------------------------------------------------------------- */
+@import 'components/buttons.css';
+@import 'components/navbar.css';
+@import 'components/footer.css';
+@import 'components/forms.css';   /* Importante para los inputs */
+@import 'components/cards.css';
+@import 'components/modal.css';   /* Si tienes modales */
+/* Si tienes más componentes (modal, carousel), añádelos aquí */
+
+/* --------------------------------------------------------------------------
+   3. PÁGINAS (Estilos específicos por vista)
+   Aquí cargamos el diseño único del login, home, perfil, etc.
+   -------------------------------------------------------------------------- */
+@import 'pages/home.css';
+@import 'pages/auth.css';    /* El diseño dividido de Login/Registro */
+@import 'pages/perfil.css';
+@import 'pages/catalogo.css'; /* Si lo tienes creado */
+
+/* --------------------------------------------------------------------------
+   4. UTILIDADES GLOBALES (Opcional)
+   Clases rápidas que quieras usar en cualquier sitio
+   -------------------------------------------------------------------------- */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.d-none { display: none; }
+
+/* Espaciadores rápidos (Margen inferior) */
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-8 { margin-bottom: var(--space-8); }

@@ -1,0 +1,70 @@
+/* Ruta: /assets/css/pages/catalogo.css
+   Descripción: Estilos para la vista de catálogo general y colecciones. */
+
+.page-header {
+    padding: var(--space-header) var(--container-padding) var(--space-8);
+    text-align: center;
+}
+
+.cat-desc {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+}
+
+/* Toolbar de Filtros */
+.toolbar-container {
+    max-width: var(--container-width);
+    margin: 0 auto var(--space-lg);
+    padding: 0 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-grisclaro);
+    padding-bottom: var(--space-md);
+}
+
+/* Grid de Colección */
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    padding: 0 5% 6rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.collection-item {
+    aspect-ratio: 3/4;
+    background: var(--bg-secondary);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.collection-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.collection-item:hover img {
+    transform: scale(1.05);
+}
+
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: var(--color-blanco);
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.collection-item:hover .item-overlay { opacity: 1; }
