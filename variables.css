@@ -1,0 +1,144 @@
+:root {
+    /* ========================================================================
+       1. PALETA DE COLOR (ADN de la Marca)
+    ======================================================================== */
+    /* Colores Base */
+    --color-negro:        #111111;
+    --color-blanco:       #FAFAFA; /* Blanco cálido según diseño */
+    
+    /* Escala de Grises */
+    --color-gris-claro:   #E5E5E5;
+    --color-gris-medio:   #8C8C8C;
+    --color-gris-oscuro:  #333333;
+
+    /* Colores de Acento & Estado */
+    --color-rojo:         #8B2E2F; /* Tu color de marca principal */
+    --color-verde:        #32843E; /* Éxito */
+
+    /* ========================================================================
+       2. HOVERS & INTERACCIÓN (Calculados para consistencia)
+    ======================================================================== */
+    /* Cuando pasas el mouse sobre Negro (#111111) -> Se aclara al Gris Oscuro */
+    --hover-negro:        #333333; 
+    
+    /* Cuando pasas el mouse sobre Blanco (#FAFAFA) -> Se oscurece un poco */
+    --hover-blanco:       #EDEDED; 
+    
+    /* Cuando pasas el mouse sobre el Rojo (#8B2E2F) -> Se oscurece para efecto "click" */
+    --hover-rojo:         #6E2425; 
+    
+    /* Hover del Verde */
+    --hover-verde:        #26632F;
+
+    /* Hover de enlaces de texto (Gris Medio -> Negro) */
+    --hover-link:         var(--color-negro);
+
+    /* ========================================================================
+       3. TOKENS SEMÁNTICOS (Uso real en la web)
+    ======================================================================== */
+    /* Fondos */
+    --bg-page:            var(--color-blanco);
+    --bg-surface:         #FFFFFF;                 /* Tarjetas o contenedores puros */
+    --bg-secondary:       var(--color-gris-claro); /* Fondos alternativos */
+    --bg-inverse:         var(--color-negro);      /* Botones negros, footer */
+    --bg-accent:          var(--color-rojo);       /* Botones de acción principal */
+
+    /* Textos */
+    --text-primary:       var(--color-negro);      /* Títulos y cuerpo principal */
+    --text-secondary:     var(--color-gris-oscuro);/* Subtítulos */
+    --text-muted:         var(--color-gris-medio); /* Textos de apoyo / fechas */
+    --text-inverse:       var(--color-blanco);     /* Texto sobre fondo negro/rojo */
+    --text-error:         var(--color-rojo);
+
+    /* Bordes */
+    --border-sutil:       var(--color-gris-claro);
+    --border-fuerte:      var(--color-negro);
+    --border-focus:       var(--color-gris-medio);
+
+    /* ========================================================================
+       4. TIPOGRAFÍA
+    ======================================================================== */
+    /* Familias */
+    --font-serif:         'Marcellus', serif;
+    --font-sans:          'Inter', sans-serif;
+
+    /* Tamaños (Extraídos de tu guía de estilos) */
+    --size-h1:            48px; /* 3rem */
+    --size-h2:            36px; /* 2.25rem */
+    --size-body:          16px; /* 1rem (Text 1 & Button) */
+    --size-small:         12px; /* 0.75rem (Text 2) */
+
+    /* Pesos (Weights) */
+    --weight-regular:     400;
+    --weight-medium:      500;
+    --weight-semibold:    600;
+
+    /* DEFINICIONES COMPLETAS (Shorthands) */
+    
+    /* H1: Marcellus / 48px / Regular */
+    --font-h1:            var(--weight-regular) var(--size-h1)/1.2 var(--font-serif);
+    
+    /* H2: Inter / 36px / Medium (¡Ojo! Aquí cambia a Inter según tu imagen) */
+    --font-h2:            var(--weight-medium) var(--size-h2)/1.3 var(--font-sans);
+    
+    /* H3/Subtítulos: Inter / 20px / Medium (Interpolado) */
+    --font-h3:            var(--weight-medium) 1.25rem/1.4 var(--font-sans);
+
+    /* Body/Text 1: Inter / 16px / Medium */
+    --font-body:          var(--weight-medium) var(--size-body)/1.6 var(--font-sans);
+    
+    /* Button: Inter / 16px / Semi Bold */
+    --font-button:        var(--weight-semibold) var(--size-body)/1 var(--font-sans);
+    
+    /* Small/Text 2: Inter / 12px / Medium */
+    --font-small:         var(--weight-medium) var(--size-small)/1.5 var(--font-sans);
+
+    /* ========================================================================
+       5. ESPACIADO Y LAYOUT
+    ======================================================================== */
+    --space-1:            0.25rem; /* 4px */
+    --space-2:            0.5rem;  /* 8px */
+    --space-3:            0.75rem; /* 12px */
+    --space-4:            1rem;    /* 16px */
+    --space-6:            1.5rem;  /* 24px */
+    --space-8:            2rem;    /* 32px */
+    --space-12:           3rem;    /* 48px */
+    --space-16:           4rem;    /* 64px */
+    --space-header:       160px;   /* Altura de seguridad del navbar */
+    
+    --container-width:    1400px;
+    --container-padding:  5%;
+
+    /* ========================================================================
+       6. UI COMPONENTES
+    ======================================================================== */
+    /* Inputs */
+    --input-height:       48px;
+    --input-bg:           #FFFFFF;
+    --input-border:       var(--color-gris-claro);
+    --input-radius:       0px;
+
+    /* Botones */
+    --btn-height:         48px;
+    --btn-padding:        0 32px;
+    --btn-radius:         0px;
+
+    /* ========================================================================
+       7. EFECTOS Y ANIMACIONES
+    ======================================================================== */
+    /* Sombras */
+    --shadow-sm:          0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md:          0 8px 16px rgba(0,0,0,0.08);
+    --shadow-floating:    0 20px 40px rgba(0,0,0,0.12);
+
+    /* Transiciones */
+    --transition-fast:    0.2s ease;
+    --transition-smooth:  0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Z-Index */
+    --z-back:             -1;
+    --z-normal:           1;
+    --z-navbar:           1000;
+    --z-modal-bg:         1900;
+    --z-modal:            2000;
+}
