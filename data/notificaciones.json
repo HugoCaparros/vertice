@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "usuario_destino_id": 1,
+    "tipo": "new_drop",
+    "leido": false,
+    "fecha": "Hace 10 min",
+    "titulo": "Leo Nakamura ha publicado obra nueva",
+    "mensaje": "Mira 'Midnight Protocol' antes de que se haga viral.",
+    "imagen": "assets/img/leo_nakamura.jpg",
+    "link_id": 112,
+    "link_tipo": "obra"
+  },
+  {
+    "id": 2,
+    "usuario_destino_id": 1,
+    "tipo": "follow",
+    "leido": false,
+    "fecha": "Hace 2 horas",
+    "titulo": "Nuevo seguidor",
+    "mensaje": "@curator_jane ha comenzado a seguirte.",
+    "imagen": "assets/img/avatars/user_jane.jpg",
+    "link_id": 2,
+    "link_tipo": "usuario"
+  },
+  {
+    "id": 3,
+    "usuario_destino_id": 1,
+    "tipo": "like",
+    "leido": true,
+    "fecha": "Hace 5 horas",
+    "titulo": "A @glitch_boy le gustó tu colección",
+    "mensaje": "Mark Z. guardó tu colección 'Inspiración Neon'.",
+    "imagen": "assets/img/obras/moderno-5.jpg",
+    "link_id": 1,
+    "link_tipo": "coleccion"
+  },
+  {
+    "id": 4,
+    "usuario_destino_id": 1,
+    "tipo": "system",
+    "leido": true,
+    "fecha": "Hace 1 día",
+    "titulo": "Bienvenido a Vértice",
+    "mensaje": "Completa tu perfil para obtener mejores recomendaciones de arte basadas en tus gustos.",
+    "imagen": "assets/img/logo_small.png",
+    "link_id": null,
+    "link_tipo": "settings"
+  },
+  {
+    "id": 5,
+    "usuario_destino_id": 1,
+    "tipo": "comentario",
+    "leido": true,
+    "fecha": "Hace 2 días",
+    "titulo": "Mención en comentario",
+    "mensaje": "@curator_jane te mencionó en 'Venus Glitch': 'Tienes que ver esto @alex_collector'.",
+    "imagen": "assets/img/obras/clasico-2.jpg",
+    "link_id": 102,
+    "link_tipo": "obra"
+  }
+]

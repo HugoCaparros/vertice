@@ -1,0 +1,102 @@
+<!-- Ruta: /pages/catalogo/artistas.html
+     Descripción: Página de visualización de la lista de artistas con efecto de carga progresiva y diseño responsivo. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistas | VÉRTICE</title>
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+    <link rel="stylesheet" href="../../assets/css/components/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/components/footer.css">
+    <link rel="stylesheet" href="../../assets/css/components/cards.css">
+    <link rel="stylesheet" href="../../assets/css/components/buttons.css">
+    <link rel="stylesheet" href="../../assets/css/pages/artistas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main>
+        <header class="page-header">
+            <h1>NUESTROS CREADORES</h1>
+            <p>Visionarios que redefinen el arte contemporáneo</p>
+        </header>
+
+        <section class="artists-grid" id="artists-grid-container">
+            <!-- Skeleton Loaders (Se reemplazarán por JS) -->
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+            <article class="artist-card artist-card-skeleton">
+                <div class="skeleton skeleton-img"></div>
+                <div class="artist-info">
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('../partials/footer.html').then(r => r.text()).then(h => document.getElementById('footer-placeholder').innerHTML = h);
+    </script>
+    <script src="../../assets/js/services/dataLoader.js"></script>
+    <script src="../../assets/js/components/layout.js"></script>
+    <script src="../../assets/js/services/auth.js"></script>
+    <script src="../../assets/js/pages/details.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!-- Ruta: /index.html
+     Descripción: Punto de entrada principal y página de inicio de la Galería Vértice. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VÉRTICE - Galería de arte digital y colección exclusiva.">
+    <title>VÉRTICE | Galería de Arte</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/base/variables.css">
+    <link rel="stylesheet" href="assets/css/base/reset.css">
+    <link rel="stylesheet" href="assets/css/base/typography.css">
+
+    <link rel="stylesheet" href="assets/css/components/navbar.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/components/cards.css">
+    <link rel="stylesheet" href="assets/css/components/modal.css">
+    
+    <link rel="stylesheet" href="assets/css/pages/detalle.css">
+    <link rel="stylesheet" href="assets/css/pages/home.css">
+    <link rel="stylesheet" href="assets/css/pages/auth.css">
+</head>
+
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="home-container">
+        <div class="selection-wrapper">
+            <h1 class="selection-title">SELECCIONA CATEGORÍA</h1>
+
+            <nav class="category-nav">
+                <a href="pages/catalogo/moderno.html" class="cat-trigger" data-cat="moderno">MODERNO</a>
+                <a href="pages/catalogo/clasico.html" class="cat-trigger" data-cat="clasico">CLÁSICO</a>
+                <a href="pages/catalogo/abstracto.html" class="cat-trigger" data-cat="abstracto">ABSTRACTO</a>
+            </nav>
+
+            <div class="preview-grid" id="art-grid">
+                <div class="art-slot"></div>
+                <div class="art-slot"></div>
+                <div class="art-slot"></div>
+                <div class="art-slot"></div>
+                <div class="art-slot"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <div id="obra-modal" class="modal-overlay">
+        <div class="modal-content modal-detalle-exclusivo">
+            <button class="modal-close" id="close-obra-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <div id="authRequiredModal" class="modal-overlay">
+        <div class="modal-content modal-exclusive">
+            <button class="modal-close" id="closeAuthModal">&times;</button>
+            <div class="modal-header-logo">
+                <img src="assets/icons/Logo_negro.svg" alt="VÉRTICE">
+            </div>
+            <h2 class="modal-title">CONTENIDO EXCLUSIVO</h2>
+            <p class="modal-description">
+                Únete a nuestra comunidad para acceder a la colección completa de artistas y obras.
+            </p>
+            <div class="modal-buttons">
+                <a href="pages/auth/login.html" class="btn-modal-solid">INICIAR SESIÓN</a>
+                <a href="pages/auth/register.html" class="btn-modal-outline">REGISTRARSE</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/services/dataLoader.js"></script>
+    <script src="assets/js/components/layout.js"></script>
+    <script src="assets/js/pages/details.js"></script> <script src="assets/js/pages/home.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

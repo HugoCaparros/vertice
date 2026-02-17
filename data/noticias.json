@@ -1,0 +1,12 @@
+[
+  {
+    "id": 401,
+    "titulo": "El resurgir del Neo-Renacimiento",
+    "categoria_id": "clasico",
+    "autor": "Dra. Elena S.",
+    "extracto": "Por qué los artistas jóvenes están volviendo al caballete en un mundo saturado de píxeles.",
+    "fecha": "2026-02-01",
+    "lectura_minutos": 6,
+    "imagen": "assets/img/noticias/blog-clasico.jpg"
+  }
+]

@@ -1,0 +1,170 @@
+<!-- Ruta: /pages/auth/login.html
+     Descripción: Página de acceso y registro de usuarios con panel deslizante. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉRTICE | Acceso</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+    <link rel="stylesheet" href="../../assets/css/pages/auth.css">
+
+    <link rel="preload" as="image" href="../../assets/img/LoginBackgroundPage2.png">
+</head>
+
+<body>
+
+    <div class="auth-container" id="authContainer">
+
+        <div class="form-container sign-up-container">
+
+            <div style="position: absolute; top: 30px; left: 30px;">
+                <a href="../../index.html" class="auth-link" style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
+                </a>
+            </div>
+
+            <div class="auth-form-wrapper">
+                <img src="../../assets/icons/Logo_negro.svg" alt="VÉRTICE" class="auth-logo">
+                <h1 class="auth-title">Crear Cuenta</h1>
+                <p class="auth-subtitle">Únete a Galería Vértice</p>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <input type="text" id="nombre" class="form-input" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="emailReg" class="form-input" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-select-wrapper">
+                            <input type="hidden" id="tipoUsuario" name="tipoUsuario" value="">
+
+                            <div class="custom-select-trigger">
+                                <span id="selectText">Tipo de Usuario</span>
+                                <i class="fa-solid fa-chevron-down select-arrow"></i>
+                            </div>
+                            <div class="custom-options">
+                                <span class="custom-option" data-value="artista">Artista</span>
+                                <span class="custom-option" data-value="coleccionista">Coleccionista</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="passwordReg" class="form-input" placeholder="Contraseña" required
+                            minlength="6">
+                        <i class="fa-regular fa-eye show-pass-icon" id="toggleRegPass"></i>
+                    </div>
+
+                    <p id="regError" class="error-message"></p>
+                    <p id="regSuccess" class="success-message">¡Cuenta creada! Iniciando sesión...</p>
+
+                    <button type="submit" class="btn-auth-primary">REGISTRARSE</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="form-container sign-in-container">
+
+            <div style="position: absolute; top: 30px; left: 30px;">
+                <a href="../../index.html" class="auth-link" style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
+                </a>
+            </div>
+
+            <div class="auth-form-wrapper">
+                <img src="../../assets/icons/Logo_negro.svg" alt="VÉRTICE" class="auth-logo">
+                <h1 class="auth-title">Iniciar sesión</h1>
+                <p class="auth-subtitle">Accede a tu colección</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-input" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-input" placeholder="Contraseña" required>
+                        <i class="fa-regular fa-eye show-pass-icon" id="toggleLoginPass"></i>
+                    </div>
+
+                    <a href="#" id="forgotLink" class="auth-link"
+                        style="display: block; text-align: right; margin-bottom: 20px;">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+
+                    <p id="loginError" class="error-message"></p>
+                    <p id="loginSuccess" class="success-message">¡Bienvenido de nuevo!</p>
+
+                    <button type="submit" class="btn-auth-primary">INICIAR SESIÓN</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h2>¡Bienvenido de nuevo!</h2>
+                    <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
+                    <button class="btn-auth-outline" id="signInBtn">INICIAR SESIÓN</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h2>Hola, Amante del Arte</h2>
+                    <p>Introduce tus datos personales y comienza tu viaje con nosotros</p>
+                    <button class="btn-auth-outline" id="signUpBtn">REGISTRARSE</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="forgotModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <img src="../../assets/icons/Logo_negro.svg" alt="VÉRTICE"
+                style="height: 40px; margin: 0 auto 24px auto; display: block;">
+            <h2 class="auth-title" style="font-size: 20px;">Restablecer Contraseña</h2>
+            <p class="auth-subtitle">Introduce tu correo y tu nueva clave.</p>
+
+            <form id="recoveryForm">
+                <div class="form-group">
+                    <input type="email" id="resetEmail" class="form-input" placeholder="Tu correo electrónico" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="resetPass" class="form-input" placeholder="Nueva contraseña" required
+                        minlength="6">
+                    <i class="fa-regular fa-eye show-pass-icon"></i>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="resetConfirmPass" class="form-input"
+                        placeholder="Confirmar nueva contraseña" required>
+                    <i class="fa-regular fa-eye show-pass-icon"></i>
+                </div>
+
+                <p id="resetError" class="error-message" style="margin-bottom: 15px;"></p>
+                <p id="resetSuccess" class="success-message" style="margin-bottom: 15px;">¡Contraseña actualizada con
+                    éxito!</p>
+
+                <button type="submit" class="btn-auth-primary">ACTUALIZAR CONTRASEÑA</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../assets/js/services/dataLoader.js"></script>
+    <script src="../../assets/js/services/auth.js"></script>
+    <script src="../../assets/js/pages/profile.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+</body>
+
+</html>

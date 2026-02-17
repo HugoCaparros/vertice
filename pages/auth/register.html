@@ -1,0 +1,98 @@
+<!-- Ruta: /pages/auth/register.html
+     Descripción: Interfaz secundaria de registro de usuarios (alternativa al panel deslizante). -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉRTICE | Crear Cuenta</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+    <link rel="stylesheet" href="../../assets/css/pages/auth.css">
+</head>
+
+<body>
+
+    <main class="auth-container mode-register">
+
+        <div class="auth-image-side" style="background-image: url('../../assets/img/LoginBackgroundPage2.png');">
+            <div class="auth-image-content">
+                <h2 style="font-family: var(--font-serif); font-size: 36px; margin-bottom: 16px;">¡Bienvenido de nuevo!
+                </h2>
+                <p style="font-family: var(--font-sans); font-size: 14px; opacity: 0.9; margin-bottom: 32px;">
+                    Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal
+                </p>
+                <a href="login.html" class="btn-auth-outline">INICIAR SESIÓN</a>
+            </div>
+        </div>
+
+        <div class="auth-form-side">
+
+            <div style="position: absolute; top: 40px; left: 40px;">
+                <a href="../../index.html" class="auth-link"
+                    style="text-align: left; display: flex; gap: 8px; align-items: center;">
+                    <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+                </a>
+            </div>
+
+            <div class="auth-form-wrapper">
+                <img src="../../assets/icons/Logo_negro.svg" alt="VÉRTICE" class="auth-logo">
+
+                <h1 class="auth-title">Crear Cuenta</h1>
+                <p class="auth-subtitle">Únete a Galería Vértice</p>
+
+                <form id="registerForm">
+
+                    <div class="form-group">
+                        <input type="text" id="nombre" class="form-input" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-input" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-select-wrapper">
+                            <div class="custom-select-trigger" style="border-bottom: 1px solid var(--border-sutil);">
+                                <span>Tipo de Usuario</span>
+                                <i class="fa-solid fa-chevron-down select-arrow"></i>
+                            </div>
+                            <div class="custom-options">
+                                <span class="custom-option">Artista</span>
+                                <span class="custom-option">Coleccionista / Usuario</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-input" placeholder="Contraseña" required
+                            minlength="6">
+                        <i class="fa-regular fa-eye show-pass-icon"></i>
+                    </div>
+
+                    <p id="regError" class="error-message"></p>
+                    <p id="regSuccess" class="success-message">¡Cuenta creada con éxito! Redirigiendo...</p>
+
+                    <button type="submit" class="btn-auth-primary">REGISTRARSE</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../../assets/js/services/dataLoader.js"></script>
+    <script src="../../assets/js/services/auth.js"></script>
+    <script src="../../assets/js/components/layout.js"></script>
+    <script src="../../assets/js/transitions.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+</body>
+
+</html>

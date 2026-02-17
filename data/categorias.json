@@ -1,0 +1,26 @@
+[
+  {
+    "id": "clasico",
+    "nombre": "Clásico & Neo-Renacimiento",
+    "slug": "clasico",
+    "descripcion": "Una mirada contemporánea a las técnicas maestras. Desde el óleo hiperrealista hasta el grabado y la fotografía analógica. Respetar la tradición para romperla.",
+    "curador": "Dra. Elena S. (Conservadora Jefe)",
+    "tags_populares": ["Óleo", "Barroco Digital", "Fine Art", "Patrimonio"]
+  },
+  {
+    "id": "moderno",
+    "nombre": "Moderno & Digital",
+    "slug": "moderno",
+    "descripcion": "La vanguardia del ahora. Arte generativo, inteligencia artificial, muralismo urbano y nuevos medios. El pulso de la ciudad y la tecnología.",
+    "curador": "Mark Z. (Especialista en Nuevos Medios)",
+    "tags_populares": ["AI Art", "Street Style", "NFT", "Cyberpunk"]
+  },
+  {
+    "id": "abstracto",
+    "nombre": "Abstracto & Conceptual",
+    "slug": "abstracto",
+    "descripcion": "Más allá de la forma. Minimalismo, instalaciones de luz, textil y escultura conceptual. Arte que no se explica, se siente.",
+    "curador": "Sarah Thornton (Crítica Invitada)",
+    "tags_populares": ["Minimalismo", "Slow Art", "Texturas", "Silencio"]
+  }
+]

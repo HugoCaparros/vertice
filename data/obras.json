@@ -1,0 +1,389 @@
+[
+  {
+    "id": 101,
+    "titulo": "Equilibrio",
+    "artista_id": 19,
+    "categoria_id": "abstracto",
+    "tecnica": "Acrílico sobre lienzo",
+    "precio": 3200,
+    "anio": 2023,
+    "descripcion": "Una exploración minimalista de la armonía y el peso visual en el espacio vacío.",
+    "imagen": "assets/img/obras/Equilibrio.webp",
+    "stats": {
+      "likes": 1250,
+      "vistas": 5600,
+      "compartidos": 240,
+      "guardados": 450
+    }
+  },
+  {
+    "id": 102,
+    "titulo": "Venus Glitch",
+    "artista_id": 2,
+    "categoria_id": "clasico",
+    "tecnica": "Óleo sobre lienzo",
+    "precio": 4568,
+    "anio": 2022,
+    "descripcion": "Una exploración técnica sobre la degradación de la memoria estética. Vega utiliza la técnica del claroscuro tradicional para representar una Venus clásica que parece corromperse por un error de carga digital. Esta obra cuestiona la permanencia de la belleza en la era de los datos volátiles.",
+    "imagen": "assets/img/obras/clasico-2.webp",
+    "stats": {
+      "likes": 38942,
+      "vistas": 92107,
+      "compartidos": 4512,
+      "guardados": 8931
+    }
+  },
+  {
+    "id": 103,
+    "titulo": "Fragmentos",
+    "artista_id": 16,
+    "categoria_id": "moderno",
+    "tecnica": "Collage Mixto",
+    "precio": 1850,
+    "anio": 2023,
+    "descripcion": "Reinterpretación de la cultura pop a través de recortes vintage y texturas contemporáneas.",
+    "imagen": "assets/img/obras/Fragmentos.webp",
+    "stats": {
+      "likes": 890,
+      "vistas": 3200,
+      "compartidos": 120,
+      "guardados": 310
+    }
+  },
+  {
+    "id": 104,
+    "titulo": "Sueño Algorítmico #404",
+    "artista_id": 11,
+    "categoria_id": "moderno",
+    "tecnica": "Impresión Digital en Aluminio",
+    "precio": 2137,
+    "anio": 2023,
+    "descripcion": "Paisaje inexistente generado por una red neuronal alimentada con literatura de ciencia ficción. La obra representa el 'subconsciente' de la máquina y ha generado un intenso debate sobre la naturaleza de la creatividad algorítmica.",
+    "imagen": "assets/img/obras/moderno-2.webp",
+    "stats": {
+      "likes": 45219,
+      "vistas": 80433,
+      "compartidos": 6347,
+      "guardados": 12108
+    }
+  },
+  {
+    "id": 105,
+    "titulo": "Geometría Viva",
+    "artista_id": 9,
+    "categoria_id": "abstracto",
+    "tecnica": "Escultura Digital",
+    "precio": 4100,
+    "anio": 2024,
+    "descripcion": "Intersección de formas puras que desafían la percepción espacial del espectador.",
+    "imagen": "assets/img/obras/Geometria_Viva.webp",
+    "stats": {
+      "likes": 2100,
+      "vistas": 7800,
+      "compartidos": 430,
+      "guardados": 980
+    }
+  },
+  {
+    "id": 107,
+    "titulo": "Horizonte Urbano",
+    "artista_id": 1,
+    "categoria_id": "clasico",
+    "tecnica": "Fotografía Analógica",
+    "precio": 1200,
+    "anio": 2023,
+    "descripcion": "Captura melancólica de la silueta de la ciudad durante el crepúsculo, procesada químicamente.",
+    "imagen": "assets/img/obras/Horizonte_Urbano.webp",
+    "stats": {
+      "likes": 3400,
+      "vistas": 12000,
+      "compartidos": 560,
+      "guardados": 1200
+    }
+  },
+  {
+    "id": 109,
+    "titulo": "Intersección",
+    "artista_id": 6,
+    "categoria_id": "abstracto",
+    "tecnica": "Instalación de Luz",
+    "precio": 5500,
+    "anio": 2023,
+    "descripcion": "Obra conceptual que explora el punto de encuentro entre la luz artificial y la sombra natural.",
+    "imagen": "assets/img/obras/Interseccion.webp",
+    "stats": {
+      "likes": 4500,
+      "vistas": 15000,
+      "compartidos": 890,
+      "guardados": 2100
+    }
+  },
+  {
+    "id": 111,
+    "titulo": "Nostalgia Urbana",
+    "artista_id": 1,
+    "categoria_id": "clasico",
+    "tecnica": "Fotografía en Blanco y Negro",
+    "precio": 950,
+    "anio": 2022,
+    "descripcion": "Una mirada íntima a los rincones olvidados de la metrópolis moderna.",
+    "imagen": "assets/img/obras/Nostalgia_Urbana.webp",
+    "stats": {
+      "likes": 1800,
+      "vistas": 6700,
+      "compartidos": 210,
+      "guardados": 540
+    }
+  },
+  {
+    "id": 113,
+    "titulo": "Perfil Urbano",
+    "artista_id": 20,
+    "categoria_id": "moderno",
+    "tecnica": "Muralismo sobre panel",
+    "precio": 3800,
+    "anio": 2024,
+    "descripcion": "La fuerza de la ciudad representada a través de trazos monumentales y colores vibrantes.",
+    "imagen": "assets/img/obras/Perfil_Urbano.webp",
+    "stats": {
+      "likes": 2900,
+      "vistas": 11000,
+      "compartidos": 670,
+      "guardados": 1100
+    }
+  },
+  {
+    "id": 115,
+    "titulo": "Pulso Digital",
+    "artista_id": 4,
+    "categoria_id": "moderno",
+    "tecnica": "Arte Generativo",
+    "precio": 2700,
+    "anio": 2024,
+    "descripcion": "Visualización de datos en tiempo real convertida en una experiencia estética vibrante.",
+    "imagen": "assets/img/obras/Pulso_Digital.webp",
+    "stats": {
+      "likes": 5600,
+      "vistas": 21000,
+      "compartidos": 1200,
+      "guardados": 3400
+    }
+  },
+  {
+    "id": 117,
+    "titulo": "Rojo Profundo",
+    "artista_id": 19,
+    "categoria_id": "abstracto",
+    "tecnica": "Óleo sobre lienzo",
+    "precio": 4800,
+    "anio": 2023,
+    "descripcion": "Estudio cromático sobre la intensidad de la emoción pura a través del color rojo.",
+    "imagen": "assets/img/obras/Rojo_Profundo.webp",
+    "stats": {
+      "likes": 3100,
+      "vistas": 9800,
+      "compartidos": 450,
+      "guardados": 890
+    }
+  },
+  {
+    "id": 119,
+    "titulo": "Silencio Urbano",
+    "artista_id": 19,
+    "categoria_id": "abstracto",
+    "tecnica": "Mixta sobre madera",
+    "precio": 3400,
+    "anio": 2024,
+    "descripcion": "La calma que precede a la tormenta en el corazón de la gran ciudad.",
+    "imagen": "assets/img/obras/Silencio_Urbano.webp",
+    "stats": {
+      "likes": 1500,
+      "vistas": 5200,
+      "compartidos": 180,
+      "guardados": 420
+    }
+  },
+  {
+    "id": 121,
+    "titulo": "Trama Urbana",
+    "artista_id": 11,
+    "categoria_id": "moderno",
+    "tecnica": "Graffiti sobre lienzo",
+    "precio": 1900,
+    "anio": 2023,
+    "descripcion": "Un entramado de tags y colores que capturan la energía caótica de las calles de Tokio.",
+    "imagen": "assets/img/obras/Trama_Urbana.webp",
+    "stats": {
+      "likes": 4200,
+      "vistas": 16000,
+      "compartidos": 780,
+      "guardados": 1500
+    }
+  },
+  {
+    "id": 123,
+    "titulo": "Clásico I",
+    "artista_id": 2,
+    "categoria_id": "clasico",
+    "tecnica": "Óleo sobre lienzo",
+    "precio": 6200,
+    "anio": 2021,
+    "descripcion": "Estudio académico sobre la figura humana y la luz natural en interiores.",
+    "imagen": "assets/img/obras/clasico-1.webp",
+    "stats": {
+      "likes": 2100,
+      "vistas": 8500,
+      "compartidos": 310,
+      "guardados": 670
+    }
+  },
+  {
+    "id": 125,
+    "titulo": "Moderno I",
+    "artista_id": 11,
+    "categoria_id": "moderno",
+    "tecnica": "Aerosol y Acrílico",
+    "precio": 1500,
+    "anio": 2022,
+    "descripcion": "Abstracción urbana que rompe con las formas tradicionales del arte callejero.",
+    "imagen": "assets/img/obras/moderno-1.webp",
+    "stats": {
+      "likes": 3800,
+      "vistas": 14000,
+      "compartidos": 620,
+      "guardados": 1100
+    }
+  },
+{
+  "id": 126,
+  "titulo": "Gravedad Suspendida",
+  "artista_id": 3,
+  "categoria_id": "abstracto",
+  "tecnica": "Bronce y Acero",
+  "precio": 7200,
+  "anio": 2024,
+  "descripcion": "Escultura que captura el instante previo al colapso estructural, congelando tensión y movimiento.",
+  "imagen": "assets/img/obras/gravedad_suspendida.webp",
+  "stats": { "likes": 5200, "vistas": 18000, "compartidos": 980, "guardados": 2300 }
+},
+{
+  "id": 127,
+  "titulo": "Meditación en Tinta",
+  "artista_id": 5,
+  "categoria_id": "abstracto",
+  "tecnica": "Tinta sobre papel de arroz",
+  "precio": 1400,
+  "anio": 2023,
+  "descripcion": "Composición minimalista donde el vacío dialoga con trazos espontáneos de inspiración zen.",
+  "imagen": "assets/img/obras/meditacion_tinta.webp",
+  "stats": { "likes": 950, "vistas": 4100, "compartidos": 150, "guardados": 380 }
+},
+{
+  "id": 128,
+  "titulo": "Tipografía Brutal",
+  "artista_id": 7,
+  "categoria_id": "moderno",
+  "tecnica": "Serigrafía",
+  "precio": 1100,
+  "anio": 2024,
+  "descripcion": "Exploración gráfica donde la letra se convierte en grito visual.",
+  "imagen": "assets/img/obras/tipografia_brutal.webp",
+  "stats": { "likes": 1300, "vistas": 5000, "compartidos": 240, "guardados": 600 }
+},
+{
+  "id": 129,
+  "titulo": "Arcilla Ancestral",
+  "artista_id": 8,
+  "categoria_id": "abstracto",
+  "tecnica": "Cerámica esmaltada",
+  "precio": 1600,
+  "anio": 2023,
+  "descripcion": "Pieza orgánica inspirada en patrones neolíticos reinterpretados para el presente.",
+  "imagen": "assets/img/obras/arcilla_ancestral.webp",
+  "stats": { "likes": 870, "vistas": 3500, "compartidos": 120, "guardados": 290 }
+},
+{
+  "id": 130,
+  "titulo": "Flora Boreal",
+  "artista_id": 10,
+  "categoria_id": "clasico",
+  "tecnica": "Acuarela botánica",
+  "precio": 950,
+  "anio": 2024,
+  "descripcion": "Ilustración científica de una especie ártica en peligro de extinción.",
+  "imagen": "assets/img/obras/flora_boreal.webp",
+  "stats": { "likes": 1200, "vistas": 4200, "compartidos": 180, "guardados": 500 }
+},
+{
+  "id": 131,
+  "titulo": "Resistencia",
+  "artista_id": 12,
+  "categoria_id": "moderno",
+  "tecnica": "Performance documentada",
+  "precio": 3800,
+  "anio": 2024,
+  "descripcion": "Registro audiovisual de una intervención corporal sobre memoria y territorio.",
+  "imagen": "assets/img/obras/resistencia.webp",
+  "stats": { "likes": 4200, "vistas": 16000, "compartidos": 760, "guardados": 2100 }
+},
+{
+  "id": 132,
+  "titulo": "Restauratio",
+  "artista_id": 13,
+  "categoria_id": "clasico",
+  "tecnica": "Óleo restaurado",
+  "precio": 5400,
+  "anio": 2023,
+  "descripcion": "Proceso documentado de recuperación cromática en obra del siglo XIX.",
+  "imagen": "assets/img/obras/restauratio.webp",
+  "stats": { "likes": 2500, "vistas": 9000, "compartidos": 320, "guardados": 780 }
+},
+{
+  "id": 133,
+  "titulo": "Bosque Nocturno",
+  "artista_id": 14,
+  "categoria_id": "abstracto",
+  "tecnica": "Grabado en linóleo",
+  "precio": 1350,
+  "anio": 2023,
+  "descripcion": "Escena simbólica inspirada en mitología eslava y horror cósmico.",
+  "imagen": "assets/img/obras/bosque_nocturno.webp",
+  "stats": { "likes": 780, "vistas": 2900, "compartidos": 100, "guardados": 260 }
+},
+{
+  "id": 134,
+  "titulo": "Loop Infinito",
+  "artista_id": 15,
+  "categoria_id": "moderno",
+  "tecnica": "Videoarte 4K",
+  "precio": 4600,
+  "anio": 2024,
+  "descripcion": "Instalación audiovisual que explora la repetición como forma de narrativa temporal.",
+  "imagen": "assets/img/obras/loop_infinito.webp",
+  "stats": { "likes": 5100, "vistas": 19000, "compartidos": 950, "guardados": 2400 }
+},
+{
+  "id": 135,
+  "titulo": "Arquitectura Textil",
+  "artista_id": 17,
+  "categoria_id": "abstracto",
+  "tecnica": "Fibra orgánica tejida",
+  "precio": 1700,
+  "anio": 2024,
+  "descripcion": "Estructura blanda que cuestiona los límites entre moda y escultura.",
+  "imagen": "assets/img/obras/arquitectura_textil.webp",
+  "stats": { "likes": 950, "vistas": 3600, "compartidos": 140, "guardados": 320 }
+},
+{
+  "id": 136,
+  "titulo": "Código Orgánico",
+  "artista_id": 18,
+  "categoria_id": "moderno",
+  "tecnica": "Plotter generativo",
+  "precio": 2300,
+  "anio": 2024,
+  "descripcion": "Algoritmo inspirado en crecimiento vegetal traducido a líneas geométricas.",
+  "imagen": "assets/img/obras/codigo_organico.webp",
+  "stats": { "likes": 1600, "vistas": 6000, "compartidos": 300, "guardados": 720 }
+}
+]

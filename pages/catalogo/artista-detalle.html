@@ -1,0 +1,68 @@
+<!-- Ruta: /pages/catalogo/artista-detalle.html
+     Descripción: Perfil detallado de un artista que muestra su biografía y obras destacadas. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Artista | VÉRTICE</title>
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+    <link rel="stylesheet" href="../../assets/css/components/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/components/footer.css">
+    <link rel="stylesheet" href="../../assets/css/components/cards.css">
+    <link rel="stylesheet" href="../../assets/css/components/buttons.css">
+    <link rel="stylesheet" href="../../assets/css/pages/detalle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-left"><a href="artistas.html">← Volver</a></div>
+        <div class="nav-center"><a href="../../index.html" class="logo">VÉRTICE</a></div>
+        <div class="nav-right" id="auth-actions"><a href="../auth/login.html" class="user-icon"><i
+                    class="fa-regular fa-user-circle"></i></a></div>
+    </nav>
+
+    <section class="artist-hero">
+        <div class="artist-bio">
+            <h1>ELENA MIRÓ</h1>
+            <p>Exploradora de la emoción a través del color. Elena utiliza técnicas mixtas para crear paisajes oníricos
+                que invitan a la introspección. Sus obras han sido expuestas en Berlín y Nueva York, desafiando la
+                percepción tradicional del espacio.</p>
+            <div class="stats">
+                <span><strong>24</strong> Obras</span> &nbsp;|&nbsp; <span><strong>Madrid</strong>, España</span>
+            </div>
+        </div>
+        <div class="artist-portrait">
+            <img src="https://images.unsplash.com/photo-1508186225823-0963cf9ab0de?auto=format&fit=crop&w=800"
+                alt="Elena Miró">
+        </div>
+    </section>
+
+    <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
+
+    <section class="works-grid">
+        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
+            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=600"
+                alt="Obra 1">
+        </div>
+        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
+            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600"
+                alt="Obra 2">
+        </div>
+        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
+            <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=600"
+                alt="Obra 3">
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../assets/js/services/dataLoader.js"></script>
+    <script src="../../assets/js/components/layout.js"></script>
+    <script src="../../assets/js/pages/details.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

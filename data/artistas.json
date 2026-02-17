@@ -1,0 +1,503 @@
+[
+  {
+    "id": 11,
+    "nombre": "Leo Nakamura",
+    "handle": "@neon_samurai",
+    "estatus": "Superestrella",
+    "disciplina": "Arte Urbano",
+    "imagen": "assets/img/artistas/leo_nakamura.webp",
+    "banner": "assets/img/banners/leo_banner.webp",
+    "bio": "Tokio 📍 NYC. Rompiendo muros y esquemas. Mi arte es un grito de color en la grisura urbana. Gestión: ArtGlobal Agency.",
+    "seguidores": 2400000,
+    "siguiendo": 15,
+    "verificado": true,
+    "mutuals": [
+      "@curator_jane",
+      "@glitch_boy"
+    ],
+    "colecciones_ids": [
+      1,
+      3,
+      13
+    ],
+    "ultima_actividad": "Hace 2 horas",
+    "estilo": [
+      "Callejero",
+      "Vibrante",
+      "Híbrido"
+    ],
+    "cita": "El arte debe ser para todos, no solo para quienes pagan entrada."
+  },
+  {
+    "id": 2,
+    "nombre": "Andrés Vega",
+    "handle": "@vega_studio",
+    "estatus": "Consagrado",
+    "disciplina": "Pintura al Óleo",
+    "imagen": "assets/img/artistas/andres_vega.webp",
+    "banner": "assets/img/banners/vega_banner.webp",
+    "bio": "Pintando el caos del siglo XXI con técnicas del XVII. Defensor del 'Renacimiento Moderno'.",
+    "seguidores": 850000,
+    "siguiendo": 120,
+    "verificado": true,
+    "mutuals": [
+      "@curator_jane"
+    ],
+    "colecciones_ids": [
+      2,
+      14
+    ],
+    "ultima_actividad": "Hace 1 día",
+    "estilo": [
+      "Hiperrealismo",
+      "Satírico",
+      "Clásico"
+    ],
+    "cita": "Si Velázquez viviera hoy, pintaría historias de Instagram."
+  },
+  {
+    "id": 4,
+    "nombre": "Daniel Ortiz",
+    "handle": "@algo_dreams",
+    "estatus": "Visionario",
+    "disciplina": "Arte Digital",
+    "imagen": "assets/img/artistas/daniel_ortiz.webp",
+    "banner": "assets/img/banners/daniel_banner.webp",
+    "bio": "No pinto con pinceles, pinto con código. Explorando la frontera entre la IA y la emoción humana.",
+    "seguidores": 500000,
+    "siguiendo": 40,
+    "verificado": true,
+    "mutuals": [
+      "@glitch_boy"
+    ],
+    "colecciones_ids": [
+      6,
+      15
+    ],
+    "ultima_actividad": "Hace 3 días",
+    "estilo": [
+      "Futurista",
+      "Onírico",
+      "Cyberpunk"
+    ],
+    "cita": "El error informático es la nueva pincelada."
+  },
+  {
+    "id": 19,
+    "nombre": "Sofia Klein",
+    "handle": "@sofia_void",
+    "estatus": "De Culto",
+    "disciplina": "Minimalismo",
+    "imagen": "assets/img/artistas/sofia_klein.webp",
+    "banner": "assets/img/banners/sofia_banner.webp",
+    "bio": "Menos es todo. Buscando la 'nada perfecta' en un mundo ruidoso. (Representada por Gagosian)",
+    "seguidores": 320000,
+    "siguiendo": 2,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 3 meses",
+    "estilo": [
+      "Puro",
+      "Silencioso",
+      "Abstracto"
+    ],
+    "cita": "El silencio grita si sabes escuchar."
+  },
+  {
+    "id": 21,
+    "nombre": "Valentina Russo",
+    "handle": "@val_glass",
+    "estatus": "Emergente",
+    "disciplina": "Vidrio Soplado",
+    "imagen": "assets/img/artistas/valentina_russo.webp",
+    "banner": "assets/img/banners/valentina_banner.webp",
+    "bio": "Fuego, aire y cristal. Venecia, Italia. Rompiendo la tradición de Murano una pieza a la vez.",
+    "seguidores": 12500,
+    "siguiendo": 450,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      4
+    ],
+    "ultima_actividad": "Hace 5 horas",
+    "estilo": [
+      "Transparente",
+      "Frágil",
+      "Luminoso"
+    ],
+    "cita": "El vidrio es líquido detenido en el tiempo."
+  },
+  {
+    "id": 1,
+    "nombre": "Álvaro Núñez",
+    "handle": "@alvaro_analog",
+    "estatus": "Nicho",
+    "disciplina": "Fotografía Documental",
+    "imagen": "assets/img/artistas/alvaro_nunez.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Cronista de lo invisible. Fotografía analógica en blanco y negro. Madrid.",
+    "seguidores": 3400,
+    "siguiendo": 150,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      5
+    ],
+    "ultima_actividad": "Hace 1 semana",
+    "estilo": [
+      "Melancólico",
+      "Urbano",
+      "Analógico"
+    ],
+    "cita": "La verdad solo existe en el grano de la película."
+  },
+  {
+    "id": 3,
+    "nombre": "Claire Dubois",
+    "handle": "@claire_sculpt",
+    "estatus": "Consagrado",
+    "disciplina": "Escultura Contemporánea",
+    "imagen": "assets/img/artistas/claire_dubois.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Desafiando la gravedad con acero y bronce. Movimiento congelado.",
+    "seguidores": 150000,
+    "siguiendo": 80,
+    "verificado": true,
+    "mutuals": [
+      "@curator_jane"
+    ],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 2 semanas",
+    "estilo": [
+      "Dinámico",
+      "Fluido",
+      "Metal"
+    ],
+    "cita": "El metal tiene memoria, solo hay que saber pedírsela."
+  },
+  {
+    "id": 5,
+    "nombre": "David Chen",
+    "handle": "@chen_ink",
+    "estatus": "Nicho",
+    "disciplina": "Acuarela y Tinta",
+    "imagen": "assets/img/artistas/david_chen.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Tradición oriental y abstracción occidental. Meditaciones visuales.",
+    "seguidores": 8900,
+    "siguiendo": 300,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 4 días",
+    "estilo": [
+      "Zen",
+      "Minimalista",
+      "Espontáneo"
+    ],
+    "cita": "El vacío es tan importante como la tinta."
+  },
+  {
+    "id": 6,
+    "nombre": "Elena Novak",
+    "handle": "@elena_installations",
+    "estatus": "Visionario",
+    "disciplina": "Instalación Artística",
+    "imagen": "assets/img/artistas/elena_novak.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Transformando espacios para sentir. Luz, sonido y percepción.",
+    "seguidores": 92000,
+    "siguiendo": 40,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 1 mes",
+    "estilo": [
+      "Inmersivo",
+      "Conceptual",
+      "Luminoso"
+    ],
+    "cita": "La luz es el único material que no puedes tocar, pero que te toca a ti."
+  },
+  {
+    "id": 7,
+    "nombre": "Hugo Lambert",
+    "handle": "@hugo_brutal",
+    "estatus": "Emergente",
+    "disciplina": "Diseño Gráfico",
+    "imagen": "assets/img/artistas/hugo_lambert.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Swiss Punk. Rompiendo rejillas y gritando con tipografía.",
+    "seguidores": 15600,
+    "siguiendo": 600,
+    "verificado": false,
+    "mutuals": [
+      "@glitch_boy"
+    ],
+    "colecciones_ids": [
+      7
+    ],
+    "ultima_actividad": "Hace 2 días",
+    "estilo": [
+      "Brutalista",
+      "Tipográfico",
+      "Audaz"
+    ],
+    "cita": "Si es legible, es aburrido."
+  },
+  {
+    "id": 8,
+    "nombre": "Irene Papadopoulos",
+    "handle": "@irene_ceramics",
+    "estatus": "Nicho",
+    "disciplina": "Cerámica",
+    "imagen": "assets/img/artistas/irene_papadopoulos.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Técnicas ancestrales para el futuro. Barro, fuego y memoria.",
+    "seguidores": 5400,
+    "siguiendo": 200,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 3 semanas",
+    "estilo": [
+      "Orgánico",
+      "Texturizado",
+      "Ancestral"
+    ],
+    "cita": "El barro recuerda lo que las manos olvidan."
+  },
+  {
+    "id": 9,
+    "nombre": "Jonas Richter",
+    "handle": "@jonas_arch",
+    "estatus": "De Culto",
+    "disciplina": "Arquitectura Conceptual",
+    "imagen": "assets/img/artistas/jonas_richter.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Construyendo utopías. Arquitectura teórica para una sociedad mejor.",
+    "seguidores": 45000,
+    "siguiendo": 10,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 2 meses",
+    "estilo": [
+      "Utopico",
+      "Geométrico",
+      "Social"
+    ],
+    "cita": "La arquitectura debe curar, no solo alojar."
+  },
+  {
+    "id": 10,
+    "nombre": "Laura Svensson",
+    "handle": "@nordic_botany",
+    "estatus": "Emergente",
+    "disciplina": "Ilustración Botánica",
+    "imagen": "assets/img/artistas/laura_svensson.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Documentando la flora escandinava en peligro de extinción.",
+    "seguidores": 8900,
+    "siguiendo": 120,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      8
+    ],
+    "ultima_actividad": "Hace 5 días",
+    "estilo": [
+      "Delicado",
+      "Científico",
+      "Ecológico"
+    ],
+    "cita": "La naturaleza es la mejor diseñadora, yo solo soy su copista."
+  },
+  {
+    "id": 12,
+    "nombre": "Lucía Moreno",
+    "handle": "@lucia_perform",
+    "estatus": "Visionario",
+    "disciplina": "Performance",
+    "imagen": "assets/img/artistas/lucia_moreno.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Mi cuerpo es la herramienta. Performance política y resistencia.",
+    "seguidores": 67000,
+    "siguiendo": 0,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 10 días",
+    "estilo": [
+      "Provocador",
+      "Físico",
+      "Político"
+    ],
+    "cita": "El dolor es solo información que el cuerpo transmite."
+  },
+  {
+    "id": 13,
+    "nombre": "Marco Bellini",
+    "handle": "@bellini_restauro",
+    "estatus": "Consagrado",
+    "disciplina": "Restauración",
+    "imagen": "assets/img/artistas/marco_bellini.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Cirujano del arte. Devolviendo la vida a obras maestras olvidadas.",
+    "seguidores": 110000,
+    "siguiendo": 50,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [
+      12
+    ],
+    "ultima_actividad": "Hace 3 semanas",
+    "estilo": [
+      "Técnico",
+      "Histórico",
+      "Minucioso"
+    ],
+    "cita": "Respetar el pasado es la única forma de pintar el futuro."
+  },
+  {
+    "id": 14,
+    "nombre": "Marta Kowalska",
+    "handle": "@marta_prints",
+    "estatus": "Nicho",
+    "disciplina": "Grabado",
+    "imagen": "assets/img/artistas/marta_kowalska.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Horror cósmico y folklore eslavo. Trabajo solo de noche.",
+    "seguidores": 4500,
+    "siguiendo": 90,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      9
+    ],
+    "ultima_actividad": "Hace 6 días",
+    "estilo": [
+      "Gótico",
+      "Detallista",
+      "Simbólico"
+    ],
+    "cita": "Hay más luz en la sombra de lo que creemos."
+  },
+  {
+    "id": 15,
+    "nombre": "Nina Hoffmann",
+    "handle": "@nina_video",
+    "estatus": "Visionario",
+    "disciplina": "Videoarte",
+    "imagen": "assets/img/artistas/nina_hoffmann.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Bucles temporales y distorsión de la realidad. Videoarte & NFTs.",
+    "seguidores": 85000,
+    "siguiendo": 300,
+    "verificado": true,
+    "mutuals": [
+      "@glitch_boy"
+    ],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 1 día",
+    "estilo": [
+      "Experimental",
+      "Hipnótico",
+      "Audiovisual"
+    ],
+    "cita": "El tiempo no es una línea, es un bucle."
+  },
+  {
+    "id": 16,
+    "nombre": "Oliver Grant",
+    "handle": "@oliver_cuts",
+    "estatus": "Emergente",
+    "disciplina": "Collage Mixto",
+    "imagen": "assets/img/artistas/oliver_grant.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Arqueólogo de la imagen. Recortes vintage y sátira moderna.",
+    "seguidores": 18900,
+    "siguiendo": 400,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 4 días",
+    "estilo": [
+      "Pop",
+      "Surrealista",
+      "Colorido"
+    ],
+    "cita": "Cortar y pegar es la forma moderna de pensar."
+  },
+  {
+    "id": 17,
+    "nombre": "Paula Ríos",
+    "handle": "@paula_fiber",
+    "estatus": "Nicho",
+    "disciplina": "Textil y Moda",
+    "imagen": "assets/img/artistas/paula_rios.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Tejiendo el futuro con técnicas ancestrales. Esculturas blandas.",
+    "seguidores": 7600,
+    "siguiendo": 150,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      10
+    ],
+    "ultima_actividad": "Hace 1 semana",
+    "estilo": [
+      "Táctil",
+      "Sostenible",
+      "Vanguardista"
+    ],
+    "cita": "El tejido es la primera arquitectura que habitamos."
+  },
+  {
+    "id": 18,
+    "nombre": "Samuel Brooks",
+    "handle": "@samuel_code",
+    "estatus": "Emergente",
+    "disciplina": "Arte Generativo",
+    "imagen": "assets/img/artistas/samuel_brooks.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Matemático y artista. Algoritmos naturales y plotter drawing.",
+    "seguidores": 14500,
+    "siguiendo": 80,
+    "verificado": false,
+    "mutuals": [],
+    "colecciones_ids": [
+      11
+    ],
+    "ultima_actividad": "Hace 2 días",
+    "estilo": [
+      "Matemático",
+      "Evolutivo",
+      "Digital"
+    ],
+    "cita": "El código es la poesía del siglo XXI."
+  },
+  {
+    "id": 20,
+    "nombre": "Thiago Mendes",
+    "handle": "@thiago_mural",
+    "estatus": "Consagrado",
+    "disciplina": "Muralismo",
+    "imagen": "assets/img/artistas/thiago_mendes.webp",
+    "banner": "assets/img/banners/generic_banner.webp",
+    "bio": "Llevando la selva a la ciudad. Murales gigantes y naturaleza.",
+    "seguidores": 540000,
+    "siguiendo": 200,
+    "verificado": true,
+    "mutuals": [],
+    "colecciones_ids": [],
+    "ultima_actividad": "Hace 2 semanas",
+    "estilo": [
+      "Tropical",
+      "Monumental",
+      "Colorista"
+    ],
+    "cita": "El hormigón necesita respirar."
+  }
+]

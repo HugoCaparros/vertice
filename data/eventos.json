@@ -1,0 +1,22 @@
+[
+  {
+    "id": 301,
+    "titulo": "Masterclass: Óleo y Glitch",
+    "artista_id": 2,
+    "categoria_id": "clasico",
+    "fecha": "2026-03-15",
+    "descripcion": "Andrés Vega explica su proceso de deconstrucción de la imagen clásica.",
+    "cupos_restantes": 14,
+    "imagen": "assets/img/eventos/masterclass-vega.jpg"
+  },
+  {
+    "id": 302,
+    "titulo": "Simposio: El subconsciente de la IA",
+    "artista_id": 11,
+    "categoria_id": "moderno",
+    "fecha": "2026-03-20",
+    "descripcion": "Debate abierto sobre la creatividad algorítmica y el futuro del arte digital.",
+    "cupos_restantes": 47,
+    "imagen": "assets/img/eventos/simposio-ia.jpg"
+  }
+]

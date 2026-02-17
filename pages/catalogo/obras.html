@@ -1,0 +1,82 @@
+<!-- Ruta: /pages/catalogo/obras.html
+     Descripción: Catálogo general de obras con filtros dinámicos y búsqueda. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Obras | VÉRTICE</title>
+
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+
+    <link rel="stylesheet" href="../../assets/css/components/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/components/footer.css">
+    <link rel="stylesheet" href="../../assets/css/components/cards.css">
+    <link rel="stylesheet" href="../../assets/css/components/buttons.css">
+    <link rel="stylesheet" href="../../assets/css/components/forms.css">
+    <link rel="stylesheet" href="../../assets/css/components/modal.css">
+    <link rel="stylesheet" href="../../assets/css/pages/catalogo.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <header class="page-header">
+        <h2>COLECCIÓN COMPLETA</h2>
+    </header>
+
+    <div class="toolbar-container">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Buscar por título o artista...">
+        </div>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todo</button>
+            <button class="filter-btn" data-filter="moderno">Moderno</button>
+            <button class="filter-btn" data-filter="clasico">Clásico</button>
+            <button class="filter-btn" data-filter="abstracto">Abstracto</button>
+        </div>
+        <div class="sort-box">
+            <select id="sortSelect">
+                <option value="defecto">Relevancia</option>
+                <option value="precio-asc">Precio: Menor a Mayor</option>
+                <option value="precio-desc">Precio: Mayor a Menor</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="collection-grid" id="collection-grid-container">
+        <p style="grid-column: 1/-1; text-align:center;">Cargando...</p>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            <div class="modal-header">
+                <span class="modal-subtitle">ACCESO EXCLUSIVO</span>
+                <h2 class="modal-title">ÚNETE A VÉRTICE</h2>
+            </div>
+            <div class="modal-body">
+                <p>Inicia sesión para continuar.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="../auth/login.html" class="btn btn-full">INICIAR SESIÓN</a>
+                <a href="../auth/register.html" class="btn btn-outline-dark">CREAR CUENTA</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../assets/js/services/dataLoader.js"></script>
+
+    <script src="../../assets/js/components/layout.js"></script>
+    <script src="../../assets/js/pages/catalog.js"></script>
+
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

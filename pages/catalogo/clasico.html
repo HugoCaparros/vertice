@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉRTICE | Colección Clásico</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../../assets/css/base/typography.css">
+    <link rel="stylesheet" href="../../assets/css/components/modal.css">
+    <link rel="stylesheet" href="../../assets/css/components/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/components/footer.css">
+    
+    <link rel="stylesheet" href="../../assets/css/pages/category.css">
+    <link rel="stylesheet" href="../../assets/css/pages/auth.css">
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="category-container">
+        
+        <header class="category-header-block">
+            
+            <a href="moderno.html" class="nav-arrow prev">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <span class="tooltip">Moderno</span>
+            </a>
+
+            <div class="header-center">
+                <h1 class="category-title">CLÁSICO</h1>
+                <span class="collection-subtitle">Colección Permanente y Maestros</span>
+            </div>
+
+            <a href="abstracto.html" class="nav-arrow next">
+                <span class="tooltip">Abstracto</span>
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+
+        </header>
+
+        <div class="toolbar-container">
+            <div class="filter-capsules">
+                <button class="filter-pill active" data-sort="default">Todo</button>
+                <button class="filter-pill" data-sort="likes-desc">Populares</button>
+                <button class="filter-pill" data-sort="anio-desc">Nuevos</button>
+                <button class="filter-pill" data-sort="anio-asc">Antiguos</button>
+                <button class="filter-pill" data-sort="precio-asc">Precio −</button>
+                <button class="filter-pill" data-sort="precio-desc">Precio +</button>
+            </div>
+            
+            <div class="toolbar-meta">
+                <span id="obraCount" class="meta-count">Explorando colección</span>
+            </div>
+        </div>
+
+        <div id="category-grid-container" class="art-grid-5-col"></div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <div id="authRequiredModal" class="modal-overlay">
+        <div class="modal-content modal-exclusive">
+            <button class="modal-close" id="closeAuthModal">&times;</button>
+            <div class="modal-header-logo"><img src="../../assets/icons/Logo_negro.svg" alt="VÉRTICE"></div>
+            <h2 class="modal-title">CONTENIDO EXCLUSIVO</h2>
+            <p class="modal-description">Únete a nuestra comunidad para acceder a la colección completa.</p>
+            <div class="modal-buttons">
+                <a href="../auth/login.html" class="btn-modal-solid">INICIAR SESIÓN</a>
+                <a href="../auth/login.html?mode=register" class="btn-modal-outline">REGISTRARSE</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/services/dataLoader.js"></script>
+    <script src="../../assets/js/components/layout.js"></script>
+    
+    <script src="../../assets/js/pages/category.js"></script>
+
+    <script src="../../assets/js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { 
+            // Carga estrictamente las obras etiquetadas como 'clasico' en el JSON
+            if(window.initCatalogPage) {
+                window.initCatalogPage('clasico'); 
+            }
+        });
+    </script>
+</body>
+</html>
