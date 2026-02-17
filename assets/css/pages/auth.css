@@ -82,7 +82,7 @@
 
 /* IMAGEN DE FONDO */
 .overlay {
-  background-image: url("../../img/LoginBackgroundPage2.webp");
+  background-image: url("../../img/LoginBackgroundPage2.png");
   background-color: var(--color-negro);
   /* Fallback */
   background-repeat: no-repeat;
