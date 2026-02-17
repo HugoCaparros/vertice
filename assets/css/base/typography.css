@@ -1,0 +1,39 @@
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  /* Usamos el shorthand definido en variables */
+  font: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1 {
+  font: var(--font-h1);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+h2, .h2 {
+  font: var(--font-h2); /* Ojo: Aquí cambia a Inter según tus vars */
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+h3, .h3 {
+  font: var(--font-h3);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+p {
+  margin-bottom: var(--space-4);
+  max-width: 70ch; /* Lecturabilidad óptima */
+}
+
+small, .text-small {
+  font: var(--font-small);
+  color: var(--text-muted);
+}
+
+a:hover {
+  color: var(--hover-link);
+}
