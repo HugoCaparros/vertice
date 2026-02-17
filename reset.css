@@ -1,0 +1,101 @@
+/* ==========================================================================
+   RESET CSS + CONFIGURACIÓN BASE (Adaptado al Root)
+   ========================================================================== */
+
+/* 1. Box Sizing Universal */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. Configuración del HTML */
+html {
+    /* Altura completa para permitir scroll correcto */
+    height: 100%;
+    
+    /* Scroll suave */
+    scroll-behavior: smooth;
+    
+    /* Evita el scroll horizontal accidental */
+    overflow-x: hidden;
+}
+
+/* 3. Configuración del BODY (Flexbox para el Footer Sticky) */
+body {
+    /* Altura mínima: Ocupa toda la pantalla pero crece si hay contenido */
+    min-height: 100vh;
+    
+    /* Layout Vertical: Header -> Main -> Footer */
+    display: flex;
+    flex-direction: column;
+    
+    /* --- VARIABLES DEL ROOT --- */
+    font-family: var(--font-sans);      /* Inter */
+    background-color: var(--bg-page);   /* Color de fondo base */
+    color: var(--text-primary);         /* Color de texto principal */
+    
+    /* Restaurar Scroll Vertical */
+    overflow-y: auto;
+    
+    /* Suavizado de fuentes */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    position: relative;
+}
+
+/* 4. MAIN (Empuja el footer hacia abajo) */
+/* El main ocupa todo el espacio libre disponible */
+main {
+    flex: 1; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 5. Multimedia Responsiva */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 6. Listas Limpias */
+ul, ol {
+    list-style: none;
+}
+
+/* 7. Enlaces */
+a {
+    text-decoration: none;
+    color: inherit;
+    /* Usamos tu variable de transición rápida */
+    transition: color var(--transition-fast);
+}
+
+/* 8. Elementos de Formulario */
+button, input, textarea, select {
+    font: inherit; /* Hereda 'Inter' del body */
+    font-family: var(--font-sans); /* Forzamos por si acaso */
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 9. Selección de texto (Branding) */
+/* Cuando seleccionas texto, se usa tu negro y blanco de marca */
+::selection {
+    background-color: var(--color-negro);
+    color: var(--text-inverse);
+}
