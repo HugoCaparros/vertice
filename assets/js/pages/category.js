@@ -79,7 +79,45 @@ export async function initCategoryDetail(slugOverride) {
 
         currentData = data.obras;
         renderGrid(container, currentData);
+        initSorting(container);
     } catch (e) { console.error(e); }
+}
+
+/**
+ * Inicializa los botones de ordenación
+ */
+function initSorting(container) {
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            const sortType = e.currentTarget.getAttribute('data-sort');
+
+            // UI: Activar píldora
+            pills.forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            // Lógica: Ordenar
+            const sorted = sortObras([...currentData], sortType);
+            renderGrid(container, sorted);
+        });
+    });
+}
+
+function sortObras(items, type) {
+    switch (type) {
+        case 'likes-desc':
+            return items.sort((a, b) => (b.stats?.likes || 0) - (a.stats?.likes || 0));
+        case 'anio-desc':
+            return items.sort((a, b) => b.anio - a.anio);
+        case 'anio-asc':
+            return items.sort((a, b) => a.anio - b.anio);
+        case 'precio-asc':
+            return items.sort((a, b) => a.precio - b.precio);
+        case 'precio-desc':
+            return items.sort((a, b) => b.precio - a.precio);
+        default:
+            return items; // 'default' o 'todo' devuelve el orden original
+    }
 }
 
 function renderGrid(container, items) {
