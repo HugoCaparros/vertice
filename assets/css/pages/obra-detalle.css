@@ -1,333 +1,274 @@
 /* Ruta: /assets/css/pages/obra-detalle.css
-   Descripción: Estilos para la vista de detalle de obra individual con diseño de galería premium. */
+   Descripción: Rediseño Premium de nivel museo para la vista de obra individual. */
 
-.detalle-container {
-  max-width: var(--container-width);
-  margin: var(--space-header) auto var(--space-16);
-  padding: 0 var(--container-padding);
+.detalle-main-wrapper {
+    margin-top: calc(var(--space-header) + var(--space-4));
+    background-color: var(--bg-page);
+    min-height: 100vh;
 }
 
-.obra-header-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: var(--space-16);
-  align-items: start;
-  margin-bottom: var(--space-20);
+/* ========================================================================
+   1. SECCIÓN HERO (LA OBRA COMO PROTAGONISTA)
+   ======================================================================== */
+.obra-hero-section {
+    padding: var(--space-12) var(--container-padding);
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
-@media (max-width: 992px) {
-  .obra-header-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-12);
-  }
-  .detalle-container {
-    margin-top: calc(var(--space-header) / 1.5);
-  }
+.obra-hero-container {
+    max-width: var(--container-width);
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-/* Animaciones */
-.autor-label, .obra-titulo, .badges-tecnicos, .obra-narrativa, 
-.ficha-tecnica, .acciones-galeria, .obra-stats-social {
-  opacity: 0;
-  animation: revealUp 0.8s var(--transition-smooth) forwards;
-}
-
-.autor-label { animation-delay: 0.1s; }
-.obra-titulo { animation-delay: 0.2s; }
-.badges-tecnicos { animation-delay: 0.25s; }
-.obra-narrativa { animation-delay: 0.3s; }
-.ficha-tecnica { animation-delay: 0.35s; }
-.acciones-galeria { animation-delay: 0.4s; }
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
+.frame-premium {
+    background-color: var(--bg-surface);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-floating);
+    max-width: 900px;
+    width: 100%;
     transform: translateY(20px);
-    filter: blur(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+    opacity: 0;
+    animation: revealImg 1.2s var(--transition-smooth) forwards;
 }
 
-/* ========================================================================
-   2. REFINAMIENTO DE TEXTOS (JERARQUÍA EDITORIAL)
-   ======================================================================== */
-.autor-label {
-  font: var(--font-h3);
-  color: var(--color-gris-medio);
-  text-transform: uppercase;
-  letter-spacing: 0.25em; /* */
-  margin-bottom: var(--space-2);
-  line-height: 1;
-  font-size: 0.9rem;
+@keyframes revealImg {
+    to { transform: translateY(0); opacity: 1; }
 }
 
-.obra-titulo {
-  font: var(--font-h1);
-  font-family: var(--font-serif); /* Marcellus */
-  font-size: clamp(2.5rem, 5vw, var(--size-h1));
-  line-height: 1.1;
-  margin-bottom: var(--space-6);
-  color: var(--text-primary);
-  font-weight: 400;
+.hero-main-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
-.badges-tecnicos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-bottom: var(--space-8);
-}
-
-.badges-tecnicos span {
-  font: var(--font-small);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 4px 12px;
-  background: transparent;
-  border: 1px solid var(--color-gris-claro);
-  color: var(--text-muted);
-  border-radius: 2px;
-}
-
-.obra-narrativa h3 {
-  font: var(--font-small);
-  font-weight: var(--weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-negro);
-  margin-bottom: var(--space-3);
-  border-bottom: 1px solid var(--border-sutil);
-  display: inline-block;
-  padding-bottom: 4px;
-}
-
-.obra-descripcion-texto {
-  font: var(--font-body);
-  color: var(--text-secondary);
-  line-height: 1.85; /* */
-  max-width: 60ch;
-  margin-bottom: var(--space-6);
-}
-
-#obra-curaduria {
-  font-family: var(--font-sans);
-  font-style: italic;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--color-gris-claro); /* */
-  margin-top: var(--space-4);
-}
-
-/* ========================================================================
-   3. FICHA TÉCNICA Y BOTÓN (UX MEJORADA)
-   ======================================================================== */
-.ficha-tecnica {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6) var(--space-8);
-  margin-bottom: var(--space-12);
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--border-sutil);
-}
-
-.dato-ficha span {
-  font: var(--font-small);
-  font-size: 0.7rem; /* */
-  color: var(--color-gris-medio);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.dato-ficha p {
-  font: var(--font-body);
-  font-weight: var(--weight-semibold); /* Destacado */
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.btn-negro {
-  height: var(--btn-height);
-  width: 100%;
-  background-color: var(--bg-inverse) !important;
-  color: var(--text-inverse) !important;
-  font: var(--font-button);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
-}
-
-.btn-negro:active { transform: scale(0.98); }
-.btn-negro:hover { background-color: var(--hover-negro) !important; }
-.btn-negro i { display: none !important; } /* Limpieza visual */
-
-/* ========================================================================
-   4. IMAGEN Y ESTADÍSTICAS
-   ======================================================================== */
-.frame-museo {
-  padding: 0;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.frame-museo img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.6s var(--transition-smooth);
-}
-
-.frame-museo:hover img { transform: scale(1.02); }
-
-.obra-stats-social {
-  display: flex;
-  gap: var(--space-8);
-  margin-top: var(--space-4);
-  color: var(--text-muted);
-}
-
-.obra-stats-social span {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font: var(--font-small);
-}
-
-/* ========================================================================
-   5. RELACIONADAS (LAYOUT ADAPTATIVO CON UNIFORMIDAD)
-   ======================================================================== */
-.relacionadas-section {
-  margin-top: var(--space-20);
-  padding-top: var(--space-16);
-  border: none !important;
-}
-
-/* Mejora: Título de sección con jerarquía clara */
-.section-title {
-  font: var(--font-h2);
-  font-size: 1.8rem;
-  margin-bottom: var(--space-8);
-  color: var(--text-primary);
-}
-
-.category-grid {
-  display: grid;
-  /* Mejora: Rejilla adaptativa con 4 columnas en escritorio */
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-8);
-}
-
-@media (max-width: 992px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
+.obra-floating-actions {
+    position: absolute;
+    bottom: var(--space-12);
+    right: 0;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-4);
-  }
+    z-index: 10;
 }
 
-.artist-card {
-  cursor: pointer;
-  transition: transform var(--transition-fast);
+.stat-item {
+    background: var(--bg-surface);
+    padding: 12px 20px;
+    border-radius: 100px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
 }
 
-/* Mejora: Contenedor con proporción fija para uniformidad total */
-.artist-image {
-  width: 100%;
-  aspect-ratio: 3 / 2; /* Formato paisaje uniforme para todas las fotos */
-  overflow: hidden;
-  background: var(--bg-secondary);
-  margin-bottom: var(--space-4);
+.stat-item i { font-size: 1rem; }
+.stat-item:hover { transform: scale(1.05); color: var(--color-rojo); }
+
+.btn-share-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-negro);
+    color: var(--color-blanco);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
 }
 
-.artist-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
-  filter: none !important;
-  transition: transform 0.6s var(--transition-smooth);
+.btn-share-icon:hover { background: var(--hover-negro); transform: rotate(15deg); }
+
+/* ========================================================================
+   2. SECCIÓN INFO (JERARQUÍA EDITORIAL)
+   ======================================================================== */
+.obra-info-section {
+    padding: var(--space-16) var(--container-padding);
+    max-width: var(--container-width);
+    margin: 0 auto;
 }
 
-.artist-card:hover {
-  transform: translateY(-5px); /* Micro-interacción de elevación */
+.info-content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
 }
 
-.artist-card:hover .artist-image img {
-  transform: scale(1.08); /* Efecto de zoom suave al pasar el cursor */
+.artista-tag {
+    font: var(--font-small);
+    color: var(--color-rojo);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--space-4);
+    font-weight: 700;
 }
 
-/* Mejora: Estilizado de información de la obra relacionada */
-.artist-info h3 {
-  font: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: var(--weight-semibold);
-  color: var(--text-primary);
-  margin-bottom: 2px;
-  text-transform: none; /* Nombre del cuadro en formato natural */
+.display-title {
+    font: var(--font-h1);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: var(--space-4);
+    line-height: 1;
 }
 
-.artist-info p {
-  font: var(--font-small);
-  font-size: 0.75rem;
-  color: var(--color-gris-medio);
-  text-transform: uppercase;
-  letter-spacing: 1px; /* Nombre del artista sutil */
+.obra-meta-inline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-12);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.dot { width: 4px; height: 4px; background: var(--color-gris-claro); border-radius: 50%; }
+
+.section-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+}
+
+.narrativa-p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    font-weight: 300;
+}
+
+.curaduria-quote {
+    font-style: italic;
+    font-size: 1rem;
+    padding-left: var(--space-8);
+    border-left: 1px solid var(--color-negro);
+    color: var(--text-muted);
 }
 
 /* ========================================================================
-   6. TOASTS (DISEÑO PREMIUM)
+   3. SIDEBAR Y FICHA TÉCNICA
    ======================================================================== */
-.toast-container {
-  position: fixed;
-  bottom: var(--space-6);
-  right: var(--space-6);
-  z-index: var(--z-modal);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+.sticky-card {
+    position: sticky;
+    top: calc(var(--space-header) + var(--space-8));
+    background: var(--bg-surface);
+    padding: var(--space-8);
+    border: 1px solid var(--border-sutil);
+    border-radius: var(--radius-cozy);
+    box-shadow: var(--shadow-sm);
 }
 
-.toast-mensaje {
-  background-color: var(--bg-inverse);
-  color: var(--text-inverse);
-  padding: 14px 24px;
-  min-width: 300px;
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  font: var(--font-small);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  box-shadow: var(--shadow-floating);
-  border-left: 4px solid var(--color-gris-medio);
-  animation: slideInToast 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+.technical-sheet {
+    margin-bottom: var(--space-10);
 }
 
-.toast-mensaje.success { border-left-color: var(--color-verde); }
-.toast-mensaje.info { border-left-color: var(--color-rojo); }
+.tech-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-sutil);
+}
 
-@keyframes slideInToast {
-  from { transform: translateX(120%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+.tech-row dt {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.tech-row dd {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.price-highlight {
+    font-size: 1.25rem !important;
+    color: var(--color-negro) !important;
+}
+
+.actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.btn-primary-vrt {
+    height: 64px;
+    background: var(--color-negro);
+    color: var(--color-blanco);
+    border: none;
+    font: var(--font-button);
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-primary-vrt:hover { background: var(--hover-negro); transform: translateY(-2px); }
+
+.btn-secondary-vrt {
+    height: 64px;
+    background: transparent;
+    color: var(--color-negro);
+    border: 1px solid var(--color-negro);
+    font: var(--font-button);
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-secondary-vrt:hover { background: var(--bg-secondary); }
+
+/* ========================================================================
+   4. RELACIONADAS
+   ======================================================================== */
+.relacionadas-premium {
+    padding: var(--space-16) var(--container-padding);
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.section-header-vrt {
+    margin-bottom: var(--space-10);
+}
+
+.section-header-vrt h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-4);
+}
+
+.divider-vrt { width: 60px; height: 2px; background: var(--color-rojo); }
+
+.relacionadas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-8);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .info-content-grid { grid-template-columns: 1fr; }
+    .obra-floating-actions { position: relative; bottom: 0; flex-direction: row; margin-top: var(--space-6); justify-content: center; }
 }

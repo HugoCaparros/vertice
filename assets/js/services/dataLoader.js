@@ -137,11 +137,12 @@ const DataLoader = {
         const usuario = this.getUsuarioActual();
         if (!usuario) return false;
 
+        const idStr = obraId.toString();
         if (!usuario.favoritos) usuario.favoritos = [];
-        const index = usuario.favoritos.indexOf(obraId);
+        const index = usuario.favoritos.indexOf(idStr);
 
         if (index === -1) {
-            usuario.favoritos.push(obraId);
+            usuario.favoritos.push(idStr);
         } else {
             usuario.favoritos.splice(index, 1);
         }
@@ -152,7 +153,8 @@ const DataLoader = {
 
     isFavorite(obraId) {
         const usuario = this.getUsuarioActual();
-        return usuario && usuario.favoritos ? usuario.favoritos.includes(obraId) : false;
+        const idStr = obraId.toString();
+        return usuario && usuario.favoritos ? usuario.favoritos.includes(idStr) : false;
     },
 
     async getFavorites() {
@@ -171,11 +173,12 @@ const DataLoader = {
         const user = this.getUsuarioActual();
         if (!user) return false;
 
+        const idStr = artistaId.toString();
         if (!user.siguiendo_ids) user.siguiendo_ids = [];
 
-        const index = user.siguiendo_ids.indexOf(artistaId.toString());
+        const index = user.siguiendo_ids.indexOf(idStr);
         if (index === -1) {
-            user.siguiendo_ids.push(artistaId.toString());
+            user.siguiendo_ids.push(idStr);
         } else {
             user.siguiendo_ids.splice(index, 1);
         }
@@ -187,7 +190,8 @@ const DataLoader = {
     isFollowingArtist(artistaId) {
         const user = this.getUsuarioActual();
         if (!user || !user.siguiendo_ids) return false;
-        return user.siguiendo_ids.includes(artistaId.toString());
+        const idStr = artistaId.toString();
+        return user.siguiendo_ids.includes(idStr);
     },
 
     async getFollowedArtists() {

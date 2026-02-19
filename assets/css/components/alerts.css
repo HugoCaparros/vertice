@@ -1,0 +1,120 @@
+/* Ruta: /assets/css/components/alerts.css
+   Descripción: Estilos para el sistema de notificaciones Toasts. 
+   ADN Vértice: Minimalista, sombras suaves y tipografía clara. */
+
+.vrt-notification-container {
+    position: fixed;
+    top: calc(var(--space-header) + var(--space-4));
+    right: var(--space-4);
+    z-index: 2100; /* Por encima de navbar y modales estándar */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    pointer-events: none; /* Dejar pasar clicks fuera de los toasts */
+}
+
+/* Base del Toast */
+.vrt-toast {
+    pointer-events: auto; /* Reestablecer para poder interactuar */
+    min-width: 300px;
+    max-width: 400px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: var(--shadow-floating);
+    border-left: 4px solid var(--color-gris-oscuro);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    animation: vrt-toast-entry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.vrt-toast:hover {
+    transform: translateX(-5px);
+}
+
+/* Contenido Principal */
+.vrt-toast-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.vrt-toast-content i {
+    font-size: 1.25rem;
+}
+
+.vrt-toast-message {
+    font: var(--font-small);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Variantes de Color */
+.vrt-toast-success { border-left-color: var(--color-success); }
+.vrt-toast-success i { color: var(--color-success); }
+
+.vrt-toast-error { border-left-color: var(--color-error); }
+.vrt-toast-error i { color: var(--color-error); }
+
+.vrt-toast-warning { border-left-color: #E6A23C; } /* Ambar para avisos */
+.vrt-toast-warning i { color: #E6A23C; }
+
+.vrt-toast-info { border-left-color: var(--color-gris-medio); }
+.vrt-toast-info i { color: var(--color-gris-medio); }
+
+/* Barra de Progreso (Visual solamente) */
+.vrt-toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--border-sutil);
+    opacity: 0.3;
+}
+
+/* Animaciones */
+@keyframes vrt-toast-entry {
+    0% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.vrt-toast-exit {
+    animation: vrt-toast-exit-anim 0.5s ease forwards !important;
+}
+
+@keyframes vrt-toast-exit-anim {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+
+/* Ajuste Móvil */
+@media (max-width: 768px) {
+    .vrt-notification-container {
+        top: auto;
+        bottom: var(--space-4);
+        right: var(--space-4);
+        left: var(--space-4);
+    }
+    .vrt-toast {
+        min-width: 0;
+        width: 100%;
+    }
+}

@@ -140,7 +140,9 @@ window.shareSocial = () => {
         });
     } else {
         navigator.clipboard.writeText(window.location.href);
-        alert("Enlace copiado al portapapeles");
+        if (window.VRT && window.VRT.showNotification) {
+            window.VRT.showNotification("Enlace copiado al portapapeles", "info");
+        }
     }
 };
 

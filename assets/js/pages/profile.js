@@ -1,4 +1,5 @@
 import DataLoader from '../services/dataLoader.js';
+import notifications from '../services/notifications.js';
 
 /* ==========================================================================
    USER PROFILE LOGIC (ES6 Module)
@@ -49,6 +50,7 @@ export async function initUserProfile() {
 
     } catch (error) {
         console.error("❌ Error cargando datos del perfil:", error);
+        notifications.show("No pudimos cargar toda la información de tu perfil.", "error");
         showProfileError();
     }
 }

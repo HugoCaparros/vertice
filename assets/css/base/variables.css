@@ -48,6 +48,11 @@
     --text-secondary:     var(--color-gris-oscuro);/* Subtítulos */
     --text-muted:         var(--color-gris-medio); /* Textos de apoyo / fechas */
     --text-inverse:       var(--color-blanco);     /* Texto sobre fondo negro/rojo */
+    
+    /* Estados Semánticos (Estrictos) */
+    --color-success:      var(--color-verde);
+    --color-error:        var(--color-rojo);
+    --text-success:       var(--color-verde);
     --text-error:         var(--color-rojo);
 
     /* Bordes */
@@ -105,7 +110,7 @@
     --space-12:           3rem;    /* 48px */
     --space-16:           4rem;    /* 64px */
     --space-header:       100px;   /* Incrementado para aumentar el "aire" visual */
-    --space-main-top:     var(--space-12); /* Espaciado extra debajo del header */
+    --space-main-top:     140px; /* Asegura que el contenido no se esconda tras el header fijo */
     
     --container-width:    1400px;
     --container-padding:  5%;

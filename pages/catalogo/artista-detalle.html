@@ -12,23 +12,41 @@
     <link rel="stylesheet" href="../../assets/css/components/footer.css">
     <link rel="stylesheet" href="../../assets/css/components/cards.css">
     <link rel="stylesheet" href="../../assets/css/components/buttons.css">
-    <link rel="stylesheet" href="../../assets/css/pages/detalle.css">
+    <link rel="stylesheet" href="../../assets/css/pages/artista-detalle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div id="navbar-placeholder"></div>
 
-    <main class="artist-detail-container">
+    <main class="artist-detail-container main-content">
         <section class="artist-hero">
             <div class="artist-bio-panel">
-                <span id="disciplina-artista" class="label-superior">Cargando...</span>
-                <h1 id="nombre-artista">...</h1>
-                <p id="bio-artista" class="bio-texto">Cargando biografía del artista...</p>
+                <header class="bio-header">
+                    <span id="disciplina-artista" class="label-superior">CARGANDO...</span>
+                    <h1 id="nombre-artista">...</h1>
+
+                    <div class="artist-impact-metrics">
+                        <div class="metric">
+                            <span class="metric-value" id="count-obras">0</span>
+                            <span class="metric-label">OBRAS</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="count-seguidores">0</span>
+                            <span class="metric-label">SEGUIDORES</span>
+                        </div>
+                    </div>
+                </header>
+
+                <p id="bio-artista" class="bio-texto">Cargando la trayectoria del artista y su visión creativa...</p>
+
                 <div class="actions-panel">
                     <button id="follow-btn" class="btn-artista-follow">SEGUIR ARTISTA</button>
+                    <button class="btn-share-minimal" onclick="window.shareSocial()"><i
+                            class="fa-regular fa-share-nodes"></i></button>
                 </div>
             </div>
+
             <div class="artist-portrait-panel">
                 <div class="portrait-frame">
                     <img id="imagen-artista" src="" alt="Artista">
@@ -36,54 +54,36 @@
             </div>
         </section>
 
-        <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
+        <section class="artist-content-section">
+            <div class="section-sidebar">
+                <div class="sticky-sidebar">
+                    <h3 class="sidebar-title">Sugeridos</h3>
+                    <div id="artistas-sugeridos-container" class="sugeridos-list">
+                        <!-- Se rellena con FavoritesManager -->
+                    </div>
+                </div>
+            </div>
 
-        <section class="works-grid" id="obras-artista-grid">
-            <!-- Se rellena dinámicamente -->
+            <div class="main-works-area">
+                <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
+                <div class="works-grid" id="obras-artista-grid">
+                    <!-- Se rellena dinámicamente -->
+                </div>
+            </div>
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
 
     <script type="module" src="../../assets/js/services/dataLoader.js"></script>
+    <script type="module" src="../../assets/js/utils/favoritesManager.js"></script>
     <script type="module" src="../../assets/js/components/layout.js"></script>
     <script type="module" src="../../assets/js/pages/details.js"></script>
     <script type="module" src="../../assets/js/main.js"></script>
 
     <script type="module">
-        import DataLoader from '../../assets/js/services/dataLoader.js';
-
-        // Lógica de seguimiento
-        document.addEventListener('DOMContentLoaded', async () => {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            if (!id) return;
-
-            const btn = document.getElementById('follow-btn');
-            if (btn) {
-                const checkStatus = () => {
-                    if (DataLoader.isFollowingArtist(id)) {
-                        btn.textContent = 'SIGUIENDO';
-                        btn.classList.add('following');
-                    } else {
-                        btn.textContent = 'SEGUIR ARTISTA';
-                        btn.classList.remove('following');
-                    }
-                };
-
-                // Esperar un momento para que el usuario se cargue
-                setTimeout(checkStatus, 500);
-
-                btn.onclick = () => {
-                    const success = DataLoader.toggleFollowArtist(id);
-                    if (!success) {
-                        if (window.showAuthModal) window.showAuthModal('../../');
-                        return;
-                    }
-                    checkStatus();
-                };
-            }
-        });
+        import { initArtistaDetalle } from '../../assets/js/pages/details.js';
+        document.addEventListener('DOMContentLoaded', initArtistaDetalle);
     </script>
 </body>
 

@@ -1,228 +1,5 @@
 /* ==========================================================================
-   OBRA DETALLE - ADN VÉRTICE (AJUSTE DE PRECISIÓN)
-   ========================================================================== */
-
-.detalle-container {
-    padding-top: var(--space-header); 
-    padding-bottom: var(--space-16);
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding-left: var(--container-padding);
-    padding-right: var(--container-padding);
-    background-color: var(--bg-page);
-}
-
-/* 1. Layout con Grid: Ajustado para dar más aire al texto */
-.obra-view {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--space-16); /* Aumentado para separar imagen de info */
-    align-items: start;
-}
-
-/* 2. Galería / Media */
-.obra-media {
-    position: sticky;
-    top: calc(var(--space-header) + var(--space-4));
-    background-color: var(--bg-secondary);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-sutil);
-    overflow: hidden;
-    /* Limitamos altura para evitar scroll excesivo de la imagen */
-    max-height: 75vh;
-}
-
-.main-img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover; /* Cambiado a cover para llenar el contenedor como en la captura */
-    transition: transform var(--transition-smooth);
-}
-
-.obra-media:hover .main-img {
-    transform: scale(1.02);
-}
-
-/* 3. Panel de Información: Alineación corregida */
-.obra-info-panel {
-    display: flex;
-    flex-direction: column;
-    min-height: 75vh; /* Sincronizado con la altura de la imagen */
-}
-
-.info-header {
-    margin-bottom: var(--space-8);
-}
-
-.categoria-label {
-    font: var(--font-small);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    display: block;
-    margin-bottom: var(--space-2);
-}
-
-.obra-titulo {
-    font: var(--font-h1);
-    color: var(--text-primary);
-    margin-bottom: var(--space-3);
-    text-transform: uppercase;
-    line-height: 1.1;
-}
-
-.obra-artista {
-    font: var(--font-h3);
-    color: var(--text-secondary);
-}
-
-/* Nombre del artista resaltado en rojo según captura */
-.obra-artista strong {
-    color: var(--color-rojo);
-    font-weight: var(--weight-semibold);
-    cursor: pointer;
-}
-
-/* 4. Bloque de Metadatos (Pestañas ajustadas) */
-.tabs-container { 
-    margin: var(--space-12) 0 var(--space-6); 
-}
-
-.tab-header {
-    display: flex;
-    gap: var(--space-6);
-    border-bottom: 1px solid var(--border-sutil);
-    margin-bottom: var(--space-6);
-}
-
-.tab-btn {
-    background: none;
-    border: none;
-    padding: var(--space-2) 0;
-    font: var(--font-small);
-    color: var(--text-muted);
-    cursor: pointer;
-    text-transform: uppercase;
-    position: relative;
-    transition: color var(--transition-fast);
-    font-weight: var(--weight-medium);
-}
-
-.tab-btn.active {
-    color: var(--text-primary);
-    font-weight: var(--weight-semibold);
-}
-
-.tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--color-rojo); /* Línea de acento roja */
-}
-
-.obra-meta {
-    padding: var(--space-4) 0;
-    border-top: 1px solid var(--border-sutil);
-    border-bottom: 1px solid var(--border-sutil);
-}
-
-.obra-descripcion {
-    font: var(--font-body);
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* Bloque Inferior: Empujado al final del panel */
-.price-action-block {
-    margin-top: auto; 
-    padding-top: var(--space-12);
-}
-
-.obra-precio {
-    font: var(--font-h2);
-    color: var(--color-rojo) !important;
-    margin-bottom: var(--space-6);
-}
-
-/* 6. Botones de Acción: Más robustos */
-.obra-actions {
-    display: flex;
-    gap: var(--space-4);
-}
-
-.btn-primary {
-    flex: 1;
-    height: 56px; /* Aumentado para coincidir con captura */
-    background-color: var(--color-negro);
-    color: var(--text-inverse);
-    border: none;
-    font: var(--font-button);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    transition: background-color var(--transition-fast);
-}
-
-.btn-primary:hover {
-    background-color: var(--hover-negro);
-}
-
-.btn-secondary {
-    width: 56px;
-    height: 56px;
-    background: transparent;
-    border: 1px solid var(--border-fuerte);
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-/* --- RECOMENDACIONES --- */
-.related-works-section {
-    background-color: var(--bg-secondary);
-    padding: var(--space-16) var(--container-padding);
-    margin-top: var(--space-16);
-}
-
-.related-title {
-    font: var(--font-h2);
-    text-align: center;
-    margin-bottom: var(--space-12);
-    letter-spacing: 0.1em;
-}
-
-/* 7. Adaptación Móvil */
-@media (max-width: 1024px) {
-    .obra-view {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-    }
-    
-    .obra-media {
-        position: relative;
-        top: 0;
-        max-height: 50vh;
-    }
-
-    .obra-info-panel {
-        min-height: auto;
-    }
-
-    .obra-titulo {
-        font-size: 32px;
-    }
-}
-
-/* ==========================================================================
-   ARTISTA DETALLE - REDISEÑO EDITORIAL
+   ARTISTA DETALLE - REDISEÑO EDITORIAL PREMIUM
    ========================================================================== */
 
 .artist-detail-container {
@@ -236,44 +13,81 @@
 .artist-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-16);
+    gap: var(--space-20);
     padding: var(--space-16) 0;
     align-items: center;
-    min-height: 70vh;
+    position: relative;
+}
+
+.bio-header {
+    margin-bottom: var(--space-10);
 }
 
 .label-superior {
     text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    letter-spacing: 4px;
+    font-size: 0.7rem;
+    color: var(--color-rojo);
     display: block;
     margin-bottom: var(--space-4);
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-bold);
 }
 
 #nombre-artista {
     font-family: var(--font-serif);
-    font-size: clamp(3rem, 5vw, 5rem);
-    line-height: 0.9;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.85;
     margin-bottom: var(--space-8);
     text-transform: uppercase;
     color: var(--text-primary);
+    font-weight: 400;
+}
+
+/* MÉTRICAS DE IMPACTO */
+.artist-impact-metrics {
+    display: flex;
+    gap: var(--space-10);
+    margin-top: var(--space-6);
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.metric-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
 }
 
 .bio-texto {
-    font-size: 1.15rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--text-secondary);
     margin-bottom: var(--space-12);
-    max-width: 540px;
+    max-width: 600px;
+    font-weight: 300;
+}
+
+.actions-panel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
 }
 
 .btn-artista-follow {
     background-color: var(--color-negro);
     color: var(--text-inverse);
-    border: none;
-    padding: 1.25rem 3rem;
+    border: 1px solid var(--color-negro);
+    padding: 1.25rem 3.5rem;
     font-weight: var(--weight-semibold);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -285,82 +99,184 @@
 .btn-artista-follow:hover {
     background-color: var(--hover-negro);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-artista-follow.following {
     background-color: transparent;
     color: var(--text-primary);
-    border: 1px solid var(--color-negro);
+    border: 1px solid var(--border-sutil);
 }
 
+.btn-share-minimal {
+    width: 56px;
+    height: 56px;
+    background: transparent;
+    border: 1px solid var(--border-sutil);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-share-minimal:hover {
+    color: var(--color-negro);
+    border-color: var(--color-negro);
+}
+
+/* PORTRAIT */
 .portrait-frame {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 5;
     background-color: var(--bg-secondary);
-    border-radius: var(--radius-cozy);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    border: 8px solid var(--color-blanco);
 }
 
 .portrait-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-smooth);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.portrait-frame:hover img {
-    transform: scale(1.05);
+/* CONTENT SECTION */
+.artist-content-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-16);
+    margin-top: var(--space-16);
+    padding-bottom: var(--space-20);
 }
 
+.sticky-sidebar {
+    position: sticky;
+    top: calc(var(--space-header) + 2rem);
+    height: fit-content;
+}
+
+.sidebar-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.sidebar-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-sutil);
+}
+
+/* SUGERIDOS */
+.sugeridos-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* MAIN WORKS AREA */
 .artist-works-title {
     font-family: var(--font-serif);
-    font-size: 2rem;
-    text-align: center;
-    margin: var(--space-16) 0 var(--space-12);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-10);
     text-transform: uppercase;
-    letter-spacing: 4px;
-    position: relative;
-    padding-bottom: var(--space-4);
-}
-
-.artist-works-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 1px;
-    background-color: var(--color-negro);
+    letter-spacing: 3px;
 }
 
 .works-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-8);
-    padding-bottom: var(--space-16);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-6);
 }
 
-/* Responsive Artista */
+/* MINI CARDS REDESIGN */
+.mini-card {
+    background: var(--color-blanco);
+    border: 1px solid var(--border-sutil);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.mini-card-img-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.mini-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.mini-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mini-card-overlay span {
+    color: var(--color-blanco);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    border: 1px solid var(--color-blanco);
+    padding: 8px 16px;
+}
+
+.mini-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-negro);
+}
+
+.mini-card:hover .mini-card-overlay {
+    opacity: 1;
+}
+
+.mini-card:hover .mini-card-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.mini-card-info {
+    padding: var(--space-4);
+}
+
+.mini-card-info h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.mini-card-info p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* Mobile Adjustments */
 @media (max-width: 1024px) {
     .artist-hero {
         grid-template-columns: 1fr;
-        text-align: center;
-        gap: var(--space-12);
     }
-
-    .bio-texto {
-        margin-left: auto;
-        margin-right: auto;
+    .artist-content-section {
+        grid-template-columns: 1fr;
     }
-
-    #nombre-artista {
-        font-size: 3.5rem;
+    .section-sidebar {
+        order: 2;
     }
-
-    .portrait-frame {
-        max-width: 500px;
-        margin: 0 auto;
+    .main-works-area {
+        order: 1;
     }
 }

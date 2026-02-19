@@ -7,7 +7,9 @@
     "tecnica": "Acrílico sobre lienzo",
     "precio": 3200,
     "anio": 2023,
-    "descripcion": "Una exploración minimalista de la armonía y el peso visual en el espacio vacío.",
+    "tecnica_detalle": "Acrílico de alta densidad y pigmentos minerales sobre lienzo de algodón premium",
+    "dimensiones": "120 x 120 cm",
+    "descripcion": "En 'Equilibrio', Sofia Klein lleva el minimalismo a su expresión más pura. La obra no busca representar un objeto, sino un estado mental de suspensión. La tensión creada por los bloques de color sólido y el uso estratégico del espacio negativo invita al espectador a una meditación sobre el orden y el silencio en medio del caos cotidiano.",
     "imagen": "assets/img/obras/Equilibrio.webp",
     "stats": {
       "likes": 1250,
@@ -24,7 +26,9 @@
     "tecnica": "Óleo sobre lienzo",
     "precio": 4568,
     "anio": 2022,
-    "descripcion": "Una exploración técnica sobre la degradación de la memoria estética. Vega utiliza la técnica del claroscuro tradicional para representar una Venus clásica que parece corromperse por un error de carga digital. Esta obra cuestiona la permanencia de la belleza en la era de los datos volátiles.",
+    "tecnica_detalle": "Óleo sobre lienzo preparado con técnicas tradicionales de imprimación flamenca",
+    "dimensiones": "150 x 200 cm",
+    "descripcion": "Una exploración técnica magistral sobre la degradación de la memoria estética en la era contemporánea. Vega utiliza la técnica del claroscuro tradicional para representar una Venus clásica que parece corromperse por un 'error de carga' digital. Esta obra cuestiona la permanencia de la belleza clásica y cómo nuestra percepción está mediada irremediablemente por los datos volátiles de la red.",
     "imagen": "assets/img/obras/clasico-2.webp",
     "stats": {
       "likes": 38942,

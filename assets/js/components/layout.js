@@ -4,17 +4,25 @@ import DataLoader from '../services/dataLoader.js';
    Descripción: Gestión de la interfaz común, incluyendo la carga dinámica de navbar, footer y control de acceso. */
 
 export const initLayout = async function () {
-    // 1. SEGURIDAD
-    authGuard();
-
-    // 2. RENDERIZADO (NAVBAR & FOOTER)
-    const navPlaceholder = document.getElementById('navbar-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-
-    // Corrección de ruta raíz
+    // 1. CARGAR ESTILOS GLOBALES DE ALERTAS
     const basePath = DataLoader.getBasePath();
     let rootPath = basePath.replace('assets/data/', '');
     if (rootPath === basePath) rootPath = basePath.replace('data/', '').replace('assets/', '');
+
+    if (!document.getElementById('vrt-alerts-css')) {
+        const link = document.createElement('link');
+        link.id = 'vrt-alerts-css';
+        link.rel = 'stylesheet';
+        link.href = rootPath + 'assets/css/components/alerts.css';
+        document.head.appendChild(link);
+    }
+
+    // 2. SEGURIDAD
+    authGuard();
+
+    // 3. RENDERIZADO (NAVBAR & FOOTER)
+    const navPlaceholder = document.getElementById('navbar-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
 
     // --- CARGAR NAVBAR ---
     if (navPlaceholder) {
