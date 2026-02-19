@@ -7,7 +7,7 @@
     "fecha": "2026-03-15",
     "descripcion": "Andrés Vega explica su proceso de deconstrucción de la imagen clásica.",
     "cupos_restantes": 14,
-    "imagen": "assets/img/eventos/masterclass-vega.jpg"
+    "imagen": "assets/img/eventos/masterclass-vega.webp"
   },
   {
     "id": 302,
@@ -17,6 +17,6 @@
     "fecha": "2026-03-20",
     "descripcion": "Debate abierto sobre la creatividad algorítmica y el futuro del arte digital.",
     "cupos_restantes": 47,
-    "imagen": "assets/img/eventos/simposio-ia.jpg"
+    "imagen": "assets/img/eventos/simposio-ia.webp"
   }
 ]
