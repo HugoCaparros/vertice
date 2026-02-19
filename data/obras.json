@@ -8,7 +8,7 @@
     "precio": 3200,
     "anio": 2023,
     "descripcion": "Una exploración minimalista de la armonía y el peso visual en el espacio vacío.",
-    "imagen": "assets/img/obras/Equilibrio.png",
+    "imagen": "assets/img/obras/Equilibrio.webp",
     "stats": {
       "likes": 1250,
       "vistas": 5600,
@@ -42,7 +42,7 @@
     "precio": 1850,
     "anio": 2023,
     "descripcion": "Reinterpretación de la cultura pop a través de recortes vintage y texturas contemporáneas.",
-    "imagen": "assets/img/obras/Fragmentos.png",
+    "imagen": "assets/img/obras/Fragmentos.webp",
     "stats": {
       "likes": 890,
       "vistas": 3200,
@@ -76,7 +76,7 @@
     "precio": 4100,
     "anio": 2024,
     "descripcion": "Intersección de formas puras que desafían la percepción espacial del espectador.",
-    "imagen": "assets/img/obras/Geometria_Viva.png",
+    "imagen": "assets/img/obras/Geometria_Viva.webp",
     "stats": {
       "likes": 2100,
       "vistas": 7800,
@@ -93,7 +93,7 @@
     "precio": 1200,
     "anio": 2023,
     "descripcion": "Captura melancólica de la silueta de la ciudad durante el crepúsculo, procesada químicamente.",
-    "imagen": "assets/img/obras/Horizonte_Urbano.png",
+    "imagen": "assets/img/obras/Horizonte_Urbano.webp",
     "stats": {
       "likes": 3400,
       "vistas": 12000,
@@ -110,7 +110,7 @@
     "precio": 5500,
     "anio": 2023,
     "descripcion": "Obra conceptual que explora el punto de encuentro entre la luz artificial y la sombra natural.",
-    "imagen": "assets/img/obras/Interseccion.png",
+    "imagen": "assets/img/obras/Interseccion.webp",
     "stats": {
       "likes": 4500,
       "vistas": 15000,
@@ -127,7 +127,7 @@
     "precio": 950,
     "anio": 2022,
     "descripcion": "Una mirada íntima a los rincones olvidados de la metrópolis moderna.",
-    "imagen": "assets/img/obras/Nostalgia_Urbana.png",
+    "imagen": "assets/img/obras/Nostalgia_Urbana.webp",
     "stats": {
       "likes": 1800,
       "vistas": 6700,
@@ -144,7 +144,7 @@
     "precio": 3800,
     "anio": 2024,
     "descripcion": "La fuerza de la ciudad representada a través de trazos monumentales y colores vibrantes.",
-    "imagen": "assets/img/obras/Perfil_Urbano.png",
+    "imagen": "assets/img/obras/Perfil_Urbano.webp",
     "stats": {
       "likes": 2900,
       "vistas": 11000,
@@ -161,7 +161,7 @@
     "precio": 2700,
     "anio": 2024,
     "descripcion": "Visualización de datos en tiempo real convertida en una experiencia estética vibrante.",
-    "imagen": "assets/img/obras/Pulso_Digital.png",
+    "imagen": "assets/img/obras/Pulso_Digital.webp",
     "stats": {
       "likes": 5600,
       "vistas": 21000,
@@ -178,7 +178,7 @@
     "precio": 4800,
     "anio": 2023,
     "descripcion": "Estudio cromático sobre la intensidad de la emoción pura a través del color rojo.",
-    "imagen": "assets/img/obras/Rojo_Profundo.png",
+    "imagen": "assets/img/obras/Rojo_Profundo.webp",
     "stats": {
       "likes": 3100,
       "vistas": 9800,
@@ -195,7 +195,7 @@
     "precio": 3400,
     "anio": 2024,
     "descripcion": "La calma que precede a la tormenta en el corazón de la gran ciudad.",
-    "imagen": "assets/img/obras/Silencio_Urbano.png",
+    "imagen": "assets/img/obras/Silencio_Urbano.webp",
     "stats": {
       "likes": 1500,
       "vistas": 5200,
@@ -212,7 +212,7 @@
     "precio": 1900,
     "anio": 2023,
     "descripcion": "Un entramado de tags y colores que capturan la energía caótica de las calles de Tokio.",
-    "imagen": "assets/img/obras/Trama_Urbana.png",
+    "imagen": "assets/img/obras/Trama_Urbana.webp",
     "stats": {
       "likes": 4200,
       "vistas": 16000,
