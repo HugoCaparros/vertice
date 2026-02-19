@@ -34,7 +34,16 @@ const DataLoader = {
     // 3. GETTERS BÁSICOS
     async getArtistas() { return await this.loadJSON('artistas.json'); },
     async getObras() { return await this.loadJSON('obras.json'); },
-    async getUsuarios() { return await this.loadJSON('usuarios.json'); },
+
+    async getUsuarios() {
+        const defaultUsers = await this.loadJSON('usuarios.json');
+        const localUsersRaw = localStorage.getItem('usuarios_locales');
+        const localUsers = localUsersRaw ? JSON.parse(localUsersRaw) : [];
+
+        // Combinar ambas fuentes
+        return [...defaultUsers, ...localUsers];
+    },
+
     async getNoticias() { return await this.loadJSON('noticias.json'); },
     async getColecciones() { return await this.loadJSON('colecciones.json'); },
     async getEventos() { return await this.loadJSON('eventos.json'); },

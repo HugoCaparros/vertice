@@ -130,9 +130,18 @@ export const AuthService = {
                 password: passInput.value,
                 avatar: "../../assets/img/default-avatar.webp",
                 rol: rol,
-                handle: "@" + nameInput.value.replace(/\s+/g, '').toLowerCase()
+                handle: "@" + nameInput.value.replace(/\s+/g, '').toLowerCase(),
+                favoritos: [],
+                siguiendo_ids: []
             };
 
+            // 1. Guardar en la colección de usuarios locales para persistencia entre sesiones
+            const usuariosLocalesRaw = localStorage.getItem('usuarios_locales');
+            const usuariosLocales = usuariosLocalesRaw ? JSON.parse(usuariosLocalesRaw) : [];
+            usuariosLocales.push(nuevoUsuario);
+            localStorage.setItem('usuarios_locales', JSON.stringify(usuariosLocales));
+
+            // 2. Marcar como usuario logueado actualmente
             localStorage.setItem('usuario_logueado', JSON.stringify(nuevoUsuario));
 
             if (successMsg) successMsg.style.display = 'block';
