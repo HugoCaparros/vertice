@@ -170,7 +170,14 @@ export const AuthService = {
             );
 
             if (usuarioEncontrado) {
-                localStorage.setItem('usuario_logueado', JSON.stringify(usuarioEncontrado));
+                // Normalizar datos antes de guardar
+                const userToSave = {
+                    ...usuarioEncontrado,
+                    favoritos: (usuarioEncontrado.obras_megusta || []).map(id => id.toString()),
+                    siguiendo_ids: (usuarioEncontrado.siguiendo_artistas || []).map(id => id.toString())
+                };
+
+                localStorage.setItem('usuario_logueado', JSON.stringify(userToSave));
                 btn.style.backgroundColor = "var(--color-verde)";
                 btn.textContent = "¡Bienvenido!";
                 setTimeout(() => { window.location.href = '../../index.html'; }, 1000);
