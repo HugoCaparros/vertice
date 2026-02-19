@@ -11,131 +11,128 @@ function safeText(elementId, text) {
 }
 
 /**
- * Inicializa la página de perfil con lógica diferenciada
+ * Inicializa la página de perfil con lógica diferenciada y carga masiva
  */
 export async function initUserProfile() {
     const usuario = await DataLoader.getUsuarioActual();
     
-    if (usuario) {
-        // 1. Identidad básica
-        safeText('user-name', usuario.nombre);
-        safeText('user-handle', usuario.handle || usuario.email);
-        
-        const roleBadge = document.getElementById('user-role-badge');
-        if (roleBadge) {
-            const role = usuario.rol || 'Coleccionista';
-            roleBadge.textContent = role;
-            if (role === 'Artista') roleBadge.classList.add('is-artist');
-        }
-
-        // 2. Avatar
-        const avatarEl = document.getElementById('user-avatar-img');
-        const placeholder = document.getElementById('avatar-placeholder');
-        if (avatarEl) {
-            const avatarPath = usuario.avatar ? DataLoader.getAssetPath() + usuario.avatar : null;
-            if (avatarPath) {
-                avatarEl.src = avatarPath;
-                avatarEl.style.display = 'block';
-                if (placeholder) placeholder.style.display = 'none';
-            }
-        }
-
-        // 3. Vistas Diferenciadas
-        if (usuario.rol === 'Artista') {
-            document.getElementById('artist-works-section').style.display = 'block';
-            renderArtistWorks(usuario.id);
-        }
-
-        // 4. Secciones Comunes
-        renderFavorites();
-        renderFollowedArtists();
-        
-    } else {
-        // Si no hay usuario y estamos en perfil, el auth guard de layout ya debería habernos sacado,
-        // pero por si acaso redirigimos a login.
+    if (!usuario) {
         const base = DataLoader.getBasePath();
         window.location.href = base + 'pages/auth/login.html';
+        return;
+    }
+
+    // 1. Identidad básica (UI Inmediata)
+    renderUserIdentity(usuario);
+
+    try {
+        // 2. CARGA MASIVA (Simultánea)
+        const [obras, artistas] = await Promise.all([
+            DataLoader.getObras(),
+            DataLoader.getArtistas()
+        ]);
+
+        // 3. Vistas Diferenciadas: Tus Obras (Si es Artista)
+        if (usuario.rol === 'Artista') {
+            document.getElementById('artist-works-section').style.display = 'block';
+            const misObras = obras.filter(o => o.artista_id === usuario.id);
+            renderList('artist-works-grid', misObras, renderMiniCard, "Aún no has subido obras.");
+        }
+
+        // 4. Secciones Comunes: Favoritos
+        const misFavoritos = obras.filter(o => (usuario.favoritos || []).includes(o.id.toString()));
+        renderList('favorites-grid', misFavoritos, renderMiniCard, "No tienes obras favoritas todavía.");
+
+        // 5. Secciones Comunes: Artistas Seguidos
+        const misSeguidos = artistas.filter(a => (usuario.siguiendo_ids || []).includes(a.id.toString()));
+        renderList('artists-grid', misSeguidos, renderArtistMiniCard, "Aún no sigues a ningún artista.");
+
+    } catch (error) {
+        console.error("❌ Error cargando datos del perfil:", error);
+        showProfileError();
+    }
+}
+
+function renderUserIdentity(usuario) {
+    safeText('user-name', usuario.nombre);
+    safeText('user-handle', usuario.handle || usuario.email);
+    
+    const roleBadge = document.getElementById('user-role-badge');
+    if (roleBadge) {
+        const role = usuario.rol || 'Coleccionista';
+        roleBadge.textContent = role;
+        if (role === 'Artista') roleBadge.classList.add('is-artist');
+    }
+
+    const avatarEl = document.getElementById('user-avatar-img');
+    const placeholder = document.getElementById('avatar-placeholder');
+    if (avatarEl) {
+        const avatarPath = usuario.avatar ? DataLoader.getAssetPath() + usuario.avatar : null;
+        if (avatarPath) {
+            avatarEl.src = avatarPath;
+            avatarEl.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+        }
     }
 }
 
 /**
- * Renderiza las obras que pertenecen al artista logueado
+ * Helper genérico para renderizar listas con mensaje de vacío
  */
-async function renderArtistWorks(artistaId) {
-    const container = document.getElementById('artist-works-grid');
+function renderList(containerId, data, renderFn, emptyMsg) {
+    const container = document.getElementById(containerId);
     if (!container) return;
 
-    try {
-        const artista = await DataLoader.getArtistaCompleto(artistaId);
-        if (!artista || !artista.lista_obras || artista.lista_obras.length === 0) {
-            container.innerHTML = `<p class="text-muted">Aún no has subido obras.</p>`;
-            return;
-        }
+    if (!data || data.length === 0) {
+        container.innerHTML = `<p class="empty-state-msg">${emptyMsg}</p>`;
+        return;
+    }
 
-        container.innerHTML = artista.lista_obras.map(o => renderMiniCard(o)).join("");
-    } catch (e) { console.error(e); }
+    container.innerHTML = data.map(item => renderFn(item)).join("");
 }
 
-/**
- * Renderiza las obras marcadas como favoritas
- */
-async function renderFavorites() {
-    const container = document.getElementById('favorites-grid');
-    if (!container) return;
-
-    try {
-        const favorites = await DataLoader.getFavorites();
-        if (!favorites || favorites.length === 0) {
-            container.innerHTML = `<p class="text-muted">No tienes obras favoritas todavía.</p>`;
-            return;
-        }
-        container.innerHTML = favorites.map(o => renderMiniCard(o)).join("");
-    } catch (e) { console.error(e); }
-}
-
-/**
- * Renderiza los artistas seguidos
- */
-async function renderFollowedArtists() {
-    const container = document.getElementById('artists-grid');
-    if (!container) return;
-
-    try {
-        const followed = await DataLoader.getFollowedArtists();
-        if (!followed || followed.length === 0) {
-            container.innerHTML = `<p class="text-muted">Aún no sigues a ningún artista.</p>`;
-            return;
-        }
-
-        const base = DataLoader.getBasePath();
-        container.innerHTML = followed.map(a => `
-            <div class="artist-card-mini" onclick="window.location.href='../catalogo/artista-detalle.html?id=${a.id}'" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-sutil); cursor: pointer;">
-                <img src="${base}${a.imagen}" alt="${a.nombre}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-                <div>
-                    <h4 style="font-family: var(--font-serif); font-size: 0.9rem;">${a.nombre}</h4>
-                    <span style="font-size: 0.7rem; color: var(--text-muted);">${a.disciplina}</span>
-                </div>
-            </div>
-        `).join("");
-    } catch (e) { console.error(e); }
-}
-
-/**
- * Helper para renderizar una tarjeta pequeña de obra
- */
-function renderMiniCard(obra) {
-    const base = DataLoader.getBasePath();
+function renderArtistMiniCard(artist) {
+    const base = DataLoader.getAssetPath();
     return `
-        <div class="cat-card mini">
-            <div class="cat-card-img-wrapper" style="aspect-ratio: 1;">
-                <img src="${base}${obra.imagen}" alt="${obra.titulo}" class="cat-card-img" loading="lazy">
-                <a href="../catalogo/obra-detalle.html?id=${obra.id}" class="card-overlay-link"></a>
+        <div class="artist-mini-card" onclick="window.location.href='../catalogo/artista-detalle.html?id=${artist.id}'">
+            <div class="artist-mini-avatar">
+                <img src="${base}${artist.imagen}" alt="${artist.nombre}">
             </div>
-            <div class="cat-card-info" style="padding: 1rem;">
-                <h3 class="cat-card-title" style="font-size: 0.85rem;">${obra.titulo}</h3>
+            <div class="artist-mini-info">
+                <h4>${artist.nombre}</h4>
+                <span>${artist.disciplina}</span>
             </div>
         </div>
     `;
+}
+
+function renderMiniCard(obra) {
+    const base = DataLoader.getAssetPath();
+    return `
+        <div class="profile-mini-card">
+            <div class="mini-card-img-wrapper">
+                <img src="${base}${obra.imagen}" alt="${obra.titulo}" loading="lazy">
+                <a href="../catalogo/obra-detalle.html?id=${obra.id}" class="card-overlay-link"></a>
+            </div>
+            <div class="mini-card-info">
+                <h3>${obra.titulo}</h3>
+                <span class="mini-card-artist">${obra.artista || ''}</span>
+            </div>
+        </div>
+    `;
+}
+
+function showProfileError() {
+    const container = document.querySelector('.profile-main-content');
+    if (container) {
+        container.innerHTML = `
+            <div class="error-state">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>Lo sentimos, hubo un error al cargar tu información. Por favor, intenta recargar la página.</p>
+                <button onclick="location.reload()" class="btn-profile-edit">REINTENTAR</button>
+            </div>
+        `;
+    }
 }
 
 // Hacer globales

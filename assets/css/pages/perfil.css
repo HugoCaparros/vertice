@@ -161,3 +161,121 @@
         text-align: center;
     }
 }
+
+/* MINI CARDS (Obras en Perfil) */
+.profile-mini-card {
+    background: var(--color-blanco);
+    border: 1px solid var(--border-sutil);
+    transition: var(--transition-smooth);
+}
+
+.profile-mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.mini-card-img-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.mini-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.profile-mini-card:hover .mini-card-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.mini-card-info {
+    padding: 1rem;
+}
+
+.mini-card-info h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.mini-card-artist {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* MINI CARDS (Artistas Seguidos) */
+.artist-mini-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    border: 1px solid var(--border-sutil);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.artist-mini-card:hover {
+    background: #fafafa;
+    border-color: var(--color-negro);
+}
+
+.artist-mini-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #eee;
+}
+
+.artist-mini-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-mini-info h4 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.artist-mini-info span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* STATES (Empty & Error) */
+.empty-state-msg {
+    grid-column: 1 / -1;
+    padding: 3rem;
+    text-align: center;
+    background: #fcfcfc;
+    border: 1px dashed var(--border-sutil);
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.error-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    border: 1px solid #fee2e2;
+    background: #fef2f2;
+}
+
+.error-state i {
+    font-size: 2.5rem;
+    color: #ef4444;
+    margin-bottom: 1.5rem;
+}
+
+.error-state p {
+    margin-bottom: 2rem;
+    color: #991b1b;
+}

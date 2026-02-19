@@ -91,15 +91,37 @@ function updateUserInfo(usuario) {
 }
 
 function fixLayoutPaths(rootPath) {
+    // 1. Imágenes y Logos
     const navLogo = document.getElementById('dynamic-logo');
     if (navLogo) navLogo.src = rootPath + 'assets/icons/logo_letras.svg';
-    const brandLink = document.querySelector('.brand-link');
-    if (brandLink) brandLink.href = rootPath + 'index.html';
+    
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         const footerLogo = footerPlaceholder.querySelector('img');
         if (footerLogo) footerLogo.src = rootPath + 'assets/icons/logo_blanco.svg';
     }
+
+    // 2. Enlaces de Navegación (Evitar navegación rota entre carpetas)
+    const brandLink = document.querySelector('.brand-link');
+    if (brandLink) brandLink.href = rootPath + 'index.html';
+
+    // Ajustar todos los enlaces en el navbar
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item:not(.logout-item)');
+    navLinks.forEach(link => {
+        const originalHref = link.getAttribute('href');
+        if (originalHref && !originalHref.startsWith('http') && !originalHref.startsWith('#')) {
+            // Reconstruir ruta relativa desde el rootPath
+            // Esperamos rutas tipo: ../../pages/catalogo/artistas.html o ../usuario/perfil.html
+            const cleanPath = originalHref.replace(/\.\.\//g, ''); // Quitamos los ../
+            // Si el originalHref ya empieza con 'pages/', lo dejamos así, sino lo añadimos si no es index
+            const isIndex = cleanPath === 'index.html';
+            link.href = isIndex ? rootPath + 'index.html' : rootPath + (cleanPath.startsWith('pages/') ? '' : 'pages/') + cleanPath;
+        }
+    });
+
+    // Casos específicos de rutas que podrían estar mal en el HTML parcial
+    const profileLink = document.querySelector('a[href*="perfil.html"]');
+    if (profileLink) profileLink.href = rootPath + 'pages/usuario/perfil.html';
 }
 
 function initNavbarEvents(rootPath) {
