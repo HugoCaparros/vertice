@@ -41,34 +41,38 @@ function initFilterEvents(container) {
     const applyFilters = () => {
         let filtered = [...allObras];
 
-        // 1. Búsqueda por texto
+        // 1. Búsqueda por texto (Título o Artista)
         const query = searchInput.value.toLowerCase().trim();
         if (query) {
             filtered = filtered.filter(o => 
                 o.titulo.toLowerCase().includes(query) || 
-                o.artista.toLowerCase().includes(query)
+                (o.artista && o.artista.toLowerCase().includes(query))
             );
         }
 
         // 2. Filtro por Categoría
-        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        const activeBtn = document.querySelector('.filter-btn.active');
+        const activeFilter = activeBtn ? activeBtn.dataset.filter : 'all';
+        
         if (activeFilter !== 'all') {
             filtered = filtered.filter(o => o.categoria_id === activeFilter);
         }
 
         // 3. Ordenación
-        const sortBy = sortSelect.value;
-        if (sortBy === 'precio-asc') {
-            filtered.sort((a, b) => a.precio - b.precio);
-        } else if (sortBy === 'precio-desc') {
-            filtered.sort((a, b) => b.precio - a.precio);
+        if (sortSelect) {
+            const sortBy = sortSelect.value;
+            if (sortBy === 'precio-asc') {
+                filtered.sort((a, b) => (a.precio || 0) - (b.precio || 0));
+            } else if (sortBy === 'precio-desc') {
+                filtered.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+            }
         }
 
         renderArtworks(filtered, container);
 
-        // Feedback si no hay resultados
-        if (filtered.length === 0) {
-            notifications.show("No hay obras que coincidan con tu búsqueda.", "info");
+        // Feedback sutil si no hay resultados
+        if (filtered.length === 0 && (query || activeFilter !== 'all')) {
+            console.log("🔍 No se encontraron resultados para los filtros aplicados.");
         }
     };
 
@@ -122,9 +126,9 @@ function renderArtworks(obras, container) {
                     <span class="cat-card-artist">${obra.artista || 'Artista Desconocido'}</span>
                     <h3 class="cat-card-title">${obra.titulo}</h3>
                     <div class="info-secondary">
-                        <span>${obra.tecnica || 'Técnica Mixta'}</span>
+                        <span>${obra.tecnica || 'Técnica Vértice'}</span>
                         <span>•</span>
-                        <span>${obra.ano || '2024'}</span>
+                        <span>${obra.anio || '2024'}</span>
                     </div>
                     <span class="info-price">${precioFormateado}</span>
                 </div>

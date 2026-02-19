@@ -10,31 +10,42 @@
   border-radius: var(--btn-radius);
   font: var(--font-button);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-smooth);
   white-space: nowrap;
+  border: none;
+  gap: var(--space-2);
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
-/* Botón Principal (Rojo Marca) */
+.btn i {
+    font-size: 1rem;
+}
+
+/* Botón Principal (ADN Vértice - Negro) */
 .btn-primary {
-  background-color: var(--bg-accent);
-  color: var(--text-inverse);
-}
-
-.btn-primary:hover {
-  background-color: var(--hover-rojo);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Botón Secundario (Negro) */
-.btn-secondary {
   background-color: var(--bg-inverse);
   color: var(--text-inverse);
 }
 
-.btn-secondary:hover {
+.btn-primary:hover {
   background-color: var(--hover-negro);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
+
+/* Botón de Acento (Rojo Marca) */
+.btn-accent {
+  background-color: var(--bg-accent);
+  color: var(--text-inverse);
+}
+
+.btn-accent:hover {
+  background-color: var(--hover-rojo);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 
 /* Botón Outline (Borde) */
 .btn-outline {

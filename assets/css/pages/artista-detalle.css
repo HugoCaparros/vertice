@@ -150,6 +150,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 5;
+    max-height: 70vh;
 }
 
 .portrait-img {
@@ -191,8 +192,70 @@
 
 .works-grid-vrt {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-12);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-8);
+}
+
+/* MINI CARDS (EXHIBITION) */
+.mini-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-sutil);
+    transition: all var(--transition-smooth);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.mini-card:hover { border-color: var(--color-negro); transform: translateY(-4px); }
+
+.mini-card-img-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.mini-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s var(--transition-smooth);
+}
+
+.mini-card:hover img { transform: scale(1.08); }
+
+.mini-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(4px);
+}
+
+.mini-card:hover .mini-card-overlay { opacity: 1; }
+
+.mini-card-overlay span {
+    color: var(--color-blanco);
+    font: var(--font-small);
+    letter-spacing: 2px;
+    border: 1px solid var(--color-blanco);
+    padding: 8px 16px;
+}
+
+.mini-card-info { padding: var(--space-4); }
+.mini-card-info h3 { font: var(--font-small); font-weight: 700; margin-bottom: 2px; text-transform: uppercase; }
+.mini-card-info p { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* DISCOVERY GRID SUGERIDOS */
+.relacionadas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-6);
 }
 
 /* DISCOVERY */

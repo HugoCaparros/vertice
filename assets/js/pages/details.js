@@ -28,8 +28,8 @@ export async function initObraDetalle() {
         // 1. Información Principal e Identidad
         safeText('obra-titulo', obra.titulo);
         safeText('nombre-artista', nombreArtista); 
-        safeText('obra-tecnica', obra.tecnica);
-        safeText('obra-anio', obra.anio || 's/f');
+        safeText('obra-tecnica-label', obra.tecnica);
+        safeText('obra-anio-label', obra.anio || 's/f');
 
         // 2. Narrativa y Contexto
         safeText('obra-descripcion-texto', obra.descripcion);
@@ -57,7 +57,11 @@ export async function initObraDetalle() {
             const formatNum = (num) => new Intl.NumberFormat('es-ES').format(num);
             safeText('stat-vistas', formatNum(obra.stats.vistas));
             safeText('stat-likes', formatNum(obra.stats.likes));
-            safeText('stat-guardados', formatNum(obra.stats.guardados));
+            
+            // Precio en euros con formato premium
+            if (obra.precio) {
+                safeText('obra-precio', formatNum(obra.precio) + " €");
+            }
 
             const likesWrapper = document.getElementById('stat-likes-wrapper');
             if (likesWrapper) {
@@ -75,7 +79,7 @@ export async function initObraDetalle() {
         if (btnColeccion) {
             const updateBtn = () => {
                 const isFav = DataLoader.isFavorite(id);
-                btnColeccion.textContent = isFav ? 'ELIMINAR DE MI COLECCIÓN' : 'AÑADIR A MI COLECCIÓN PRIVADA';
+            btnColeccion.textContent = isFav ? 'ELIMINAR DE VÉRTICE' : 'GUARDAR EN VÉRTICE';
                 btnColeccion.classList.toggle('active', isFav);
             };
             
@@ -159,9 +163,21 @@ export async function initArtistaDetalle() {
         safeText('bio-artista', artista.bio);
         safeText('disciplina-artista', artista.disciplina);
         
-        // Contadores
-        safeText('count-obras', (artista.lista_obras || []).length);
-        safeText('count-seguidores', (artista.stats?.seguidores || '1.2k'));
+        // Nuevos Campos Enriquecidos
+        safeText('nacionalidad-artista', artista.nacionalidad || 'Internacional');
+        safeText('estilo-artista', artista.estilo_predominante || artista.disciplina);
+        
+        // Contadores con formato premium
+        const totalObras = (artista.lista_obras || []).length;
+        safeText('count-obras', totalObras);
+        
+        const seguidoresNum = artista.seguidores || 0;
+        const formatFollowers = (num) => {
+            if (num >= 1000000) return (num/1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num/1000).toFixed(1) + 'K';
+            return num;
+        };
+        safeText('count-seguidores', formatFollowers(seguidoresNum));
 
         const img = document.getElementById('imagen-artista');
         if(img) {
@@ -175,7 +191,7 @@ export async function initArtistaDetalle() {
         if (btnFollow) {
             const checkStatus = () => {
                 const isFollowing = DataLoader.isFollowingArtist(id);
-                btnFollow.textContent = isFollowing ? 'SIGUIENDO' : 'SEGUIR ARTISTA';
+                btnFollow.textContent = isFollowing ? 'SIGUIENDO EN VÉRTICE' : 'SEGUIR EN VÉRTICE';
                 btnFollow.classList.toggle('following', isFollowing);
             };
             checkStatus();
@@ -245,18 +261,14 @@ export async function initArtistsList() {
     const base = DataLoader.getBasePath();
 
     container.innerHTML = artistas.map(a => {
-        const isFollowing = DataLoader.isFollowingArtist(a.id);
         return `
-            <article class="artist-card">
-                <div class="artist-card-img-wrapper" onclick="window.location.href='artista-detalle.html?id=${a.id}'">
+            <article class="artist-card" onclick="window.location.href='artista-detalle.html?id=${a.id}'">
+                <div class="artist-card-img-wrapper">
                     <img src="${base}${a.imagen}" alt="${a.nombre}" class="artist-card-img" loading="lazy">
                 </div>
                 <div class="artist-card-info">
                     <div class="artist-card-header">
-                        <h3 class="artist-card-name" onclick="window.location.href='artista-detalle.html?id=${a.id}'">${a.nombre}</h3>
-                        <button class="follow-icon-btn ${isFollowing ? 'active' : ''}" onclick="window.toggleArtistFollow(event, '${a.id}')">
-                            <i class="${isFollowing ? 'fa-solid' : 'fa-regular'} fa-star"></i>
-                        </button>
+                        <h3 class="artist-card-name">${a.nombre}</h3>
                     </div>
                     <p class="artist-card-specialty">${a.disciplina}</p>
                 </div>

@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     height: var(--space-header);
-    background-color: rgba(255, 255, 255, 0.98);
+    background-color: var(--bg-surface);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-sutil);
     z-index: var(--z-navbar);
@@ -233,7 +233,7 @@
     font-weight: 600;
     text-transform: uppercase;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 0px;
     letter-spacing: 0.05em;
 }
 
@@ -262,7 +262,7 @@
     background-color: #ffffff;
     border: 1px solid var(--border-sutil);
     box-shadow: var(--shadow-md);
-    border-radius: 4px;
+    border-radius: 0px;
     padding: 0; 
     overflow: hidden; 
     margin-top: 5px;

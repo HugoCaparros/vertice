@@ -1,159 +1,124 @@
-/* ==========================================================================
-   MODAL DE CONTENIDO EXCLUSIVO (Adaptado al ADN de Marca)
-   Ubicación: assets/css/components/modal.css
-   ========================================================================== */
+/* Ruta: /assets/css/components/modal.css
+   Descripción: Sistema de modales premium con efectos de glassmorphism y jerarquía de museo. */
 
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    
-    /* Fondo oscuro semitransparente */
-    background-color: rgba(0, 0, 0, 0.6); 
-    backdrop-filter: blur(5px); /* Efecto cristal */
-    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-modal);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: var(--z-modal-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    z-index: var(--z-modal); /* 2000 */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-fast);
+    padding: var(--space-6);
+    animation: fadeIn 0.4s var(--transition-smooth);
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-exclusive {
-    background-color: var(--bg-surface); /* #FFFFFF */
-    width: 90%;
-    max-width: 420px;
-    padding: var(--space-8) var(--space-6); /* 32px 24px */
-    text-align: center;
-    position: relative;
-    
-    /* Bordes y Sombras del Root */
-    border-radius: var(--input-radius); /* 4px */
-    box-shadow: var(--shadow-floating); /* Sombra suave y elevada */
-    border: 1px solid var(--border-sutil);
-}
-
-/* Botón Cerrar (X) */
-.modal-close {
-    position: absolute;
-    top: var(--space-4); 
-    right: var(--space-4);
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: var(--text-muted); /* Gris medio */
-    cursor: pointer;
-    transition: color var(--transition-fast);
-}
-
-.modal-close:hover { 
-    color: var(--color-rojo); /* Toque de marca al cerrar */
-}
-
-/* Logo */
-.modal-header-logo img {
-    height: 40px; 
-    margin-bottom: var(--space-6);
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Título */
-.modal-title {
-    font-family: var(--font-serif); /* Marcellus */
-    font-size: 24px; /* Un poco menos que H2 para el modal */
-    font-weight: var(--weight-regular);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: var(--space-2);
-    color: var(--text-primary); /* Negro */
-}
-
-/* Descripción */
-.modal-description {
-    font-family: var(--font-sans); /* Inter */
-    font-size: 14px;
-    color: var(--text-secondary); /* Gris oscuro */
-    margin-bottom: var(--space-8);
-    line-height: 1.6;
-    padding: 0 var(--space-2);
-}
-
-/* Contenedor de Botones */
-.modal-buttons {
+.modal-container {
+    background-color: var(--bg-surface);
+    width: 95%;
+    max-width: 1400px;
+    max-height: 90vh;
+    border-radius: var(--radius-cozy);
+    box-shadow: var(--shadow-floating);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3); /* 12px */
+    overflow: hidden;
+    animation: slideUp 0.5s var(--transition-smooth);
 }
 
-/* --- BOTONES (Usando tus variables de botones) --- */
-
-/* 1. Botón Sólido (Iniciar Sesión) */
-.btn-modal-solid {
+.modal-header {
+    padding: var(--space-8) var(--space-10);
+    border-bottom: 1px solid var(--border-sutil);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: var(--btn-height); /* 48px */
-    
-    background-color: var(--bg-inverse); /* Negro */
-    color: var(--text-inverse);          /* Blanco */
-    
-    border: 1px solid var(--bg-inverse);
-    border-radius: var(--btn-radius);    /* 999px (Pill Shape) */
-    
-    /* Tipografía de Botón */
-    font-family: var(--font-sans);
-    font-weight: var(--weight-semibold);
-    font-size: 13px;
+}
+
+.modal-label {
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    
-    transition: all var(--transition-fast);
+    letter-spacing: 3px;
+    color: var(--color-rojo);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
 }
 
-.btn-modal-solid:hover {
-    background-color: var(--hover-negro); /* #333333 */
-    border-color: var(--hover-negro);
-    transform: translateY(-1px);
-}
-
-/* 2. Botón Outline (Registrarse) */
-.btn-modal-outline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: var(--btn-height); /* 48px */
-    
-    background-color: transparent;
-    color: var(--text-primary); /* Negro */
-    
-    border: 1px solid var(--border-fuerte); /* Borde Negro */
-    border-radius: var(--btn-radius);       /* 999px (Pill Shape) */
-    
-    /* Tipografía */
-    font-family: var(--font-sans);
-    font-weight: var(--weight-semibold);
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    
-    transition: all var(--transition-fast);
-}
-
-.btn-modal-outline:hover {
-    background-color: var(--bg-secondary); /* Gris claro al hover */
+#modal-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
     color: var(--color-negro);
+}
+
+.modal-close-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-sutil);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
+    transform: rotate(90deg);
+}
+
+.modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-10);
+}
+
+/* Grilla interna del modal */
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-8);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Scrollbar personalizado para el modal */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--color-gris-medio);
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .modal-container {
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
 }

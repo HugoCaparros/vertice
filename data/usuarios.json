@@ -21,7 +21,7 @@
   {
     "id": 2,
     "email": "jane@art.com",
-    "password": "jane",
+    "password": "123456",
     "handle": "@curator_jane",
     "nombre": "Jane Doe",
     "tipo": "curador",

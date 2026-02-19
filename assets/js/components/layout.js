@@ -76,17 +76,20 @@ export const initLayout = async function () {
    ========================================================================== */
 
 function updateUserInfo(usuario) {
+    const welcomeEl = document.querySelector('.welcome-label');
+    if (welcomeEl) welcomeEl.textContent = 'BIENVENIDO,';
+
     const nameEl = document.querySelector('.user-name-display');
     if (nameEl && usuario.nombre) {
-        nameEl.textContent = usuario.nombre.split(' ')[0];
+        nameEl.textContent = usuario.nombre.split(' ')[0].toUpperCase();
     }
 
     const roleEl = document.querySelector('.user-role-badge');
     const artistLinks = document.querySelectorAll('.artist-only-link');
 
     if (roleEl) {
-        const rol = usuario.rol || 'Usuario';
-        roleEl.textContent = rol;
+        const rol = usuario.rol || 'Coleccionista';
+        roleEl.textContent = rol.toUpperCase();
 
         if (rol === 'Artista') {
             roleEl.classList.add('is-artist');
@@ -96,6 +99,13 @@ function updateUserInfo(usuario) {
             artistLinks.forEach(link => { link.style.display = 'none'; });
         }
     }
+
+    // Sincronizar también elementos específicos de la página de perfil si existen
+    const profileName = document.getElementById('user-name');
+    if (profileName && usuario.nombre) profileName.textContent = usuario.nombre;
+    
+    const profileRole = document.getElementById('user-role-badge');
+    if (profileRole) profileRole.textContent = (usuario.rol || 'Coleccionista').toUpperCase();
 }
 
 function fixLayoutPaths(rootPath) {
@@ -156,20 +166,37 @@ export function authGuard() {
     const usuario = JSON.parse(localStorage.getItem('usuario_logueado'));
     const path = window.location.pathname;
 
+    // Páginas que requieren protección
     const protectedPages = [
-        'perfil.html', 'mis-colecciones.html', 'ajustes.html', 'dashboard.html',
-        'subir-obra.html', 'mis-obras.html', 'artistas.html', 'obras.html',
-        'categorias.html', 'obra-detalle.html', 'artista-detalle.html',
+        'perfil.html', 'dashboard.html', 'subir-obra.html', 'mis-obras.html', 'mis-colecciones.html'
     ];
 
-    if (protectedPages.some(page => path.includes(page)) && !usuario) {
+    // Páginas que son "libres" una vez logueado (sin popups molestos)
+    const browsePages = [
+        'obras.html', 'artistas.html', 'categorias.html', 'obra-detalle.html', 'artista-detalle.html'
+    ];
+
+    // Si no hay usuario y trata de entrar en páginas protegidas -> Mostrar Modal
+    if (!usuario && (protectedPages.some(page => path.includes(page)) || browsePages.some(page => path.includes(page)))) {
         const basePath = DataLoader.getBasePath();
         let rootPath = basePath.replace('assets/data/', '');
         if (rootPath === basePath) {
             rootPath = basePath.replace('data/', '').replace('assets/', '');
         }
+        
+        // Solo mostrar modal si no es una navegación "natural" de catálogo (opcional, pero Vértice es exclusivo)
         showAuthModal(rootPath);
         document.body.style.overflow = 'hidden';
+    }
+    
+    // Si hay usuario logueado -> NUNCA redirigir ni mostrar modal
+    if (usuario) {
+        console.log("🔓 Usuario autenticado detectado. Movimiento libre habilitado.");
+        const modal = document.getElementById('authRequiredModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 }
 

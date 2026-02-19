@@ -61,8 +61,8 @@
 .vrt-toast-error { border-left-color: var(--color-error); }
 .vrt-toast-error i { color: var(--color-error); }
 
-.vrt-toast-warning { border-left-color: #E6A23C; } /* Ambar para avisos */
-.vrt-toast-warning i { color: #E6A23C; }
+.vrt-toast-warning { border-left-color: var(--color-warning); }
+.vrt-toast-warning i { color: var(--color-warning); }
 
 .vrt-toast-info { border-left-color: var(--color-gris-medio); }
 .vrt-toast-info i { color: var(--color-gris-medio); }

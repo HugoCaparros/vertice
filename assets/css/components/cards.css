@@ -13,7 +13,7 @@
                 box-shadow var(--transition-smooth);
     box-shadow: var(--shadow-sm);
     position: relative;
-    border: 1px solid rgba(0,0,0,0.03); /* Borde casi invisible para definición */
+    border: 1px solid var(--border-sutil);
 }
 
 /* Efecto Hover "Cozy": Elevación y suavidad */
@@ -136,13 +136,34 @@
     z-index: 1;
 }
 
+.vrt-toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--border-sutil);
+    opacity: 0.3;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--color-gris-medio);
+    border-radius: 0px;
+}
+
+.modal-container {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0px;
+}
+
 /* ==========================================================================
    ARTIST CARDS (Rediseño "Cozy")
    ========================================================================== */
 
 .artist-card {
     background-color: var(--bg-surface);
-    border-radius: var(--radius-cozy);
+    border-radius: 0px; /* ADN Vértice: Puntas afiladas */
     padding: var(--space-6);
     text-align: center;
     text-decoration: none;
@@ -161,17 +182,17 @@
 .artist-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-md);
-    background-color: #fff;
+    background-color: var(--bg-surface);
 }
 
 .artist-card-img-wrapper {
     width: 160px;
     height: 160px;
-    border-radius: 50%; /* Retrato circular elegante */
+    border-radius: 0px; /* ADN Vértice: Puntas afiladas */
     overflow: hidden;
     margin-bottom: var(--space-6);
     background-color: var(--bg-secondary);
-    border: 3px solid var(--color-blanco);
+    border-left: 4px solid var(--color-gris-oscuro);
     box-shadow: var(--shadow-sm);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }

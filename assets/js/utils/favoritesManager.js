@@ -25,8 +25,12 @@ const FavoritesManager = {
             this.updateIcon(iconEl, isFav, 'heart');
         }
 
-        const msg = isFav ? 'Obra añadida a favoritos' : 'Obra eliminada de tu colección';
-        notifications.show(msg, isFav ? 'success' : 'error');
+        // Notificación Semántica: Verde para añadir, Rojo para quitar
+        if (isFav) {
+            notifications.show("Obra guardada en Vértice", 'success');
+        } else {
+            notifications.show("Obra eliminada de tu colección", 'error');
+        }
         
         return isFav;
     },
@@ -37,15 +41,18 @@ const FavoritesManager = {
     async toggleArtista(id, btnEl = null, iconEl = null) {
         const success = DataLoader.toggleFollowArtist(id);
         if (!success) {
-            notifications.show("Debes iniciar sesión para seguir artistas", "warning");
-            if (window.showAuthModal) window.showAuthModal('../../');
+            notifications.show("Debes acceder a tu cuenta para seguir en Vértice", "warning");
+            if (window.showAuthModal) {
+                const base = DataLoader.getBasePath();
+                window.showAuthModal(base);
+            }
             return false;
         }
 
         const isFollowing = DataLoader.isFollowingArtist(id);
 
         if (btnEl) {
-            btnEl.textContent = isFollowing ? 'SIGUIENDO' : 'SEGUIR ARTISTA';
+            btnEl.textContent = isFollowing ? 'SIGUIENDO EN VÉRTICE' : 'SEGUIR EN VÉRTICE';
             btnEl.classList.toggle('following', isFollowing);
         }
 
@@ -53,8 +60,12 @@ const FavoritesManager = {
             this.updateIcon(iconEl, isFollowing, 'star');
         }
 
-        const msg = isFollowing ? 'Siguiendo al artista' : 'Has dejado de seguir al artista';
-        notifications.show(msg, isFollowing ? 'success' : 'error');
+        // Notificación Semántica: Verde para añadir, Rojo para quitar
+        if (isFollowing) {
+            notifications.show('Artista añadido a tu red en Vértice', 'success');
+        } else {
+            notifications.show('Has dejado de seguir en Vértice', 'error');
+        }
 
         return isFollowing;
     },

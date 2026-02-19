@@ -19,55 +19,73 @@
 <body>
     <div id="navbar-placeholder"></div>
 
-    <main class="artist-detail-container main-content">
-        <section class="artist-hero">
-            <div class="artist-bio-panel">
-                <header class="bio-header">
-                    <span id="disciplina-artista" class="label-superior">CARGANDO...</span>
-                    <h1 id="nombre-artista">...</h1>
+    <main class="artist-detail-wrapper main-content">
+        <!-- 1. HERO SECTION PREMIUM -->
+        <section class="artist-hero-premium">
+            <div class="hero-bg-accent"></div>
+            <div class="hero-content-grid">
+                <div class="artist-text-content">
+                    <span class="label-premium" id="disciplina-artista">CARGANDO...</span>
+                    <h1 class="artist-display-name" id="nombre-artista">...</h1>
 
-                    <div class="artist-impact-metrics">
-                        <div class="metric">
-                            <span class="metric-value" id="count-obras">0</span>
-                            <span class="metric-label">OBRAS</span>
+                    <div class="artist-quick-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Nacionalidad</span>
+                            <span class="meta-value" id="nacionalidad-artista">-</span>
                         </div>
-                        <div class="metric">
-                            <span class="metric-value" id="count-seguidores">0</span>
-                            <span class="metric-label">SEGUIDORES</span>
+                        <div class="meta-item">
+                            <span class="meta-label">Estilo</span>
+                            <span class="meta-value" id="estilo-artista">-</span>
                         </div>
                     </div>
-                </header>
 
-                <p id="bio-artista" class="bio-texto">Cargando la trayectoria del artista y su visión creativa...</p>
+                    <div class="artist-bio-area">
+                        <span class="section-subtitle-vrt">Trayectoria</span>
+                        <p class="bio-narrative" id="bio-artista">Cargando la visión creativa del artista...</p>
+                    </div>
 
-                <div class="actions-panel">
-                    <button id="follow-btn" class="btn-artista-follow">SEGUIR ARTISTA</button>
-                    <button class="btn-share-minimal" onclick="window.shareSocial()"><i
-                            class="fa-regular fa-share-nodes"></i></button>
+                    <div class="artist-social-actions">
+                        <button id="follow-btn" class="btn-vrt-follow">SEGUIR ARTISTA</button>
+                        <div class="social-metrics">
+                            <div class="metric-vrt">
+                                <span class="m-val" id="count-obras">0</span>
+                                <span class="m-lbl">OBRAS</span>
+                            </div>
+                            <div class="metric-vrt">
+                                <span class="m-val" id="count-seguidores">0</span>
+                                <span class="m-lbl">FOLLOWERS</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="artist-portrait-panel">
-                <div class="portrait-frame">
-                    <img id="imagen-artista" src="" alt="Artista">
+                <div class="portrait-container">
+                    <div class="portrait-frame-vrt"></div>
+                    <img id="imagen-artista" src="" alt="Artista" class="portrait-img">
                 </div>
             </div>
         </section>
 
-        <section class="artist-content-section">
-            <div class="section-sidebar">
-                <div class="sticky-sidebar">
-                    <h3 class="sidebar-title">Sugeridos</h3>
-                    <div id="artistas-sugeridos-container" class="sugeridos-list">
-                        <!-- Se rellena con FavoritesManager -->
-                    </div>
-                </div>
+        <!-- 2. EXHIBITION AREA -->
+        <section class="artist-exhibition-section">
+            <header class="exhibition-header">
+                <h2>OBRAS EN EXHIBICIÓN</h2>
+                <div class="exhibition-divider"></div>
+            </header>
+            <div class="works-grid-vrt" id="obras-artista-grid">
+                <!-- Se rellena dinámicamente -->
             </div>
+        </section>
 
-            <div class="main-works-area">
-                <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
-                <div class="works-grid" id="obras-artista-grid">
-                    <!-- Se rellena dinámicamente -->
+        <!-- 3. DISCOVERY AREA -->
+        <section class="more-discovery-section">
+            <div class="discovery-grid">
+                <div class="discovery-info">
+                    <span class="section-subtitle-vrt">Descubrir</span>
+                    <h3>Artistas Relacionados</h3>
+                </div>
+                <div id="artistas-sugeridos-container" class="relacionadas-grid">
+                    <!-- Se rellena con JS -->
                 </div>
             </div>
         </section>

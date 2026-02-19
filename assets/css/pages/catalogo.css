@@ -32,7 +32,7 @@
     align-items: center;
     gap: var(--space-4);
     background: var(--bg-surface);
-    border: 1px solid var(--border-sutil);
+    border: 1px solid var(--border-fuerte);
     padding: 0 var(--space-4);
     height: var(--input-height);
     flex: 1;
@@ -66,7 +66,8 @@
 
 .filter-btn.active {
     border-color: var(--color-negro);
-    color: var(--color-negro);
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
     font-weight: var(--weight-semibold);
 }
 

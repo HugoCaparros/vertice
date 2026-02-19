@@ -56,13 +56,18 @@ const DataLoader = {
             const filteredObras = obras.filter(o => o.categoria_id === slug);
             
             // Adjuntar datos del artista a cada obra
-            filteredObras.forEach(obra => {
-                obra.artista_data = artistas.find(a => a.id === obra.artista_id);
+            const obrasConArtista = filteredObras.map(o => {
+                const artista = artistas.find(a => a.id === o.artista_id);
+                return {
+                    ...o,
+                    artista: artista ? artista.nombre : 'Artista Vértice',
+                    artista_data: artista
+                };
             });
 
             return {
                 info: categoria,
-                obras: filteredObras
+                obras: obrasConArtista
             };
         } catch (error) {
             console.error(`Error al obtener obras por categoría (${slug}):`, error);
