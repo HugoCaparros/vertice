@@ -41,6 +41,34 @@ const DataLoader = {
     async getComentarios() { return await this.loadJSON('comentarios.json'); },
     async getNotificaciones() { return await this.loadJSON('notificaciones.json'); },
     async getCategorias() { return await this.loadJSON('categorias.json'); },
+    
+    async getObrasPorCategoria(slug) {
+        try {
+            const [obras, artistas, categorias] = await Promise.all([
+                this.getObras(),
+                this.getArtistas(),
+                this.getCategorias()
+            ]);
+
+            const categoria = categorias.find(c => c.slug === slug);
+            if (!categoria) return { info: null, obras: [] };
+
+            const filteredObras = obras.filter(o => o.categoria_id === slug);
+            
+            // Adjuntar datos del artista a cada obra
+            filteredObras.forEach(obra => {
+                obra.artista_data = artistas.find(a => a.id === obra.artista_id);
+            });
+
+            return {
+                info: categoria,
+                obras: filteredObras
+            };
+        } catch (error) {
+            console.error(`Error al obtener obras por categoría (${slug}):`, error);
+            return { info: null, obras: [] };
+        }
+    },
 
     // 4. FUNCIONES RELACIONALES
     async getObraCompleta(id) {
