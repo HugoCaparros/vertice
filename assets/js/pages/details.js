@@ -208,12 +208,12 @@ export async function initArtistsList() {
 
     container.innerHTML = artistas.map(a => `
         <article class="artist-card" onclick="window.location.href='artista-detalle.html?id=${a.id}'">
-            <div class="artist-image">
-                <img src="${base}${a.imagen}" alt="${a.nombre}" loading="lazy">
+            <div class="artist-card-img-wrapper">
+                <img src="${base}${a.imagen}" alt="${a.nombre}" class="artist-card-img" loading="lazy">
             </div>
-            <div class="artist-info">
-                <h3>${a.nombre}</h3>
-                <p>${a.disciplina}</p>
+            <div class="artist-card-info">
+                <h3 class="artist-card-name">${a.nombre}</h3>
+                <p class="artist-card-specialty">${a.disciplina}</p>
             </div>
         </article>
     `).join('');

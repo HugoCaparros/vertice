@@ -2,36 +2,39 @@
    Descripción: Estilos para la lista y el grid de artistas con soporte para skeleton loading. */
 
 .page-header {
-    padding: var(--space-header) var(--container-padding) var(--space-8);
-    text-align: left;
+    padding: calc(var(--space-header) + var(--space-12)) var(--container-padding) var(--space-12);
+    text-align: center; /* Centrado para balance visual */
     max-width: var(--container-width);
     margin: 0 auto;
 }
 
 .page-header h1 {
     font: var(--font-h1);
-    font-size: 72px; /* Tamaño Hero */
+    font-size: var(--size-h1); /* Sincronizado con variables */
     color: var(--text-primary);
     line-height: 1.1;
     margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .page-header p {
     font: var(--font-body);
     color: var(--text-muted);
-    font-size: 18px;
-    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
     max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Grid de Artistas */
+/* Grid de Artistas con mayor espaciado */
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-12);
     padding: 0 var(--container-padding) var(--space-16);
     max-width: var(--container-width);
-    margin: 0 auto;
+    margin: 40px auto 0;
 }
 
 /* Esqueleto de carga (Skeleton) con tus tokens */

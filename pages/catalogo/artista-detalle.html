@@ -14,117 +14,34 @@
     <link rel="stylesheet" href="../../assets/css/components/buttons.css">
     <link rel="stylesheet" href="../../assets/css/pages/detalle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .artist-hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 160px 5% 80px;
-            align-items: center;
-        }
-
-        .artist-portrait {
-            width: 100%;
-            aspect-ratio: 1;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-        .artist-portrait img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .artist-bio h1 {
-            font-family: var(--font-serif);
-            font-size: 4rem;
-            line-height: 1;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
-
-        .artist-bio p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--color-gris-oscuro);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        .artist-follow-btn {
-            background: var(--color-negro);
-            color: var(--color-blanco);
-            border: none;
-            padding: 15px 40px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .artist-follow-btn.following {
-            background: transparent;
-            color: var(--color-negro);
-            border: 1px solid var(--color-negro);
-        }
-
-        .artist-works-title {
-            text-align: center;
-            font-family: var(--font-serif);
-            margin: 100px 0 50px;
-            font-size: 2rem;
-            letter-spacing: 4px;
-        }
-
-        .works-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            padding: 0 5% 100px;
-        }
-
-        @media (max-width: 900px) {
-            .artist-hero {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .artist-bio h1 {
-                font-size: 3rem;
-            }
-
-            .artist-bio p {
-                margin: 0 auto 2rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
     <div id="navbar-placeholder"></div>
 
-    <section class="artist-hero">
-        <div class="artist-bio">
-            <span id="disciplina-artista"
-                style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: #999; display: block; margin-bottom: 1rem;">Cargando...</span>
-            <h1 id="nombre-artista">...</h1>
-            <p id="bio-artista">Cargando biografía del artista...</p>
-            <button id="follow-btn" class="artist-follow-btn">SEGUIR ARTISTA</button>
-        </div>
-        <div class="artist-portrait">
-            <img id="imagen-artista" src="" alt="Artista">
-        </div>
-    </section>
+    <main class="artist-detail-container">
+        <section class="artist-hero">
+            <div class="artist-bio-panel">
+                <span id="disciplina-artista" class="label-superior">Cargando...</span>
+                <h1 id="nombre-artista">...</h1>
+                <p id="bio-artista" class="bio-texto">Cargando biografía del artista...</p>
+                <div class="actions-panel">
+                    <button id="follow-btn" class="btn-artista-follow">SEGUIR ARTISTA</button>
+                </div>
+            </div>
+            <div class="artist-portrait-panel">
+                <div class="portrait-frame">
+                    <img id="imagen-artista" src="" alt="Artista">
+                </div>
+            </div>
+        </section>
 
-    <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
+        <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
 
-    <section class="works-grid" id="obras-artista-grid">
-        <!-- Se rellena dinámicamente -->
-    </section>
+        <section class="works-grid" id="obras-artista-grid">
+            <!-- Se rellena dinámicamente -->
+        </section>
+    </main>
 
     <div id="footer-placeholder"></div>
 

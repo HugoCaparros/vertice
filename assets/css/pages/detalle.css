@@ -220,3 +220,147 @@
         font-size: 32px;
     }
 }
+
+/* ==========================================================================
+   ARTISTA DETALLE - REDISEÑO EDITORIAL
+   ========================================================================== */
+
+.artist-detail-container {
+    padding-top: var(--space-header);
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+.artist-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    padding: var(--space-16) 0;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.label-superior {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-4);
+    font-weight: var(--weight-semibold);
+}
+
+#nombre-artista {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-8);
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+
+.bio-texto {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-12);
+    max-width: 540px;
+}
+
+.btn-artista-follow {
+    background-color: var(--color-negro);
+    color: var(--text-inverse);
+    border: none;
+    padding: 1.25rem 3rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.8rem;
+}
+
+.btn-artista-follow:hover {
+    background-color: var(--hover-negro);
+    transform: translateY(-2px);
+}
+
+.btn-artista-follow.following {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--color-negro);
+}
+
+.portrait-frame {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-cozy);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+}
+
+.portrait-frame:hover img {
+    transform: scale(1.05);
+}
+
+.artist-works-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    text-align: center;
+    margin: var(--space-16) 0 var(--space-12);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    position: relative;
+    padding-bottom: var(--space-4);
+}
+
+.artist-works-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-negro);
+}
+
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-8);
+    padding-bottom: var(--space-16);
+}
+
+/* Responsive Artista */
+@media (max-width: 1024px) {
+    .artist-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: var(--space-12);
+    }
+
+    .bio-texto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #nombre-artista {
+        font-size: 3.5rem;
+    }
+
+    .portrait-frame {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}

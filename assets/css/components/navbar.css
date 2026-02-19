@@ -9,14 +9,14 @@
     height: var(--space-header);
     background-color: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-sutil); /* Corregido: añadido para consistencia */
+    border-bottom: 1px solid var(--border-sutil);
     z-index: var(--z-navbar);
     
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 var(--container-padding);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================

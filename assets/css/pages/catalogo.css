@@ -1,70 +1,114 @@
 /* Ruta: /assets/css/pages/catalogo.css
-   Descripción: Estilos para la vista de catálogo general y colecciones. */
+   Descripción: Estilos para la vista de catálogo general coordinando toolbar y grid. */
 
 .page-header {
-    padding: var(--space-header) var(--container-padding) var(--space-8);
+    padding: calc(var(--space-header) + var(--space-8)) var(--container-padding) var(--space-8);
     text-align: center;
 }
 
-.cat-desc {
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--text-secondary);
+.page-header h2 {
+    font-family: var(--font-serif);
+    font-size: var(--size-h2);
+    letter-spacing: 4px;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
 }
 
-/* Toolbar de Filtros */
+/* Toolbar de Filtros - Más aireado y limpio */
 .toolbar-container {
     max-width: var(--container-width);
-    margin: 0 auto var(--space-lg);
-    padding: 0 5%;
+    margin: 0 auto var(--space-12);
+    padding: var(--space-6) var(--container-padding);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md);
+    gap: var(--space-8);
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--color-grisclaro);
-    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-sutil);
 }
 
-/* Grid de Colección */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-sutil);
+    padding: 0 var(--space-4);
+    height: var(--input-height);
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+}
+
+.filters {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--text-muted);
+}
+
+.filter-btn.active {
+    border-color: var(--color-negro);
+    color: var(--color-negro);
+    font-weight: var(--weight-semibold);
+}
+
+.filter-btn:hover:not(.active) {
+    color: var(--color-negro);
+}
+
+.sort-box select {
+    background: transparent;
+    border: 1px solid var(--border-sutil);
+    height: var(--input-height);
+    padding: 0 var(--space-4);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Grid de Colección con espaciado amplio */
 .collection-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-md);
-    padding: 0 5% 6rem;
-    max-width: 1600px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-12); /* Gap muy amplio para sensación "cozy" */
+    padding: 0 var(--container-padding) var(--space-16);
+    max-width: var(--container-width);
     margin: 0 auto;
 }
 
-.collection-item {
-    aspect-ratio: 3/4;
-    background: var(--bg-secondary);
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
+/* Ajustes Responsive */
+@media (max-width: 1024px) {
+    .collection-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-8);
+    }
 }
 
-.collection-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
+@media (max-width: 768px) {
+    .toolbar-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-box {
+        max-width: none;
+    }
 }
-
-.collection-item:hover img {
-    transform: scale(1.05);
-}
-
-.item-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: var(--space-md);
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    color: var(--color-blanco);
-    opacity: 0;
-    transition: var(--transition-fast);
-}
-
-.collection-item:hover .item-overlay { opacity: 1; }
