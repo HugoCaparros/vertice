@@ -128,7 +128,7 @@ export const AuthService = {
                 nombre: nameInput.value,
                 email: emailInput.value,
                 password: passInput.value,
-                avatar: "../../assets/img/default-avatar.jpg",
+                avatar: "../../assets/img/default-avatar.webp",
                 rol: rol,
                 handle: "@" + nameInput.value.replace(/\s+/g, '').toLowerCase()
             };
