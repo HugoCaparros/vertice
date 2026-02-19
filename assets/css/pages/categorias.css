@@ -1,0 +1,177 @@
+/* Ruta: /assets/css/pages/categorias.css
+   Descripción: Estilos específicos para la página de categorías, incluyendo el grid interactivo. */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+}
+
+/* ==========================================================================
+   CATEGORÍAS INTERACTIVA (Layout Flexible)
+   ========================================================================== */
+
+.home-container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    /* --- ESPACIADO SIMÉTRICO --- */
+
+    /* ARRIBA: Altura navbar (160px) + Extra (32px) = 192px */
+    padding-top: calc(var(--space-header) + var(--space-8));
+
+    /* ABAJO: Igualamos la distancia para que quede centrado visualmente */
+    padding-bottom: calc(var(--space-header) + var(--space-8));
+
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+.selection-wrapper {
+    text-align: center;
+    width: 100%;
+    max-width: var(--container-width);
+    /* 1400px */
+}
+
+/* TÍTULO "SELECCIONA CATEGORÍA" */
+.selection-title {
+    font-family: var(--font-serif);
+    /* Marcellus */
+    font-size: var(--size-h2);
+    /* 36px */
+    font-weight: var(--weight-regular);
+    color: var(--text-primary);
+    /* Negro #111 */
+
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-8);
+    /* 32px */
+}
+
+/* MENÚ DE CATEGORÍAS (Moderno, Clásico...) */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-16);
+    /* 64px de separación */
+    margin-bottom: var(--space-12);
+    /* 48px antes de las fotos */
+}
+
+.cat-trigger {
+    font-family: var(--font-serif);
+    font-size: var(--size-body);
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.cat-trigger:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+/* GRID DE 5 IMÁGENES */
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 columnas iguales */
+    gap: var(--space-4);
+    /* 16px entre fotos */
+    width: 100%;
+}
+
+/* EL HUECO (Cuadrado con fondo sutil) */
+.art-slot {
+    aspect-ratio: 1 / 1;
+    /* Cuadrado perfecto */
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-sutil);
+    /* Borde gris claro */
+    border-radius: 2px;
+
+    /* Patrón de ajedrez usando tus variables de color */
+    background-image:
+        linear-gradient(45deg, var(--bg-secondary) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--bg-secondary) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--bg-secondary) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--bg-secondary) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+
+    overflow: hidden;
+    position: relative;
+    transition: border-color var(--transition-fast);
+}
+
+.art-slot:hover {
+    border-color: var(--border-focus);
+    /* Se oscurece el borde al pasar el ratón */
+}
+
+/* LA IMAGEN DENTRO DEL HUECO */
+.art-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.4s ease, transform var(--transition-smooth);
+}
+
+/* Clase que añade JS para mostrar la imagen */
+.art-img.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* RESPONSIVE (Móvil) */
+@media (max-width: 900px) {
+    .home-container {
+        /* En móvil reducimos un poco el espacio superior */
+        padding-top: var(--space-header);
+    }
+
+    .selection-title {
+        font-size: 24px;
+        /* Un poco más pequeño */
+    }
+
+    .category-nav {
+        gap: var(--space-6);
+        /* 24px */
+        flex-direction: column;
+        margin-bottom: var(--space-8);
+    }
+
+    .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+    }
+
+    /* Ocultamos la 5ª imagen en móvil para mantener la simetría (2x2) */
+    .art-slot:nth-child(5) {
+        display: none;
+    }
+}
