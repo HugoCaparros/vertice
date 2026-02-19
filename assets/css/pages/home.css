@@ -22,6 +22,7 @@ body {
    overflow: auto;
    position: relative;
    cursor: grab;
+   scroll-behavior: smooth;
 }
 
 #interactive-container:active {
@@ -46,20 +47,23 @@ body {
    left: 50%;
    transform: translate(-50%, -50%);
    text-align: center;
-   z-index: 10;
+   z-index: 100;
+   /* Asegurar que esté por encima de todo */
    pointer-events: none;
    /* No bloquear clicks en obras que puedan estar cerca */
    user-select: none;
-   max-width: 800px;
+   width: 90%;
+   max-width: 1000px;
 }
 
 .main-title {
    font-family: var(--font-serif);
-   font-size: clamp(2rem, 5vw, 3.5rem);
+   font-size: clamp(2.5rem, 8vw, 5rem);
+   /* Título más grande e impactante */
    font-weight: var(--weight-regular);
-   letter-spacing: 0.1em;
-   line-height: 1.2;
-   margin-bottom: var(--space-12);
+   letter-spacing: 0.15em;
+   line-height: 1.1;
+   margin-bottom: var(--space-16);
    color: var(--text-primary);
    text-transform: uppercase;
 }
@@ -68,21 +72,29 @@ body {
    display: flex;
    flex-direction: column;
    align-items: center;
-   gap: var(--space-4);
-   opacity: 0.8;
+   gap: var(--space-6);
+   background: rgba(255, 255, 255, 0.8);
+   padding: var(--space-8);
+   border-radius: 50%;
+   /* Icono circular como en figma */
+   width: 200px;
+   height: 200px;
+   justify-content: center;
+   border: 1px solid var(--border-sutil);
+   margin: 0 auto;
 }
 
 .scroll-hint p {
-   font-size: 0.9rem;
-   letter-spacing: 0.2em;
+   font-size: 0.75rem;
+   letter-spacing: 0.25em;
    color: var(--text-muted);
+   margin-bottom: var(--space-2);
 }
 
 .hint-icon {
-   width: 100px;
+   width: 60px;
    height: auto;
-   filter: grayscale(1);
-   opacity: 0.6;
+   opacity: 0.8;
 }
 
 /* Estilos para las obras flotantes */

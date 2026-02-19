@@ -8,25 +8,29 @@ export async function initHomePage() {
     const wrapper = document.getElementById('canvas-wrapper');
     const instructions = document.getElementById('central-instructions');
 
-    if (!container || !wrapper) return;
+    if (!container || !wrapper || !instructions) return;
 
-    // Centrar el scroll inmediatamente (o casi)
-    centerViewport(container);
+    // Centrar el scroll inmediatamente
+    setTimeout(() => {
+        instructions.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
+    }, 50);
 
     try {
         const obras = await DataLoader.getObras();
         if (!obras) return;
 
-        // Seleccionar una muestra aleatoria de obras (ej: 25)
-        const sampleObras = obras.sort(() => 0.5 - Math.random()).slice(0, 30);
+        // Aumentar el número de obras para llenar más el espacio
+        const sampleObras = obras.sort(() => 0.5 - Math.random()).slice(0, 40);
 
         const assetRoot = DataLoader.getAssetPath();
 
-        sampleObras.forEach(obra => {
-            renderFloatingObra(obra, wrapper, assetRoot);
+        // Renderizar obras por "cuadrantes" para asegurar dispersión
+        sampleObras.forEach((obra, index) => {
+            renderFloatingObra(obra, wrapper, assetRoot, index);
         });
 
         setupDragToScroll(container);
+        addReturnToCenterButton(container, instructions);
 
     } catch (error) {
         console.error("Error inicializando Home Interactiva:", error);
@@ -49,24 +53,27 @@ function centerViewport(container) {
 /**
  * Renderiza una obra en una posición aleatoria del canvas
  */
-function renderFloatingObra(obra, wrapper, assetRoot) {
+function renderFloatingObra(obra, wrapper, assetRoot, index) {
     const link = document.createElement('a');
     link.href = `./pages/catalogo/obra-detalle.html?id=${obra.id}`;
     link.className = 'floating-artwork';
 
-    // Asignar tamaño aleatorio
+    // Tamaños más grandes para llenar el espacio
     const sizes = ['size-sm', 'size-md', 'size-lg'];
     const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
     link.classList.add(sizeClass);
 
-    // Posicionamiento aleatorio evitando el centro exacto
-    const pos = getRandomPosition(300, 300, 80, 40); // 300vw x 300vh, margen de 80vw x 40vh en el centro
+    // Posicionamiento aleatorio basado en el índice para asegurar cobertura de la "pantalla entera"
+    const pos = getRandomPosition(300, 300, 100, 60);
     link.style.left = `${pos.x}vw`;
     link.style.top = `${pos.y}vh`;
 
     // Rotación leve aleatoria
-    const rotation = (Math.random() - 0.5) * 10;
+    const rotation = (Math.random() - 0.5) * 8;
     link.style.transform = `rotate(${rotation}deg)`;
+
+    // Añadir un ligero retraso en la transición para efecto de carga orgánica
+    link.style.transitionDelay = `${Math.random() * 0.5}s`;
 
     const img = document.createElement('img');
     let cleanPath = obra.imagen.replace(/^(\.\/|\/|\.\.\/)+/, '');
@@ -141,6 +148,32 @@ function setupDragToScroll(container) {
         container.scrollLeft = scrollLeft - walkX;
         container.scrollTop = scrollTop - walkY;
     });
+}
+
+/**
+ * Añade un botón "VOLVER AL CENTRO" al navbar si estamos en la home
+ */
+function addReturnToCenterButton(container, target) {
+    // Esperar un poco a que el navbar se cargue (ya que es dinámico)
+    setTimeout(() => {
+        const navRight = document.querySelector('.nav-right');
+        if (!navRight || document.getElementById('return-center-btn')) return;
+
+        const btn = document.createElement('a');
+        btn.id = 'return-center-btn';
+        btn.href = '#';
+        btn.className = 'nav-link';
+        btn.style.marginRight = 'var(--space-6)';
+        btn.textContent = 'VOLVER AL CENTRO';
+
+        btn.onclick = (e) => {
+            e.preventDefault();
+            target.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+        };
+
+        // Insertar antes del login/user menu
+        navRight.insertBefore(btn, navRight.firstChild);
+    }, 1000); // Un segundo suele ser suficiente para el fetch del partial
 }
 
 // Global para main.js

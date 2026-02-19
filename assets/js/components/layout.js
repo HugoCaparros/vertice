@@ -103,7 +103,7 @@ function updateUserInfo(usuario) {
     // Sincronizar también elementos específicos de la página de perfil si existen
     const profileName = document.getElementById('user-name');
     if (profileName && usuario.nombre) profileName.textContent = usuario.nombre;
-    
+
     const profileRole = document.getElementById('user-role-badge');
     if (profileRole) profileRole.textContent = (usuario.rol || 'Coleccionista').toUpperCase();
 }
@@ -112,7 +112,7 @@ function fixLayoutPaths(rootPath) {
     // 1. Imágenes y Logos
     const navLogo = document.getElementById('dynamic-logo');
     if (navLogo) navLogo.src = rootPath + 'assets/icons/logo_letras.svg';
-    
+
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         const footerLogo = footerPlaceholder.querySelector('img');
@@ -171,6 +171,11 @@ export function authGuard() {
         'perfil.html', 'dashboard.html', 'subir-obra.html', 'mis-obras.html', 'mis-colecciones.html'
     ];
 
+    // EXCEPCIÓN: Si estamos en la Home (index.html o root), no aplicar guard
+    if (path === '/' || path.endsWith('index.html')) {
+        return;
+    }
+
     // Páginas que son "libres" una vez logueado (sin popups molestos)
     const browsePages = [
         'obras.html', 'artistas.html', 'categorias.html', 'obra-detalle.html', 'artista-detalle.html'
@@ -183,12 +188,12 @@ export function authGuard() {
         if (rootPath === basePath) {
             rootPath = basePath.replace('data/', '').replace('assets/', '');
         }
-        
+
         // Solo mostrar modal si no es una navegación "natural" de catálogo (opcional, pero Vértice es exclusivo)
         showAuthModal(rootPath);
         document.body.style.overflow = 'hidden';
     }
-    
+
     // Si hay usuario logueado -> NUNCA redirigir ni mostrar modal
     if (usuario) {
         console.log("🔓 Usuario autenticado detectado. Movimiento libre habilitado.");
