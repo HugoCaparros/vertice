@@ -14,11 +14,11 @@ export async function initCatalogPage(categorySlug) {
     if (!gridContainer) return;
 
     if (!categorySlug) {
-        // Si no hay slug, estamos en la página de índice de categorías
+        // Si no hay slug, cargamos todas las obras o el índice
         renderCategoryIndex(gridContainer);
     } else {
-        // Si hay slug, estamos en una página de categoría específica (aunque esto ahora se maneja en main.js)
-        renderCategoryDetail(gridContainer, categorySlug);
+        // Si hay slug, inicializamos el detalle de esa categoría
+        initCategoryDetail(categorySlug);
     }
 }
 
@@ -47,27 +47,77 @@ async function renderCategoryIndex(container) {
 /**
  * Renderiza el detalle de una categoría específica (ej: abstracto.html)
  */
-export async function initCategoryDetail() {
+/**
+ * Renderiza el detalle de una categoría específica (ej: abstracto.html)
+ */
+export async function initCategoryDetail(slugOverride) {
     const container = document.querySelector('.art-grid-5-col') || document.getElementById('category-grid-container');
     if (!container) return;
 
     // Detectar categoría por el nombre del archivo si no hay param
-    const path = window.location.pathname;
-    const slug = path.split('/').pop().replace('.html', '');
-    
+    let slug = slugOverride;
+    if (!slug) {
+        const path = window.location.pathname;
+        slug = path.split('/').pop().replace('.html', '');
+    }
+
     try {
         const data = await DataLoader.getObrasPorCategoria(slug);
-        if (!data.info) return;
+        if (!data.info) {
+            console.warn(`No se encontró información para la categoría: ${slug}`);
+            return;
+        }
 
         // Inyectar metadatos
-        const titleEl = document.getElementById('cat-title');
-        const descEl = document.getElementById('cat-description');
+        const titleEl = document.querySelector('.category-title') || document.getElementById('cat-title');
+        const descEl = document.querySelector('.collection-subtitle') || document.getElementById('cat-description');
+        const countEl = document.getElementById('obraCount');
+
         if (titleEl) titleEl.textContent = data.info.nombre;
         if (descEl) descEl.textContent = data.info.descripcion;
+        if (countEl) countEl.textContent = `${data.obras.length} obras en esta colección`;
 
         currentData = data.obras;
         renderGrid(container, currentData);
+        initSorting(container);
     } catch (e) { console.error(e); }
+}
+
+/**
+ * Inicializa los botones de ordenación
+ */
+function initSorting(container) {
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            const sortType = e.currentTarget.getAttribute('data-sort');
+
+            // UI: Activar píldora
+            pills.forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            // Lógica: Ordenar
+            const sorted = sortObras([...currentData], sortType);
+            renderGrid(container, sorted);
+        });
+    });
+}
+
+function sortObras(items, type) {
+    switch (type) {
+        case 'likes-desc':
+            return items.sort((a, b) => (b.stats?.likes || 0) - (a.stats?.likes || 0));
+        case 'anio-desc':
+            return items.sort((a, b) => b.anio - a.anio);
+        case 'anio-asc':
+            return items.sort((a, b) => a.anio - b.anio);
+        case 'precio-asc':
+            return items.sort((a, b) => a.precio - b.precio);
+        case 'precio-desc':
+            return items.sort((a, b) => b.precio - a.precio);
+        default:
+            return items; // 'default' o 'todo' devuelve el orden original
+    }
 }
 
 function renderGrid(container, items) {
@@ -101,14 +151,14 @@ window.toggleLike = (event, id) => {
     event.preventDefault();
     event.stopPropagation();
     const success = DataLoader.toggleFavorite(id.toString());
-    if(!success && window.showAuthModal) window.showAuthModal(DataLoader.getBasePath());
-    
+    if (!success && window.showAuthModal) window.showAuthModal(DataLoader.getBasePath());
+
     // Feedback visual
     const btn = event.currentTarget.closest('.card-like-btn');
-    if(btn) {
+    if (btn) {
         btn.classList.toggle('liked');
         const icon = btn.querySelector('i');
-        if(btn.classList.contains('liked')) {
+        if (btn.classList.contains('liked')) {
             icon.classList.replace('fa-regular', 'fa-solid');
         } else {
             icon.classList.replace('fa-solid', 'fa-regular');
