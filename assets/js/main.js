@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const path = window.location.pathname;
     const urlParams = new URLSearchParams(window.location.search);
 
-    // --- A. HOME / GRID PRINCIPAL ---
-    if (document.getElementById('art-grid') || document.getElementById('viral-container')) {
+    // --- A. HOME / INTERACTIVA ---
+    if (document.getElementById('interactive-container') || document.getElementById('art-grid')) {
         if (window.initHomePage) window.initHomePage();
     }
 

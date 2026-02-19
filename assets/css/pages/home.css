@@ -1,2 +1,132 @@
 /* Ruta: /assets/css/pages/home.css
-   Descripción: Estilos específicos para la página de inicio. (Vaciado para mover a categorias.css) */
+   Descripción: Estilos para la Home interactiva con lienzo infinito y obras flotantes. */
+
+:root {
+   --canvas-width: 300vw;
+   --canvas-height: 300vh;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   overflow: auto;
+   /* Permitir scroll en ambas direcciones */
+   background-color: var(--bg-page);
+   font-family: var(--font-sans);
+}
+
+/* Contenedor principal que permite el scroll */
+#interactive-container {
+   width: 100vw;
+   height: 100vh;
+   overflow: auto;
+   position: relative;
+   cursor: grab;
+}
+
+#interactive-container:active {
+   cursor: grabbing;
+}
+
+/* El lienzo real donde se esparcen los elementos */
+#canvas-wrapper {
+   width: var(--canvas-width);
+   height: var(--canvas-height);
+   position: relative;
+   background-color: var(--bg-page);
+   /* Patrón sutil de fondo para dar sensación de espacio */
+   background-image: radial-gradient(var(--border-sutil) 1px, transparent 1px);
+   background-size: 50px 50px;
+}
+
+/* Bloque central de instrucciones */
+#central-instructions {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   z-index: 10;
+   pointer-events: none;
+   /* No bloquear clicks en obras que puedan estar cerca */
+   user-select: none;
+   max-width: 800px;
+}
+
+.main-title {
+   font-family: var(--font-serif);
+   font-size: clamp(2rem, 5vw, 3.5rem);
+   font-weight: var(--weight-regular);
+   letter-spacing: 0.1em;
+   line-height: 1.2;
+   margin-bottom: var(--space-12);
+   color: var(--text-primary);
+   text-transform: uppercase;
+}
+
+.scroll-hint {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: var(--space-4);
+   opacity: 0.8;
+}
+
+.scroll-hint p {
+   font-size: 0.9rem;
+   letter-spacing: 0.2em;
+   color: var(--text-muted);
+}
+
+.hint-icon {
+   width: 100px;
+   height: auto;
+   filter: grayscale(1);
+   opacity: 0.6;
+}
+
+/* Estilos para las obras flotantes */
+.floating-artwork {
+   position: absolute;
+   display: block;
+   text-decoration: none;
+   transition: transform var(--transition-smooth), filter var(--transition-fast), box-shadow var(--transition-fast);
+   z-index: 5;
+   background: var(--bg-surface);
+   padding: 10px;
+   box-shadow: var(--shadow-soft);
+}
+
+.floating-artwork:hover {
+   transform: scale(1.05) translateY(-5px) !important;
+   z-index: 20;
+   box-shadow: var(--shadow-floating);
+   filter: brightness(1.1);
+}
+
+.artwork-img {
+   display: block;
+   max-width: 100%;
+   height: auto;
+   object-fit: cover;
+   background-color: var(--bg-secondary);
+}
+
+/* Tamaños variados para las obras */
+.size-sm {
+   width: 180px;
+}
+
+.size-md {
+   width: 280px;
+}
+
+.size-lg {
+   width: 400px;
+}
+
+/* Ocultar scrollbars para una experiencia más limpia si se desea */
+#interactive-container::-webkit-scrollbar {
+   width: 0;
+   height: 0;
+}

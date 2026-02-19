@@ -4,10 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VÉRTICE</title>
+    <meta name="description" content="VÉRTICE - Galería de arte digital y colección exclusiva.">
+    <title>VÉRTICE | Galería de Arte</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/base/variables.css">
+    <link rel="stylesheet" href="assets/css/base/reset.css">
+    <link rel="stylesheet" href="assets/css/base/typography.css">
+
+    <link rel="stylesheet" href="assets/css/components/navbar.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/components/cards.css">
+    <link rel="stylesheet" href="assets/css/components/modal.css">
+
+    <link rel="stylesheet" href="assets/css/pages/home.css">
 </head>
 
 <body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main id="interactive-container">
+        <div id="canvas-wrapper">
+            <!-- Las obras se inyectarán aquí mediante JS -->
+
+            <div id="central-instructions">
+                <h1 class="main-title">LOREM IPSUM DOLOR SIT AMET,<br>CONSECTETUR ADIPISCING ELIT</h1>
+                <div class="scroll-hint">
+                    <p>SCROLLEA PARA INTERACTUAR</p>
+                    <img src="assets/icons/flechas_index.svg" alt="Flechas de navegación" class="hint-icon">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Modales necesarios para la interacción -->
+    <div id="obra-modal" class="modal-overlay">
+        <div class="modal-content modal-detalle-exclusivo">
+            <button class="modal-close" id="close-obra-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/services/dataLoader.js"></script>
+    <script type="module" src="assets/js/components/layout.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/pages/home.js"></script>
 
 </body>
 
