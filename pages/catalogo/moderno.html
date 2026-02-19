@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VÉRTICE | Colección Moderno</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Marcellus&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="../../assets/css/base/variables.css">
@@ -17,14 +19,15 @@
     <link rel="stylesheet" href="../../assets/css/pages/category.css">
     <link rel="stylesheet" href="../../assets/css/pages/auth.css">
 </head>
+
 <body>
 
     <div id="navbar-placeholder"></div>
 
     <main class="category-container">
-        
+
         <header class="category-header-block">
-            
+
             <a href="abstracto.html" class="nav-arrow prev">
                 <i class="fa-solid fa-arrow-left-long"></i>
                 <span class="tooltip">Abstracto</span>
@@ -45,11 +48,13 @@
         <div class="toolbar-container">
             <div class="filter-capsules">
                 <button class="filter-pill active" data-sort="default">Todo</button>
-                <button class="filter-pill" data-sort="likes-desc">Populares</button> <button class="filter-pill" data-sort="anio-desc">Nuevos</button>
-                <button class="filter-pill" data-sort="anio-asc">Antiguos</button>   <button class="filter-pill" data-sort="precio-asc">Precio −</button>
+                <button class="filter-pill" data-sort="likes-desc">Populares</button> <button class="filter-pill"
+                    data-sort="anio-desc">Nuevos</button>
+                <button class="filter-pill" data-sort="anio-asc">Antiguos</button> <button class="filter-pill"
+                    data-sort="precio-asc">Precio −</button>
                 <button class="filter-pill" data-sort="precio-desc">Precio +</button>
             </div>
-            
+
             <div class="toolbar-meta">
                 <span id="obraCount" class="meta-count">Explorando colección</span>
             </div>
@@ -60,7 +65,7 @@
     </main>
 
     <div id="footer-placeholder"></div>
-    
+
     <div id="authRequiredModal" class="modal-overlay">
         <div class="modal-content modal-exclusive">
             <button class="modal-close" id="closeAuthModal">&times;</button>
@@ -74,15 +79,16 @@
         </div>
     </div>
 
-    <script src="../../assets/js/services/dataLoader.js"></script>
-    <script src="../../assets/js/components/layout.js"></script>
-    <script src="../../assets/js/pages/category.js"></script>
-    <script src="../../assets/js/main.js"></script>
-    
+    <script type="module" src="../../assets/js/services/dataLoader.js"></script>
+    <script type="module" src="../../assets/js/components/layout.js"></script>
+    <script type="module" src="../../assets/js/pages/category.js"></script>
+    <script type="module" src="../../assets/js/main.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => { 
-            if(window.initCatalogPage) window.initCatalogPage('moderno'); 
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.initCatalogPage) window.initCatalogPage('moderno');
         });
     </script>
 </body>
+
 </html>

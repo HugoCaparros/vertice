@@ -1,15 +1,12 @@
+import DataLoader from '../services/dataLoader.js';
+
 /* Ruta: /assets/js/pages/home.js
    Descripción: Controlador de la página de inicio que gestiona el grid interactivo de previsualización. */
 
-window.initHomePage = async function() {
+export async function initHomePage() {
     const gridContainer = document.getElementById('art-grid');
 
     if (!gridContainer) return;
-
-    if (typeof DataLoader === 'undefined') {
-        console.error("Error: DataLoader no está definido.");
-        return;
-    }
 
     try {
         const obras = await DataLoader.getObras();
@@ -36,11 +33,7 @@ window.initHomePage = async function() {
                     let cleanPath = obra.imagen.replace(/^(\.\/|\/|\.\.\/)+/, '');
                     let imagePath = assetRoot + cleanPath;
 
-                    // --- MODIFICACIÓN: NAVEGACIÓN DIRECTA (Sin Popup) ---
                     const link = document.createElement('a');
-                    
-                    // Apuntamos a la página física de detalle pasando el ID en la URL
-                    // La ruta depende de si estás en la raíz o en una subcarpeta
                     link.href = `./pages/catalogo/obra-detalle.html?id=${obra.id}`; 
                     
                     link.className = 'art-grid-link';
@@ -84,12 +77,7 @@ window.initHomePage = async function() {
     } catch (error) {
         console.error("Error inicializando Home Page:", error);
     }
-};
+}
 
-(function() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.initHomePage);
-    } else {
-        window.initHomePage();
-    }
-})();
+// Global para main.js
+window.initHomePage = initHomePage;

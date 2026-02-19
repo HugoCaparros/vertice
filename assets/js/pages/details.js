@@ -1,3 +1,5 @@
+import DataLoader from '../services/dataLoader.js';
+
 /* Ruta: /assets/js/pages/details.js
    Descripción: Lógica para la visualización de detalles de obras y artistas, incluyendo carga de grids y efectos visuales. */
 
@@ -12,7 +14,7 @@ function safeText(elementId, text) {
 /**
  * Lanza una notificación flotante en la pantalla (Toast)
  */
-function mostrarNotificacion(mensaje, tipo = 'success') {
+export function mostrarNotificacion(mensaje, tipo = 'success') {
     let container = document.getElementById('toast-container');
     if (!container) {
         container = document.createElement('div');
@@ -38,15 +40,10 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
 /**
  * LÓGICA PARA LA PÁGINA DE DETALLE DE OBRA
  */
-window.initObraDetalle = async function() {
+export async function initObraDetalle() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (!id) return;
-
-    if (typeof DataLoader === 'undefined') {
-        console.error("DataLoader no definido. Revisa el orden de los scripts en el HTML.");
-        return;
-    }
 
     const obra = await DataLoader.getObraCompleta(id);
     
@@ -126,7 +123,7 @@ window.initObraDetalle = async function() {
             `).join('');
         }
     }
-};
+}
 
 /**
  * CARGA DE OBRAS RELACIONADAS (Uniformidad visual y metadatos completos)
@@ -162,9 +159,9 @@ async function cargarRelacionadas(categoriaId, actualId) {
 }
 
 /**
- * LÓGICA PARA EL PERFIL DE ARTISTA
+ * LÓGICA PARA EL PERFIL DE ARTISTA (Página pública de detalle de artista)
  */
-window.initArtistaDetalle = async function() {
+export async function initArtistaDetalle() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (!id) return;
@@ -197,12 +194,12 @@ window.initArtistaDetalle = async function() {
             `).join('');
         }
     }
-};
+}
 
 /**
  * LÓGICA PARA EL LISTADO GENERAL DE ARTISTAS
  */
-window.initArtistsList = async function() {
+export async function initArtistsList() {
     const container = document.getElementById('artists-grid-container');
     if (!container) return;
     
@@ -220,21 +217,10 @@ window.initArtistsList = async function() {
             </div>
         </article>
     `).join('');
-};
+}
 
-/**
- * ENRUTADOR DE INICIALIZACIÓN
- */
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('obra-titulo')) {
-        window.initObraDetalle();
-    }
-    
-    if (document.getElementById('nombre-artista') && !document.getElementById('obra-titulo')) {
-        window.initArtistaDetalle();
-    }
-    
-    if (document.getElementById('artists-grid-container')) {
-        window.initArtistsList();
-    }
-});
+// Retrocompatibilidad global
+window.initObraDetalle = initObraDetalle;
+window.initArtistaDetalle = initArtistaDetalle;
+window.initArtistsList = initArtistsList;
+window.mostrarNotificacion = mostrarNotificacion;

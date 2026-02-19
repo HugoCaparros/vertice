@@ -1,10 +1,9 @@
-<!-- Ruta: /pages/catalogo/artista-detalle.html
-     Descripción: Perfil detallado de un artista que muestra su biografía y obras destacadas. -->
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artista | VÉRTICE</title>
     <link rel="stylesheet" href="../../assets/css/base/reset.css">
     <link rel="stylesheet" href="../../assets/css/base/variables.css">
@@ -15,54 +14,160 @@
     <link rel="stylesheet" href="../../assets/css/components/buttons.css">
     <link rel="stylesheet" href="../../assets/css/pages/detalle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .artist-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 160px 5% 80px;
+            align-items: center;
+        }
+
+        .artist-portrait {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .artist-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .artist-bio h1 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .artist-bio p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--color-gris-oscuro);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .artist-follow-btn {
+            background: var(--color-negro);
+            color: var(--color-blanco);
+            border: none;
+            padding: 15px 40px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .artist-follow-btn.following {
+            background: transparent;
+            color: var(--color-negro);
+            border: 1px solid var(--color-negro);
+        }
+
+        .artist-works-title {
+            text-align: center;
+            font-family: var(--font-serif);
+            margin: 100px 0 50px;
+            font-size: 2rem;
+            letter-spacing: 4px;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 100px;
+        }
+
+        @media (max-width: 900px) {
+            .artist-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .artist-bio h1 {
+                font-size: 3rem;
+            }
+
+            .artist-bio p {
+                margin: 0 auto 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-left"><a href="artistas.html">← Volver</a></div>
-        <div class="nav-center"><a href="../../index.html" class="logo">VÉRTICE</a></div>
-        <div class="nav-right" id="auth-actions"><a href="../auth/login.html" class="user-icon"><i
-                    class="fa-regular fa-user-circle"></i></a></div>
-    </nav>
+    <div id="navbar-placeholder"></div>
 
     <section class="artist-hero">
         <div class="artist-bio">
-            <h1>ELENA MIRÓ</h1>
-            <p>Exploradora de la emoción a través del color. Elena utiliza técnicas mixtas para crear paisajes oníricos
-                que invitan a la introspección. Sus obras han sido expuestas en Berlín y Nueva York, desafiando la
-                percepción tradicional del espacio.</p>
-            <div class="stats">
-                <span><strong>24</strong> Obras</span> &nbsp;|&nbsp; <span><strong>Madrid</strong>, España</span>
-            </div>
+            <span id="disciplina-artista"
+                style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: #999; display: block; margin-bottom: 1rem;">Cargando...</span>
+            <h1 id="nombre-artista">...</h1>
+            <p id="bio-artista">Cargando biografía del artista...</p>
+            <button id="follow-btn" class="artist-follow-btn">SEGUIR ARTISTA</button>
         </div>
         <div class="artist-portrait">
-            <img src="https://images.unsplash.com/photo-1508186225823-0963cf9ab0de?auto=format&fit=crop&w=800"
-                alt="Elena Miró">
+            <img id="imagen-artista" src="" alt="Artista">
         </div>
     </section>
 
     <h2 class="artist-works-title">OBRAS EN EXHIBICIÓN</h2>
 
-    <section class="works-grid">
-        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
-            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=600"
-                alt="Obra 1">
-        </div>
-        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
-            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600"
-                alt="Obra 2">
-        </div>
-        <div class="grid-item" onclick="window.location.href='obra-detalle.html'">
-            <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=600"
-                alt="Obra 3">
-        </div>
+    <section class="works-grid" id="obras-artista-grid">
+        <!-- Se rellena dinámicamente -->
     </section>
 
     <div id="footer-placeholder"></div>
-    <script src="../../assets/js/services/dataLoader.js"></script>
-    <script src="../../assets/js/components/layout.js"></script>
-    <script src="../../assets/js/pages/details.js"></script>
-    <script src="../../assets/js/main.js"></script>
+
+    <script type="module" src="../../assets/js/services/dataLoader.js"></script>
+    <script type="module" src="../../assets/js/components/layout.js"></script>
+    <script type="module" src="../../assets/js/pages/details.js"></script>
+    <script type="module" src="../../assets/js/main.js"></script>
+
+    <script type="module">
+        import DataLoader from '../../assets/js/services/dataLoader.js';
+
+        // Lógica de seguimiento
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (!id) return;
+
+            const btn = document.getElementById('follow-btn');
+            if (btn) {
+                const checkStatus = () => {
+                    if (DataLoader.isFollowingArtist(id)) {
+                        btn.textContent = 'SIGUIENDO';
+                        btn.classList.add('following');
+                    } else {
+                        btn.textContent = 'SEGUIR ARTISTA';
+                        btn.classList.remove('following');
+                    }
+                };
+
+                // Esperar un momento para que el usuario se cargue
+                setTimeout(checkStatus, 500);
+
+                btn.onclick = () => {
+                    const success = DataLoader.toggleFollowArtist(id);
+                    if (!success) {
+                        if (window.showAuthModal) window.showAuthModal('../../');
+                        return;
+                    }
+                    checkStatus();
+                };
+            }
+        });
+    </script>
 </body>
 
 </html>

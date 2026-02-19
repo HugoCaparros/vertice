@@ -1,21 +1,17 @@
+import DataLoader from './services/dataLoader.js';
+import { initLayout } from './components/layout.js';
+import { AuthService } from './services/auth.js';
+
 /* Ruta: /assets/js/main.js
    Descripción: Motor principal de la aplicación que coordina el enrutamiento y la inicialización de componentes. */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // 0. VERIFICACIÓN CRÍTICA
-    if (typeof DataLoader === 'undefined') {
-        console.error("⛔ DataLoader no encontrado.");
-        return;
-    }
-
     // 1. INICIALIZAR LAYOUT (Navbar, Footer, Auth Guard)
-    if (window.initLayout) await window.initLayout();
+    await initLayout();
 
     // 1.1 INICIALIZAR AUTH SERVICE
-    if (typeof AuthService !== 'undefined' && AuthService.init) {
-        AuthService.init();
-    }
+    AuthService.init();
 
     // 2. ENRUTAMIENTO Y LÓGICA DE PÁGINAS
     const path = window.location.pathname;
@@ -45,25 +41,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- E. LÓGICA DE DETALLES (Modal vs Página) ---
-    // Si estamos en la home pero la URL trae un ID, abrimos el modal
     const obraId = urlParams.get('id');
-    if (obraId && window.openObraModal) {
-        window.openObraModal(obraId);
+    const artistaIdParam = urlParams.get('id');
+
+    if (document.getElementById('obra-titulo')) {
+        if (window.initObraDetalle) window.initObraDetalle();
     }
 
-    // Si es la página independiente de detalle de artista
-    if (path.includes('artista-detalle.html') && window.initArtistaDetalle) {
-        window.initArtistaDetalle();
+    if (document.getElementById('nombre-artista') && !document.getElementById('obra-titulo')) {
+        if (window.initArtistaDetalle) window.initArtistaDetalle();
     }
 
     // --- F. LISTA DE ARTISTAS ---
-    // Corregido: Llamada a la función correcta definida en details.js
     if (path.includes('artistas.html') || document.getElementById('artists-grid-container')) {
         if (window.initArtistsList) window.initArtistsList();
     }
 
     // --- G. PERFIL DE USUARIO ---
-    if (path.includes('perfil.html') && window.initUserProfile) {
-        window.initUserProfile();
+    if (path.includes('perfil.html') || document.getElementById('user-name')) {
+        if (window.initUserProfile) window.initUserProfile();
     }
 });
