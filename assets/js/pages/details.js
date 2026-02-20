@@ -6,9 +6,9 @@ import notifications from '../services/notifications.js';
 /**
  * Utilidad para inyectar texto de forma segura
  */
-function safeText(elementId, text) { 
-    const el = document.getElementById(elementId); 
-    if (el) el.textContent = text; 
+function safeText(elementId, text) {
+    const el = document.getElementById(elementId);
+    if (el) el.textContent = text;
 }
 
 /**
@@ -20,14 +20,14 @@ export async function initObraDetalle() {
     if (!id) return;
 
     const obra = await DataLoader.getObraCompleta(id);
-    
+
     if (obra) {
         const base = DataLoader.getBasePath();
         const nombreArtista = obra.artista_data ? obra.artista_data.nombre : "Artista Vértice";
-        
+
         // 1. Información Principal e Identidad
         safeText('obra-titulo', obra.titulo);
-        safeText('nombre-artista', nombreArtista); 
+        safeText('nombre-artista', nombreArtista);
         safeText('obra-tecnica-label', obra.tecnica);
         safeText('obra-anio-label', obra.anio || 's/f');
 
@@ -45,7 +45,7 @@ export async function initObraDetalle() {
         const imgEl = document.getElementById('obra-imagen-principal');
         if (imgEl) {
             imgEl.style.transition = "opacity 0.8s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)";
-            imgEl.style.opacity = "0"; 
+            imgEl.style.opacity = "0";
             imgEl.src = base + obra.imagen;
             imgEl.onload = () => {
                 imgEl.style.opacity = "1";
@@ -57,7 +57,7 @@ export async function initObraDetalle() {
             const formatNum = (num) => new Intl.NumberFormat('es-ES').format(num);
             safeText('stat-vistas', formatNum(obra.stats.vistas));
             safeText('stat-likes', formatNum(obra.stats.likes));
-            
+
             // Precio en euros con formato premium
             if (obra.precio) {
                 safeText('obra-precio', formatNum(obra.precio) + " €");
@@ -67,7 +67,7 @@ export async function initObraDetalle() {
             if (likesWrapper) {
                 const heartIcon = likesWrapper.querySelector('i');
                 FavoritesManager.syncUI(id, 'obra', { icon: heartIcon });
-                
+
                 likesWrapper.onclick = async () => {
                     await FavoritesManager.toggleObra(id, heartIcon);
                 };
@@ -77,19 +77,19 @@ export async function initObraDetalle() {
         // 6. LÓGICA DE FAVORITOS (Toggle dinámico)
         const btnColeccion = document.getElementById('btn-coleccion');
         if (btnColeccion) {
-            const updateBtn = () => {
-                const isFav = DataLoader.isFavorite(id);
-            btnColeccion.textContent = isFav ? 'ELIMINAR DE VÉRTICE' : 'GUARDAR EN VÉRTICE';
+            const updateBtn = async () => {
+                const isFav = await DataLoader.isFavorite(id);
+                btnColeccion.textContent = isFav ? 'ELIMINAR DE VÉRTICE' : 'GUARDAR EN VÉRTICE';
                 btnColeccion.classList.toggle('active', isFav);
             };
-            
+
             updateBtn(); // Estado inicial
 
             btnColeccion.onclick = async () => {
                 const heartIcon = document.querySelector('#stat-likes-wrapper i');
                 await FavoritesManager.toggleObra(id, heartIcon);
                 updateBtn();
-                
+
                 // Efecto visual extra en el botón
                 btnColeccion.style.transform = 'scale(0.98)';
                 setTimeout(() => btnColeccion.style.transform = '', 100);
@@ -155,42 +155,42 @@ export async function initArtistaDetalle() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (!id) return;
-    
+
     const artista = await DataLoader.getArtistaCompleto(id);
     if (artista) {
         const base = DataLoader.getBasePath();
         safeText('nombre-artista', artista.nombre);
         safeText('bio-artista', artista.bio);
         safeText('disciplina-artista', artista.disciplina);
-        
+
         // Nuevos Campos Enriquecidos
         safeText('nacionalidad-artista', artista.nacionalidad || 'Internacional');
         safeText('estilo-artista', artista.estilo_predominante || artista.disciplina);
-        
+
         // Contadores con formato premium
         const totalObras = (artista.lista_obras || []).length;
         safeText('count-obras', totalObras);
-        
+
         const seguidoresNum = artista.seguidores || 0;
         const formatFollowers = (num) => {
-            if (num >= 1000000) return (num/1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num/1000).toFixed(1) + 'K';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
             return num;
         };
         safeText('count-seguidores', formatFollowers(seguidoresNum));
 
         const img = document.getElementById('imagen-artista');
-        if(img) {
+        if (img) {
             img.src = base + artista.imagen;
             img.style.opacity = "0";
             img.onload = () => img.style.opacity = "1";
         }
-        
+
         // Lógica de Seguimiento
         const btnFollow = document.getElementById('follow-btn');
         if (btnFollow) {
-            const checkStatus = () => {
-                const isFollowing = DataLoader.isFollowingArtist(id);
+            const checkStatus = async () => {
+                const isFollowing = await DataLoader.isFollowingArtist(id);
                 btnFollow.textContent = isFollowing ? 'SIGUIENDO EN VÉRTICE' : 'SEGUIR EN VÉRTICE';
                 btnFollow.classList.toggle('following', isFollowing);
             };
@@ -200,9 +200,9 @@ export async function initArtistaDetalle() {
                 await FavoritesManager.toggleArtista(id, btnFollow);
             };
         }
-        
+
         const worksContainer = document.getElementById('obras-artista-grid');
-        if(worksContainer && artista.lista_obras) {
+        if (worksContainer && artista.lista_obras) {
             worksContainer.innerHTML = artista.lista_obras.map(o => `
                 <div class="mini-card" onclick="window.location.href='obra-detalle.html?id=${o.id}'">
                     <div class="mini-card-img-wrapper">
@@ -256,7 +256,7 @@ async function cargarArtistasSugeridos(actualId, disciplina) {
 export async function initArtistsList() {
     const container = document.getElementById('artists-grid-container');
     if (!container) return;
-    
+
     const artistas = await DataLoader.getArtistas();
     const base = DataLoader.getBasePath();
 
@@ -281,10 +281,10 @@ export async function initArtistsList() {
 window.toggleArtistFollow = async (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const btn = event.currentTarget.closest('.follow-icon-btn');
     const icon = btn.querySelector('i');
-    
+
     const isNowFollowing = await FavoritesManager.toggleArtista(id, null, icon);
     btn.classList.toggle('active', isNowFollowing);
 };

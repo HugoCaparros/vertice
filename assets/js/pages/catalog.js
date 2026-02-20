@@ -12,17 +12,23 @@ export async function initGeneralCatalog() {
 
     try {
         container.innerHTML = '<div class="loader-v">Buscando en la galería...</div>';
-        
+
         // Obtener obras desde el servicio
-        allObras = await DataLoader.getObras();
-        
+        const [obras, favoriteIds] = await Promise.all([
+            DataLoader.getObras(),
+            DataLoader.getFavorites()
+        ]);
+        allObras = obras;
+
+        const favIds = favoriteIds.map(f => f.id.toString());
+
         if (!allObras || allObras.length === 0) {
             container.innerHTML = '<p class="error-msg">No se encontraron obras disponibles.</p>';
             return;
         }
 
-        renderArtworks(allObras, container);
-        initFilterEvents(container);
+        renderArtworks(allObras, container, favIds);
+        initFilterEvents(container, favIds);
     } catch (error) {
         console.error("❌ Error inicializando el catálogo:", error);
         notifications.show("Error al conectar con la galería.", "error");
@@ -33,7 +39,7 @@ export async function initGeneralCatalog() {
 /**
  * Inicializa los eventos de filtrado y búsqueda
  */
-function initFilterEvents(container) {
+function initFilterEvents(container, favoriteIds) {
     const searchInput = document.getElementById('searchInput');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const sortSelect = document.getElementById('sortSelect');
@@ -44,8 +50,8 @@ function initFilterEvents(container) {
         // 1. Búsqueda por texto (Título o Artista)
         const query = searchInput.value.toLowerCase().trim();
         if (query) {
-            filtered = filtered.filter(o => 
-                o.titulo.toLowerCase().includes(query) || 
+            filtered = filtered.filter(o =>
+                o.titulo.toLowerCase().includes(query) ||
                 (o.artista && o.artista.toLowerCase().includes(query))
             );
         }
@@ -53,7 +59,7 @@ function initFilterEvents(container) {
         // 2. Filtro por Categoría
         const activeBtn = document.querySelector('.filter-btn.active');
         const activeFilter = activeBtn ? activeBtn.dataset.filter : 'all';
-        
+
         if (activeFilter !== 'all') {
             filtered = filtered.filter(o => o.categoria_id === activeFilter);
         }
@@ -68,7 +74,7 @@ function initFilterEvents(container) {
             }
         }
 
-        renderArtworks(filtered, container);
+        renderArtworks(filtered, container, favoriteIds);
 
         // Feedback sutil si no hay resultados
         if (filtered.length === 0 && (query || activeFilter !== 'all')) {
@@ -78,7 +84,7 @@ function initFilterEvents(container) {
 
     // Eventos
     searchInput?.addEventListener('input', applyFilters);
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -93,7 +99,7 @@ function initFilterEvents(container) {
 /**
  * Renderiza el HTML de las tarjetas de obras.
  */
-function renderArtworks(obras, container) {
+function renderArtworks(obras, container, favoriteIds) {
     if (obras.length === 0) {
         container.innerHTML = `
             <div class="empty-results">
@@ -111,7 +117,7 @@ function renderArtworks(obras, container) {
             maximumFractionDigits: 0
         }).format(obra.precio || 0);
 
-        const isLiked = DataLoader.isFavorite(obra.id.toString());
+        const isLiked = favoriteIds.includes(obra.id.toString());
 
         return `
             <div class="cat-card">
@@ -143,10 +149,10 @@ window.initGeneralCatalog = initGeneralCatalog;
 window.toggleLike = async (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const btn = event.currentTarget.closest('.card-like-btn');
     const icon = btn.querySelector('i');
-    
+
     const isNowLiked = await FavoritesManager.toggleObra(id, icon);
     btn.classList.toggle('liked', isNowLiked);
 };

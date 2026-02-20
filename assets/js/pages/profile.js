@@ -6,9 +6,9 @@ import notifications from '../services/notifications.js';
    Ubicación: assets/js/pages/profile.js
    ========================================================================== */
 
-function safeText(elementId, text) { 
-    const el = document.getElementById(elementId); 
-    if (el) el.textContent = text; 
+function safeText(elementId, text) {
+    const el = document.getElementById(elementId);
+    if (el) el.textContent = text;
 }
 
 /**
@@ -16,7 +16,7 @@ function safeText(elementId, text) {
  */
 export async function initUserProfile() {
     const usuario = await DataLoader.getUsuarioActual();
-    
+
     if (!usuario) {
         const base = DataLoader.getBasePath();
         window.location.href = base + 'pages/auth/login.html';
@@ -32,7 +32,7 @@ export async function initUserProfile() {
             DataLoader.getObras(),
             DataLoader.getArtistas()
         ]);
-        
+
         console.log(`📦 Datos cargados: ${obras.length} obras, ${artistas.length} artistas.`);
 
         // 3. Vistas Diferenciadas: Tus Obras (Si es Artista)
@@ -44,11 +44,11 @@ export async function initUserProfile() {
 
         // 4. Secciones Comunes: Favoritos
         const misFavoritos = obras.filter(o => (usuario.favoritos || []).includes(o.id.toString()));
-        renderList('favorites-grid', misFavoritos, renderMiniCard, "No tienes obras favoritas todavía.");
+        renderList('favorites-grid', misFavoritos, (o) => renderMiniCard(o, true), "No tienes obras favoritas todavía.");
 
         // 5. Secciones Comunes: Artistas Seguidos
         const misSeguidos = artistas.filter(a => (usuario.siguiendo_ids || []).includes(a.id.toString()));
-        renderList('artists-grid', misSeguidos, renderArtistMiniCard, "Aún no sigues a ningún artista.");
+        renderList('artists-grid', misSeguidos, (a) => renderArtistMiniCard(a, true), "Aún no sigues a ningún artista.");
 
         // 6. Configurar Modal
         setupModal();
@@ -63,7 +63,7 @@ export async function initUserProfile() {
 function renderUserIdentity(usuario) {
     safeText('user-name', (usuario.nombre || 'CARGANDO...').toUpperCase());
     safeText('user-handle', usuario.handle || usuario.email);
-    
+
     const roleBadge = document.getElementById('user-role-badge');
     if (roleBadge) {
         const role = usuario.rol || 'Coleccionista';
@@ -98,12 +98,15 @@ function renderList(containerId, data, renderFn, emptyMsg) {
     container.innerHTML = data.map(item => renderFn(item)).join("");
 }
 
-function renderArtistMiniCard(artist) {
+function renderArtistMiniCard(artist, isFollowing) {
     const base = DataLoader.getAssetPath();
     return `
         <div class="artist-mini-card" onclick="window.location.href='../catalogo/artista-detalle.html?id=${artist.id}'">
             <div class="artist-mini-avatar">
                 <img src="${base}${artist.imagen}" alt="${artist.nombre}">
+                <div class="card-follow-badge ${isFollowing ? 'active' : ''}">
+                    <i class="fa-solid fa-star"></i>
+                </div>
             </div>
             <div class="artist-mini-info">
                 <h4>${artist.nombre}</h4>
@@ -113,10 +116,9 @@ function renderArtistMiniCard(artist) {
     `;
 }
 
-function renderMiniCard(obra) {
+function renderMiniCard(obra, isLiked) {
     const base = DataLoader.getAssetPath();
-    const isLiked = DataLoader.isFavorite(obra.id.toString());
-    
+
     return `
         <div class="profile-mini-card">
             <div class="mini-card-img-wrapper">
@@ -157,7 +159,7 @@ function setupModal() {
     if (!modal || !closeBtn) return;
 
     closeBtn.onclick = closeModal;
-    
+
     // Cerrar al hacer clic fuera del contenedor
     modal.onclick = (e) => {
         if (e.target === modal) closeModal();
@@ -174,7 +176,7 @@ async function openModal(type) {
     const title = document.getElementById('modal-title');
     const grid = document.getElementById('modal-grid');
     const usuario = await DataLoader.getUsuarioActual();
-    
+
     if (!modal || !title || !grid || !usuario) return;
 
     let data = [];
@@ -184,23 +186,23 @@ async function openModal(type) {
     if (type === 'obras-artista') {
         const obras = await DataLoader.getObras();
         data = obras.filter(o => o.artista_id === usuario.id);
-        renderFn = renderMiniCard;
+        renderFn = (item) => renderMiniCard(item, false); // No necesariamente favoritos aquí
         modalTitle = "Tus Obras";
     } else if (type === 'obras-favoritas') {
         const obras = await DataLoader.getObras();
         data = obras.filter(o => (usuario.favoritos || []).includes(o.id.toString()));
-        renderFn = renderMiniCard;
+        renderFn = (item) => renderMiniCard(item, true);
         modalTitle = "Obras Favoritas";
     } else if (type === 'artistas-favoritos') {
         const artistas = await DataLoader.getArtistas();
         data = artistas.filter(a => (usuario.siguiendo_ids || []).includes(a.id.toString()));
-        renderFn = renderArtistMiniCard;
+        renderFn = (item) => renderArtistMiniCard(item, true);
         modalTitle = "Artistas Favoritos";
     }
 
     title.textContent = modalTitle;
     grid.innerHTML = data.map(item => renderFn(item)).join("");
-    
+
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
 }
@@ -215,7 +217,7 @@ function closeModal() {
 
 // Hacer globales
 window.initUserProfile = initUserProfile;
-window.logout = function() {
+window.logout = function () {
     notifications.show("Cerrando sesión en Vértice...", "info");
     setTimeout(() => {
         localStorage.removeItem('usuario_logueado');
@@ -224,17 +226,35 @@ window.logout = function() {
     }, 800);
 };
 
-// Sincronización de likes en perfil
+// Sincronización de likes en perfil con actualización en tiempo real
 window.toggleLike = async (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const btn = event.currentTarget.closest('.card-like-btn');
     const icon = btn.querySelector('i');
-    
+    const card = event.currentTarget.closest('.profile-mini-card');
+
     const isNowLiked = await FavoritesManager.toggleObra(id, icon);
     btn.classList.toggle('liked', isNowLiked);
-    
-    // Si estamos en el perfil, tal vez queramos refrescar la lista de favoritos si se quitó uno
-    // Pero por UX, es mejor dejarlo y que desaparezca al recargar o refrescar suavemente
+
+    // Si estamos en el perfil y dejamos de dar like, eliminamos la tarjeta con una transición suave
+    if (!isNowLiked && card) {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        card.style.transition = 'all 0.4s ease';
+
+        setTimeout(() => {
+            const grid = card.parentElement;
+            card.remove();
+
+            // Si el grid se queda vacío, mostrar el mensaje de "No tienes obras favoritas"
+            if (grid && grid.children.length === 0) {
+                const emptyMsg = grid.id === 'favorites-grid'
+                    ? "No tienes obras favoritas todavía."
+                    : "No tienes obras subidas todavía.";
+                grid.innerHTML = `<p class="empty-state-msg">${emptyMsg}</p>`;
+            }
+        }, 400);
+    }
 };

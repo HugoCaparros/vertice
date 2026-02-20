@@ -78,15 +78,18 @@ export async function initCategoryDetail(slugOverride) {
         if (countEl) countEl.textContent = `${data.obras.length} obras en esta colección`;
 
         currentData = data.obras;
-        renderGrid(container, currentData);
-        initSorting(container);
+        const favorites = await DataLoader.getFavorites();
+        const favoriteIds = favorites.map(f => f.id.toString());
+
+        renderGrid(container, currentData, favoriteIds);
+        initSorting(container, favoriteIds);
     } catch (e) { console.error(e); }
 }
 
 /**
  * Inicializa los botones de ordenación
  */
-function initSorting(container) {
+function initSorting(container, favoriteIds) {
     const pills = document.querySelectorAll('.filter-pill');
     pills.forEach(pill => {
         pill.addEventListener('click', (e) => {
@@ -98,7 +101,7 @@ function initSorting(container) {
 
             // Lógica: Ordenar
             const sorted = sortObras([...currentData], sortType);
-            renderGrid(container, sorted);
+            renderGrid(container, sorted, favoriteIds);
         });
     });
 }
@@ -120,12 +123,12 @@ function sortObras(items, type) {
     }
 }
 
-function renderGrid(container, items) {
+function renderGrid(container, items, favoriteIds) {
     container.innerHTML = '';
     const base = DataLoader.getBasePath();
 
     container.innerHTML = items.map(obra => {
-        const isLiked = DataLoader.isFavorite(obra.id.toString());
+        const isLiked = favoriteIds.includes(obra.id.toString());
         return `
             <article class="cat-card">
                 <div class="cat-card-img-wrapper">
@@ -147,10 +150,10 @@ function renderGrid(container, items) {
 // Globales
 window.initCatalogPage = initCatalogPage;
 window.initCategoryDetail = initCategoryDetail;
-window.toggleLike = (event, id) => {
+window.toggleLike = async (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    const success = DataLoader.toggleFavorite(id.toString());
+    const success = await DataLoader.toggleFavorite(id.toString());
     if (!success && window.showAuthModal) window.showAuthModal(DataLoader.getBasePath());
 
     // Feedback visual
