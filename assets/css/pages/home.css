@@ -28,6 +28,8 @@ body {
    cursor: grab;
    user-select: none;
    /* Evitar selección de texto al arrastrar */
+   opacity: 0;
+   transition: opacity 0.6s ease;
 }
 
 #interactive-container:active {
@@ -116,10 +118,10 @@ body {
 }
 
 .floating-artwork:hover {
-   transform: scale(1.05) translateY(-5px) !important;
+   /* Interacción muy leve como se solicitó para evitar bugs */
    z-index: 20;
    box-shadow: var(--shadow-floating);
-   filter: brightness(1.1);
+   filter: brightness(1.05);
 }
 
 .artwork-img {

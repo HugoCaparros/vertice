@@ -10,27 +10,42 @@ export async function initHomePage() {
 
     if (!container || !wrapper || !instructions) return;
 
-    // Centrar el scroll directamente en el medio del lienzo de 6000px
-    const halfCanvas = 3000;
-    const halfViewportW = container.clientWidth / 2;
-    const halfViewportH = container.clientHeight / 2;
+    // 1. Ocultar y centrar instantáneamente incluso antes del renderizado pesado
+    container.style.opacity = '0';
 
-    container.scrollLeft = halfCanvas - halfViewportW;
-    container.scrollTop = halfCanvas - halfViewportH;
+    const canvasSize = 6000;
+    const centerX = canvasSize / 2;
+    const centerY = canvasSize / 2;
+
+    const snapCenter = () => {
+        const viewportW = container.clientWidth || window.innerWidth;
+        const viewportH = container.clientHeight || window.innerHeight;
+        container.scrollLeft = centerX - (viewportW / 2);
+        container.scrollTop = centerY - (viewportH / 2);
+    };
+
+    // Primer snap inmediato
+    snapCenter();
 
     try {
         const obras = await DataLoader.getObras();
         if (!obras) return;
 
         const assetRoot = DataLoader.getAssetPath();
-        // Renderizar TODAS las obras con una distribución inteligente para evitar solapamientos
         renderAllObras(obras, wrapper, assetRoot);
+
+        // Segundo snap tras el renderizado para asegurar posición final
+        setTimeout(() => {
+            snapCenter();
+            container.style.opacity = '1';
+        }, 150);
 
         setupDragToScroll(container);
         addReturnToCenterButton(container, instructions);
 
     } catch (error) {
         console.error("Error inicializando Home Interactiva:", error);
+        container.style.opacity = '1';
     }
 }
 
@@ -51,23 +66,24 @@ function centerViewport(container) {
  * Renderiza todas las obras usando un sistema de rejilla estática y balanceada
  */
 function renderAllObras(obras, wrapper, assetRoot) {
-    const canvasSize = 6000; // px
+    const canvasSize = 6000;
     const centerX = canvasSize / 2;
     const centerY = canvasSize / 2;
 
-    // Configuración del grid (800px x 1000px permite obras grandes + margenes)
-    const cellW = 850;
-    const cellH = 1050; // Margen de 3rem (~48px) incluido en este espacio
+    // Configuración del grid: Celdas más pequeñas para mayor densidad
+    const cellW = 500;
+    const cellH = 650;
 
-    // Generar coordenadas de grid en espiral
+    // Generar coordenadas de grid en todas direcciones (X e Y positivos y negativos)
     let cells = [];
-    const radius = 5; // Suficiente para cubrir las obras
+    const radius = 8; // Aumentamos el radio para cubrir más área del canvas 6000x6000px
 
     for (let r = 0; r <= radius; r++) {
         for (let x = -r; x <= r; x++) {
             for (let y = -r; y <= r; y++) {
+                // Solo celdas en el "anillo" actual r
                 if (Math.abs(x) === r || Math.abs(y) === r) {
-                    // Evitar el centro (3x3 celdas centrales para las instrucciones)
+                    // Evitar el centro exacto donde están las instrucciones (espacio de 2x2 celdas aprox)
                     if (Math.abs(x) <= 1 && Math.abs(y) <= 1) continue;
                     cells.push({ col: x, row: y });
                 }
@@ -75,7 +91,22 @@ function renderAllObras(obras, wrapper, assetRoot) {
         }
     }
 
-    // Ordenar obras de forma determinista para que la Home sea estática
+    // Ordenar las celdas por distancia real (diagonal) al centro para una expansión radial perfecta
+    cells.sort((a, b) => {
+        const distA = Math.sqrt(Math.pow(a.col * cellW, 2) + Math.pow(a.row * cellH, 2));
+        const distB = Math.sqrt(Math.pow(b.col * cellW, 2) + Math.pow(b.row * cellH, 2));
+        return distA - distB;
+    });
+
+    // Barajar ligeramente las celdas dentro de grupos de distancia similar 
+    // para evitar un aspecto demasiado "perfecto" o robótico
+    for (let i = 0; i < cells.length - 1; i += 3) {
+        if (Math.random() > 0.5) {
+            [cells[i], cells[i + 1]] = [cells[i + 1], cells[i]];
+        }
+    }
+
+    // Usar todas las obras disponibles
     const sortedObras = [...obras].sort((a, b) => a.id - b.id);
 
     sortedObras.forEach((obra, index) => {
@@ -86,17 +117,15 @@ function renderAllObras(obras, wrapper, assetRoot) {
         link.href = `./pages/catalogo/obra-detalle.html?id=${obra.id}`;
         link.className = 'floating-artwork';
 
-        // Tamaños ordenados por ID para un look "curado"
+        // Tamaños variados
         const sizes = ['size-sm', 'size-md', 'size-lg'];
-        const sizeClass = sizes[obra.id % sizes.length];
+        const sizeClass = sizes[index % sizes.length];
         link.classList.add(sizeClass);
 
-        // Posicionar en el centro de la celda
+        // Posición calculada respecto al centro del canvas
         const posX = centerX + (cell.col * cellW);
         const posY = centerY + (cell.row * cellH);
 
-        // Centrar el elemento en su coordenada (restando la mitad de su tamaño aprox)
-        // Usamos translate(-50%, -50%) en CSS o calculamos aquí. Mejor aquí para control total.
         link.style.left = `${posX}px`;
         link.style.top = `${posY}px`;
         link.style.transform = `translate(-50%, -50%)`;
