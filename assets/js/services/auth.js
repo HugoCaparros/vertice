@@ -130,9 +130,18 @@ export const AuthService = {
                 password: passInput.value,
                 avatar: "../../assets/img/default-avatar.webp",
                 rol: rol,
-                handle: "@" + nameInput.value.replace(/\s+/g, '').toLowerCase()
+                handle: "@" + nameInput.value.replace(/\s+/g, '').toLowerCase(),
+                favoritos: [],
+                siguiendo_ids: []
             };
 
+            // 1. Guardar en la colección de usuarios locales para persistencia entre sesiones
+            const usuariosLocalesRaw = localStorage.getItem('usuarios_locales');
+            const usuariosLocales = usuariosLocalesRaw ? JSON.parse(usuariosLocalesRaw) : [];
+            usuariosLocales.push(nuevoUsuario);
+            localStorage.setItem('usuarios_locales', JSON.stringify(usuariosLocales));
+
+            // 2. Marcar como usuario logueado actualmente
             localStorage.setItem('usuario_logueado', JSON.stringify(nuevoUsuario));
 
             if (successMsg) successMsg.style.display = 'block';
@@ -170,7 +179,14 @@ export const AuthService = {
             );
 
             if (usuarioEncontrado) {
-                localStorage.setItem('usuario_logueado', JSON.stringify(usuarioEncontrado));
+                // Normalizar datos antes de guardar
+                const userToSave = {
+                    ...usuarioEncontrado,
+                    favoritos: (usuarioEncontrado.obras_megusta || []).map(id => id.toString()),
+                    siguiendo_ids: (usuarioEncontrado.siguiendo_artistas || []).map(id => id.toString())
+                };
+
+                localStorage.setItem('usuario_logueado', JSON.stringify(userToSave));
                 btn.style.backgroundColor = "var(--color-verde)";
                 btn.textContent = "¡Bienvenido!";
                 setTimeout(() => { window.location.href = '../../index.html'; }, 1000);

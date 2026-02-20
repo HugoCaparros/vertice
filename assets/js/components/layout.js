@@ -112,7 +112,7 @@ function fixLayoutPaths(rootPath) {
     // 1. Imágenes y Logos
     const navLogo = document.getElementById('dynamic-logo');
     if (navLogo) navLogo.src = rootPath + 'assets/icons/logo_letras.svg';
-    
+
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         const footerLogo = footerPlaceholder.querySelector('img');
@@ -223,7 +223,7 @@ export function showAuthModal(rootPath) {
                 </p>
                 <div class="modal-buttons">
                     <a href="${rootPath}pages/auth/login.html" class="btn-modal-solid">INICIAR SESIÓN</a>
-                    <a href="${rootPath}pages/auth/register.html" class="btn-modal-outline">REGISTRARSE</a>
+                    <a href="${rootPath}pages/auth/login.html?mode=register" class="btn-modal-outline">REGISTRARSE</a>
                 </div>
             </div>
         `;

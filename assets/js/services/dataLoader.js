@@ -3,16 +3,16 @@ const DataLoader = {
     getBasePath: () => {
         const path = window.location.pathname;
         if (path.includes('/pages/')) {
-            return '../../'; 
+            return '../../';
         }
-        return './'; 
+        return './';
     },
 
-    getDataPath: function() {
+    getDataPath: function () {
         return this.getBasePath() + 'data/';
     },
 
-    getAssetPath: function() {
+    getAssetPath: function () {
         return this.getBasePath();
     },
 
@@ -34,14 +34,23 @@ const DataLoader = {
     // 3. GETTERS BÁSICOS
     async getArtistas() { return await this.loadJSON('artistas.json'); },
     async getObras() { return await this.loadJSON('obras.json'); },
-    async getUsuarios() { return await this.loadJSON('usuarios.json'); },
+
+    async getUsuarios() {
+        const defaultUsers = await this.loadJSON('usuarios.json');
+        const localUsersRaw = localStorage.getItem('usuarios_locales');
+        const localUsers = localUsersRaw ? JSON.parse(localUsersRaw) : [];
+
+        // Combinar ambas fuentes
+        return [...defaultUsers, ...localUsers];
+    },
+
     async getNoticias() { return await this.loadJSON('noticias.json'); },
     async getColecciones() { return await this.loadJSON('colecciones.json'); },
     async getEventos() { return await this.loadJSON('eventos.json'); },
     async getComentarios() { return await this.loadJSON('comentarios.json'); },
     async getNotificaciones() { return await this.loadJSON('notificaciones.json'); },
     async getCategorias() { return await this.loadJSON('categorias.json'); },
-    
+
     async getObrasPorCategoria(slug) {
         try {
             const [obras, artistas, categorias] = await Promise.all([
@@ -54,7 +63,7 @@ const DataLoader = {
             if (!categoria) return { info: null, obras: [] };
 
             const filteredObras = obras.filter(o => o.categoria_id === slug);
-            
+
             // Adjuntar datos del artista a cada obra
             const obrasConArtista = filteredObras.map(o => {
                 const artista = artistas.find(a => a.id === o.artista_id);
@@ -126,11 +135,31 @@ const DataLoader = {
 
     async getUsuarioActual() {
         try {
+            let user = null;
             const uLogueado = localStorage.getItem('usuario_logueado');
-            if (uLogueado) return JSON.parse(uLogueado);
-            
-            const usuarios = await this.getUsuarios();
-            return usuarios[0]; 
+
+            if (uLogueado) {
+                user = JSON.parse(uLogueado);
+            } else {
+                const usuarios = await this.getUsuarios();
+                user = usuarios[0];
+            }
+
+            if (user) {
+                // NORMALIZACIÓN: Asegurar que los campos coincidan con lo que espera el resto de la app
+                if (user.obras_megusta && !user.favoritos) {
+                    user.favoritos = user.obras_megusta.map(id => id.toString());
+                }
+                if (user.siguiendo_artistas && !user.siguiendo_ids) {
+                    user.siguiendo_ids = user.siguiendo_artistas.map(id => id.toString());
+                }
+
+                // Garantizar que existan como arrays
+                user.favoritos = user.favoritos || [];
+                user.siguiendo_ids = user.siguiendo_ids || [];
+            }
+
+            return user;
         } catch (error) {
             console.error("Error al obtener usuario actual:", error);
             return null;
@@ -202,7 +231,7 @@ const DataLoader = {
     async getFollowedArtists() {
         const user = this.getUsuarioActual();
         if (!user || !user.siguiendo_ids) return [];
-        
+
         const artistas = await this.getArtistas();
         return artistas.filter(a => user.siguiendo_ids.includes(a.id.toString()));
     }
