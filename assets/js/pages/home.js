@@ -10,24 +10,21 @@ export async function initHomePage() {
 
     if (!container || !wrapper || !instructions) return;
 
-    // Centrar el scroll inmediatamente
-    setTimeout(() => {
-        instructions.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
-    }, 50);
+    // Centrar el scroll directamente en el medio del lienzo de 6000px
+    const halfCanvas = 3000;
+    const halfViewportW = container.clientWidth / 2;
+    const halfViewportH = container.clientHeight / 2;
+
+    container.scrollLeft = halfCanvas - halfViewportW;
+    container.scrollTop = halfCanvas - halfViewportH;
 
     try {
         const obras = await DataLoader.getObras();
         if (!obras) return;
 
-        // Aumentar el número de obras para llenar más el espacio
-        const sampleObras = obras.sort(() => 0.5 - Math.random()).slice(0, 40);
-
         const assetRoot = DataLoader.getAssetPath();
-
-        // Renderizar obras por "cuadrantes" para asegurar dispersión
-        sampleObras.forEach((obra, index) => {
-            renderFloatingObra(obra, wrapper, assetRoot, index);
-        });
+        // Renderizar TODAS las obras con una distribución inteligente para evitar solapamientos
+        renderAllObras(obras, wrapper, assetRoot);
 
         setupDragToScroll(container);
         addReturnToCenterButton(container, instructions);
@@ -51,65 +48,77 @@ function centerViewport(container) {
 }
 
 /**
- * Renderiza una obra en una posición aleatoria del canvas
+ * Renderiza todas las obras usando un sistema de rejilla estática y balanceada
  */
-function renderFloatingObra(obra, wrapper, assetRoot, index) {
-    const link = document.createElement('a');
-    link.href = `./pages/catalogo/obra-detalle.html?id=${obra.id}`;
-    link.className = 'floating-artwork';
+function renderAllObras(obras, wrapper, assetRoot) {
+    const canvasSize = 6000; // px
+    const centerX = canvasSize / 2;
+    const centerY = canvasSize / 2;
 
-    // Tamaños más grandes para llenar el espacio
-    const sizes = ['size-sm', 'size-md', 'size-lg'];
-    const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
-    link.classList.add(sizeClass);
+    // Configuración del grid (800px x 1000px permite obras grandes + margenes)
+    const cellW = 850;
+    const cellH = 1050; // Margen de 3rem (~48px) incluido en este espacio
 
-    // Posicionamiento aleatorio basado en el índice para asegurar cobertura de la "pantalla entera"
-    const pos = getRandomPosition(300, 300, 100, 60);
-    link.style.left = `${pos.x}vw`;
-    link.style.top = `${pos.y}vh`;
+    // Generar coordenadas de grid en espiral
+    let cells = [];
+    const radius = 5; // Suficiente para cubrir las obras
 
-    // Rotación leve aleatoria
-    const rotation = (Math.random() - 0.5) * 8;
-    link.style.transform = `rotate(${rotation}deg)`;
+    for (let r = 0; r <= radius; r++) {
+        for (let x = -r; x <= r; x++) {
+            for (let y = -r; y <= r; y++) {
+                if (Math.abs(x) === r || Math.abs(y) === r) {
+                    // Evitar el centro (3x3 celdas centrales para las instrucciones)
+                    if (Math.abs(x) <= 1 && Math.abs(y) <= 1) continue;
+                    cells.push({ col: x, row: y });
+                }
+            }
+        }
+    }
 
-    // Añadir un ligero retraso en la transición para efecto de carga orgánica
-    link.style.transitionDelay = `${Math.random() * 0.5}s`;
+    // Ordenar obras de forma determinista para que la Home sea estática
+    const sortedObras = [...obras].sort((a, b) => a.id - b.id);
 
-    const img = document.createElement('img');
-    let cleanPath = obra.imagen.replace(/^(\.\/|\/|\.\.\/)+/, '');
-    img.src = assetRoot + cleanPath;
-    img.alt = obra.titulo;
-    img.className = 'artwork-img';
-    img.loading = 'lazy';
+    sortedObras.forEach((obra, index) => {
+        if (index >= cells.length) return;
 
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.8s ease';
-    img.onload = () => img.style.opacity = '1';
+        const cell = cells[index];
+        const link = document.createElement('a');
+        link.href = `./pages/catalogo/obra-detalle.html?id=${obra.id}`;
+        link.className = 'floating-artwork';
 
-    link.appendChild(img);
-    wrapper.appendChild(link);
+        // Tamaños ordenados por ID para un look "curado"
+        const sizes = ['size-sm', 'size-md', 'size-lg'];
+        const sizeClass = sizes[obra.id % sizes.length];
+        link.classList.add(sizeClass);
+
+        // Posicionar en el centro de la celda
+        const posX = centerX + (cell.col * cellW);
+        const posY = centerY + (cell.row * cellH);
+
+        // Centrar el elemento en su coordenada (restando la mitad de su tamaño aprox)
+        // Usamos translate(-50%, -50%) en CSS o calculamos aquí. Mejor aquí para control total.
+        link.style.left = `${posX}px`;
+        link.style.top = `${posY}px`;
+        link.style.transform = `translate(-50%, -50%)`;
+
+        const img = document.createElement('img');
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.8s ease';
+        img.onload = () => img.style.opacity = '1';
+
+        let cleanPath = obra.imagen.replace(/^(\.\/|\/|\.\.\/)+/, '');
+        img.src = assetRoot + cleanPath;
+        img.alt = obra.titulo;
+        img.className = 'artwork-img';
+
+        if (img.complete) img.style.opacity = '1';
+
+        link.appendChild(img);
+        wrapper.appendChild(link);
+    });
 }
 
-/**
- * Genera coordenadas aleatorias evitando un área central protegida
- */
-function getRandomPosition(totalW, totalH, skipW, skipH) {
-    let x, y;
-    const centerX = totalW / 2;
-    const centerY = totalH / 2;
-    const halfSkipW = skipW / 2;
-    const halfSkipH = skipH / 2;
 
-    do {
-        x = Math.random() * (totalW - 20) + 10; // Margen de seguridad de 10vw
-        y = Math.random() * (totalH - 20) + 10;
-    } while (
-        x > centerX - halfSkipW && x < centerX + halfSkipW &&
-        y > centerY - halfSkipH && y < centerY + halfSkipH
-    );
-
-    return { x, y };
-}
 
 /**
  * Implementa scroll arrastrando con el ratón (UX mejorada para desktop)
@@ -143,8 +152,8 @@ function setupDragToScroll(container) {
         e.preventDefault();
         const x = e.pageX - container.offsetLeft;
         const y = e.pageY - container.offsetTop;
-        const walkX = (x - startX) * 2;
-        const walkY = (y - startY) * 2;
+        const walkX = (x - startX) * 1.5; // Velocidad de arrastre ajustada
+        const walkY = (y - startY) * 1.5;
         container.scrollLeft = scrollLeft - walkX;
         container.scrollTop = scrollTop - walkY;
     });
