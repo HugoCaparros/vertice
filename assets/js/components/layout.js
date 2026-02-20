@@ -103,7 +103,7 @@ function updateUserInfo(usuario) {
     // Sincronizar también elementos específicos de la página de perfil si existen
     const profileName = document.getElementById('user-name');
     if (profileName && usuario.nombre) profileName.textContent = usuario.nombre;
-    
+
     const profileRole = document.getElementById('user-role-badge');
     if (profileRole) profileRole.textContent = (usuario.rol || 'Coleccionista').toUpperCase();
 }
@@ -163,40 +163,55 @@ function initNavbarEvents(rootPath) {
 }
 
 export function authGuard() {
-    const usuario = JSON.parse(localStorage.getItem('usuario_logueado'));
+    // 1. Obtener usuario del almacenamiento de forma segura
+    const uRaw = localStorage.getItem('usuario_logueado');
+    let usuario = null;
+    try {
+        if (uRaw) usuario = JSON.parse(uRaw);
+    } catch (e) {
+        console.error("❌ Error parseando sesión:", e);
+        localStorage.removeItem('usuario_logueado');
+    }
+
     const path = window.location.pathname;
 
-    // Páginas que requieren protección
-    const protectedPages = [
-        'perfil.html', 'dashboard.html', 'subir-obra.html', 'mis-obras.html', 'mis-colecciones.html'
-    ];
-
-    // Páginas que son "libres" una vez logueado (sin popups molestos)
-    const browsePages = [
-        'obras.html', 'artistas.html', 'categorias.html', 'obra-detalle.html', 'artista-detalle.html'
-    ];
-
-    // Si no hay usuario y trata de entrar en páginas protegidas -> Mostrar Modal
-    if (!usuario && (protectedPages.some(page => path.includes(page)) || browsePages.some(page => path.includes(page)))) {
-        const basePath = DataLoader.getBasePath();
-        let rootPath = basePath.replace('assets/data/', '');
-        if (rootPath === basePath) {
-            rootPath = basePath.replace('data/', '').replace('assets/', '');
-        }
-        
-        // Solo mostrar modal si no es una navegación "natural" de catálogo (opcional, pero Vértice es exclusivo)
-        showAuthModal(rootPath);
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // Si hay usuario logueado -> NUNCA redirigir ni mostrar modal
+    // 2. Si hay usuario, limpiar cualquier modal previo y permitir navegación libre
     if (usuario) {
-        console.log("🔓 Usuario autenticado detectado. Movimiento libre habilitado.");
+        console.log("🔓 Acceso concedido a:", usuario.nombre);
         const modal = document.getElementById('authRequiredModal');
         if (modal) {
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
+        return; // Éxito: No hacemos nada más
+    }
+
+    // 3. Páginas que requieren protección obligatoria (Redirección o Modal)
+    const protectedPages = [
+        'perfil.html', 'dashboard.html', 'subir-obra.html', 'mis-obras.html', 'mis-colecciones.html'
+    ];
+
+    // 4. Páginas de navegación exclusiva (Vértice es una galería privada)
+    const browsePages = [
+        'obras.html', 'artistas.html', 'categorias.html', 'obra-detalle.html', 'artista-detalle.html'
+    ];
+
+    const isProtected = protectedPages.some(page => path.includes(page));
+    const isBrowse = browsePages.some(page => path.includes(page));
+
+    // 5. Si es una página de acceso restringido y NO estamos logueados -> Mostrar Modal
+    if (isProtected || isBrowse) {
+        // Pequeño retardo para asegurar que el DOM esté listo o evitar race conditions con auth.js
+        setTimeout(() => {
+            const checkFinal = localStorage.getItem('usuario_logueado');
+            if (checkFinal) return; // Si se logueó justo ahora, cancelar
+
+            const basePath = DataLoader.getBasePath();
+            let rootPath = basePath.replace('assets/data/', '').replace('data/', '').replace('assets/', '');
+            if (!rootPath.endsWith('/')) rootPath = rootPath === '' ? './' : rootPath;
+
+            showAuthModal(rootPath);
+        }, 100);
     }
 }
 

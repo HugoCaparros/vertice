@@ -141,8 +141,9 @@ const DataLoader = {
             if (uLogueado) {
                 user = JSON.parse(uLogueado);
             } else {
-                const usuarios = await this.getUsuarios();
-                user = usuarios[0];
+                // ANTES: user = usuarios[0]; (Bug: trataba al primer usuario como invitado)
+                // AHORA: return null para indicar que no hay sesión activa
+                return null;
             }
 
             if (user) {
