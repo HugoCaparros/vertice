@@ -206,15 +206,15 @@ async function openModal(type) {
     title.textContent = modalTitle;
     grid.innerHTML = data.map(item => renderFn(item)).join("");
 
-    modal.style.display = 'flex';
+    modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
 }
 
 function closeModal() {
     const modal = document.getElementById('premium-modal');
     if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }
 
@@ -230,14 +230,14 @@ function setupAvatarModal(usuarioActual) {
 
     // Abrir modal
     avatarBtn.addEventListener('click', () => {
-        avatarModal.style.display = 'flex';
+        avatarModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
 
     // Cerrar modal local
     const closeAvModal = () => {
-        avatarModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        avatarModal.classList.remove('active');
+        document.body.style.overflow = '';
     };
 
     closeAvatarBtn.addEventListener('click', closeAvModal);
