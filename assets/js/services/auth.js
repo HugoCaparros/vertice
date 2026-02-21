@@ -172,8 +172,17 @@ export const AuthService = {
         btn.disabled = true;
 
         try {
-            const usuarios = await DataLoader.getUsuarios();
-            const usuarioEncontrado = usuarios.find(u =>
+            // Obtener usuarios precargados del JSON
+            const usuariosJSON = await DataLoader.getUsuarios();
+
+            // Obtener usuarios locales registrados
+            const usuariosLocalesRaw = localStorage.getItem('usuarios_locales');
+            const usuariosLocales = usuariosLocalesRaw ? JSON.parse(usuariosLocalesRaw) : [];
+
+            // Combinar ambas listas (prioridad al local si hubiera conflicto, aunque aquí solo unimos)
+            const todosLosUsuarios = [...usuariosJSON, ...usuariosLocales];
+
+            const usuarioEncontrado = todosLosUsuarios.find(u =>
                 u.email.toLowerCase() === emailInput.value.trim().toLowerCase() &&
                 u.password === passInput.value
             );
