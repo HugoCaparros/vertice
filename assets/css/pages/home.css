@@ -28,8 +28,6 @@ body {
    cursor: grab;
    user-select: none;
    /* Evitar selección de texto al arrastrar */
-   opacity: 0;
-   transition: opacity 0.6s ease;
 }
 
 #interactive-container:active {
@@ -51,6 +49,7 @@ body {
 /* Bloque central de instrucciones */
 #central-instructions {
    position: absolute;
+   /* GARANTIZA que esté en el centro del CANVAS de 6000px, no de la pantalla */
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
@@ -58,7 +57,7 @@ body {
    z-index: 100;
    /* Asegurar que esté por encima de todo */
    pointer-events: none;
-   /* No bloquear clicks en obras que puedan estar cerca */
+   /* No bloquear clicks ni arrastres en las obras detrás */
    user-select: none;
    width: 100%;
    max-width: 1200px;

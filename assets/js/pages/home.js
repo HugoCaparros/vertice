@@ -10,8 +10,10 @@ export async function initHomePage() {
 
     if (!container || !wrapper || !instructions) return;
 
-    // 1. Ocultar y centrar instantáneamente incluso antes del renderizado pesado
-    container.style.opacity = '0';
+    // Desactivar la restauración nativa del scroll del navegador
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 
     const canvasSize = 6000;
     const centerX = canvasSize / 2;
@@ -24,7 +26,7 @@ export async function initHomePage() {
         container.scrollTop = centerY - (viewportH / 2);
     };
 
-    // Primer snap inmediato
+    // Forzar scroll antes de pintar nada pesado
     snapCenter();
 
     try {
@@ -34,18 +36,23 @@ export async function initHomePage() {
         const assetRoot = DataLoader.getAssetPath();
         renderAllObras(obras, wrapper, assetRoot);
 
-        // Segundo snap tras el renderizado para asegurar posición final
-        setTimeout(() => {
+        // Estrategia agresiva para vencer la inicialización del navegador:
+        // Asegurar la posición inmediatamente tras renderizar...
+        snapCenter();
+
+        // ... en el siguiente frame...
+        requestAnimationFrame(() => {
             snapCenter();
-            container.style.opacity = '1';
-        }, 150);
+            // ... y como plan de contingencia si el render tarda.
+            setTimeout(snapCenter, 50);
+            setTimeout(snapCenter, 150);
+        });
 
         setupDragToScroll(container);
         addReturnToCenterButton(container, instructions);
 
     } catch (error) {
         console.error("Error inicializando Home Interactiva:", error);
-        container.style.opacity = '1';
     }
 }
 
