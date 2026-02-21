@@ -66,8 +66,10 @@
     justify-content: center;
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    /* Círculo perfecto */
+    border-radius: 0 !important;
+    /* Cuadrado perfecto */
+    -webkit-appearance: none;
+    appearance: none;
     border: 1px solid var(--border-sutil);
     color: var(--text-primary);
     text-decoration: none;
@@ -161,7 +163,10 @@
 .filter-pill {
     background: transparent;
     border: 1px solid var(--border-sutil);
-    border-radius: 100px;
+    border-radius: 0 !important;
+    /* Forma rectangular estricta */
+    -webkit-appearance: none;
+    appearance: none;
     padding: 10px 24px;
 
     font-family: var(--font-sans);

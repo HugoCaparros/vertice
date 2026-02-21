@@ -77,24 +77,34 @@
 
 .filter-btn {
     background: transparent;
-    border: 1px solid transparent;
-    padding: 8px 16px;
-    font-size: 11px;
+    border: 1px solid var(--border-fuerte);
+    border-radius: 0 !important;
+    /* Forzar el sobreescribir cualquier radio de botón general */
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0 var(--space-6);
+    height: var(--input-height);
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     cursor: pointer;
     transition: all var(--transition-fast);
-    color: var(--text-muted);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .filter-btn.active {
     border-color: var(--color-negro);
     background-color: var(--color-negro);
     color: var(--color-blanco);
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-medium);
 }
 
 .filter-btn:hover:not(.active) {
+    border-color: var(--color-negro);
     color: var(--color-negro);
 }
 
