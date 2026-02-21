@@ -29,6 +29,9 @@
                 <div id="avatar-placeholder" class="profile-avatar-placeholder">
                     <i class="fa-solid fa-user"></i>
                 </div>
+                <button id="btn-edit-avatar" class="avatar-edit-btn">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
             </div>
 
             <div class="profile-info">
@@ -106,6 +109,43 @@
             <div class="modal-content">
                 <div id="modal-grid" class="modal-grid">
                     <!-- Rellenado dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE SELECCIÓN DE AVATAR -->
+    <div id="avatarModal" class="modal-overlay" style="display: none;">
+        <div class="modal-container avatar-modal-container">
+            <header class="modal-header">
+                <div class="modal-header-info">
+                    <span class="modal-label">Personalización</span>
+                    <h2>ELIGE TU AVATAR</h2>
+                </div>
+                <button id="closeAvatarModal" class="modal-close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </header>
+            <div class="modal-content">
+                <div class="avatar-selection-grid">
+                    <img src="../../assets/img/avatares/Avatar1.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar1.png" alt="Avatar 1">
+                    <img src="../../assets/img/avatares/Avatar2.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar2.png" alt="Avatar 2">
+                    <img src="../../assets/img/avatares/Avatar3.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar3.png" alt="Avatar 3">
+                    <img src="../../assets/img/avatares/Avatar4.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar4.png" alt="Avatar 4">
+                    <img src="../../assets/img/avatares/Avatar5.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar5.png" alt="Avatar 5">
+                    <img src="../../assets/img/avatares/Avatar6.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar6.png" alt="Avatar 6">
+                    <img src="../../assets/img/avatares/Avatar7.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar7.png" alt="Avatar 7">
+                    <img src="../../assets/img/avatares/Avatar8.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar8.png" alt="Avatar 8">
+                    <img src="../../assets/img/avatares/Avatar9.png" class="avatar-option"
+                        data-src="../../assets/img/avatares/Avatar9.png" alt="Avatar 9">
                 </div>
             </div>
         </div>

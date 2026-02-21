@@ -53,6 +53,9 @@ export async function initUserProfile() {
         // 6. Configurar Modal
         setupModal();
 
+        // 7. Configurar Modal de Avatar
+        setupAvatarModal(usuario);
+
     } catch (error) {
         console.error("❌ Error cargando datos del perfil:", error);
         notifications.show("No pudimos cargar toda la información de tu perfil.", "error");
@@ -213,6 +216,84 @@ function closeModal() {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
+}
+
+function setupAvatarModal(usuarioActual) {
+    const avatarBtn = document.getElementById('btn-edit-avatar');
+    const avatarModal = document.getElementById('avatarModal');
+    const closeAvatarBtn = document.getElementById('closeAvatarModal');
+    const avatarOptions = document.querySelectorAll('.avatar-option');
+    const currentUserImg = document.getElementById('user-avatar-img');
+    const placeholder = document.getElementById('avatar-placeholder');
+
+    if (!avatarBtn || !avatarModal) return;
+
+    // Abrir modal
+    avatarBtn.addEventListener('click', () => {
+        avatarModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Cerrar modal local
+    const closeAvModal = () => {
+        avatarModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    closeAvatarBtn.addEventListener('click', closeAvModal);
+    avatarModal.addEventListener('click', (e) => {
+        if (e.target === avatarModal) closeAvModal();
+    });
+
+    // Seleccionar Avatar
+    avatarOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            const newSrc = e.target.getAttribute('data-src');
+
+            // 1. Actualizar UI visualmente
+            if (currentUserImg) {
+                currentUserImg.src = newSrc;
+                currentUserImg.style.display = 'block';
+                if (placeholder) placeholder.style.display = 'none';
+            }
+
+            // Destacar selección actual (Opcional visual)
+            avatarOptions.forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+
+            // 2. Persistir en la Sesión Actual
+            const sessionUserRaw = localStorage.getItem('usuario_logueado');
+            if (sessionUserRaw) {
+                let sessionUser = JSON.parse(sessionUserRaw);
+                // Extraer la ruta a partir de 'assets/...' para compatibilidad universal
+                let cleanRoute = newSrc;
+                if (newSrc.includes('../../')) {
+                    cleanRoute = newSrc.split('../../')[1];
+                }
+                sessionUser.avatar = cleanRoute;
+                localStorage.setItem('usuario_logueado', JSON.stringify(sessionUser));
+            }
+
+            // 3. Persistir en LocalStorage (Base de datos local simulada)
+            const localUsersRaw = localStorage.getItem('usuarios_locales');
+            if (localUsersRaw) {
+                let localUsers = JSON.parse(localUsersRaw);
+                const userIndex = localUsers.findIndex(u => u.id === usuarioActual.id);
+                if (userIndex !== -1) {
+                    let cleanRoute = newSrc;
+                    if (newSrc.includes('../../')) {
+                        cleanRoute = newSrc.split('../../')[1];
+                    }
+                    localUsers[userIndex].avatar = cleanRoute;
+                    localStorage.setItem('usuarios_locales', JSON.stringify(localUsers));
+                }
+            }
+
+            // 4. Feedback y Cerrar
+            notifications.show("Avatar actualizado con éxito.", "success");
+            closeAvModal();
+        });
+    });
 }
 
 // Hacer globales

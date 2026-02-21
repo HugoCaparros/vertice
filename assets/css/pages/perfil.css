@@ -142,7 +142,7 @@
     .profile-container {
         grid-template-columns: 1fr;
     }
-    
+
     .profile-sidebar {
         position: static;
         display: flex;
@@ -150,7 +150,7 @@
         align-items: center;
         margin-bottom: 3rem;
     }
-    
+
     .profile-avatar-wrapper {
         width: 150px;
         margin-bottom: 0;
@@ -286,4 +286,96 @@
 .error-state p {
     margin-bottom: 2rem;
     color: #991b1b;
+}
+
+/* ==========================================================================
+   MODAL AVATAR SELECCIÓN
+   ========================================================================== */
+
+.avatar-edit-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-negro);
+    color: var(--color-blanco);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+    z-index: 10;
+}
+
+.avatar-edit-btn:hover {
+    transform: scale(1.1);
+    background: var(--hover-negro);
+}
+
+.avatar-modal-container {
+    max-width: 600px;
+}
+
+/* Modificamos el header específicamente para el modal del avatar */
+.avatar-modal-container .modal-header {
+    padding-top: var(--space-12);
+    /* Más espaciado superior */
+    padding-bottom: var(--space-4);
+    /* Menos espaciado inferior */
+    padding-left: var(--space-10);
+    padding-right: var(--space-10);
+    border-bottom: 1px solid var(--border-sutil);
+}
+
+/* El problema del espaciado también venía del padding global del contenido */
+.avatar-modal-container .modal-content {
+    padding-top: var(--space-2);
+    /* Reducir el hueco entre el header y el grid */
+    padding-bottom: var(--space-10);
+    padding-left: var(--space-10);
+    padding-right: var(--space-10);
+}
+
+.avatar-modal-container .modal-header-info h2 {
+    font-family: var(--font-serif) !important;
+    font-size: 2.5rem !important;
+    /* Aún más grande, forzado para que no lo sobreescriba el reset */
+    color: var(--color-negro);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.avatar-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    padding: var(--space-2) 0;
+}
+
+.avatar-option {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background-color: var(--bg-secondary);
+    border: 2px solid transparent;
+    /* Para el estado seleccionado */
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: var(--space-2);
+}
+
+.avatar-option:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-blanco);
+    border-color: var(--border-sutil);
+}
+
+.avatar-option.selected {
+    border-color: var(--color-negro);
+    background-color: var(--color-blanco);
+    box-shadow: var(--shadow-md);
 }

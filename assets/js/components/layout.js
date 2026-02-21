@@ -51,8 +51,9 @@ export const initLayout = async function () {
                     }
                 });
 
+                // REPLACING BLOCK 1 (Call site)
                 // PERSONALIZAR EL MENÚ SEGÚN EL ROL
-                if (usuario) updateUserInfo(usuario);
+                if (usuario) updateUserInfo(usuario, rootPath);
             } else {
                 console.error(`❌ Error 404: No se encuentra ${fullUrl}`);
             }
@@ -75,7 +76,7 @@ export const initLayout = async function () {
    FUNCIONES AUXILIARES (LOGIN / UI)
    ========================================================================== */
 
-function updateUserInfo(usuario) {
+function updateUserInfo(usuario, rootPath = './') {
     const welcomeEl = document.querySelector('.welcome-label');
     if (welcomeEl) welcomeEl.textContent = 'BIENVENIDO,';
 
@@ -98,6 +99,13 @@ function updateUserInfo(usuario) {
             roleEl.classList.remove('is-artist');
             artistLinks.forEach(link => { link.style.display = 'none'; });
         }
+    }
+
+    const avatarEl = document.getElementById('navbar-user-avatar');
+    if (avatarEl && usuario.avatar) {
+        // En `layout.js`, rootPath maneja la relativización (ej. '../../' o './')
+        avatarEl.src = rootPath + usuario.avatar;
+        avatarEl.style.display = 'block';
     }
 
     // Sincronizar también elementos específicos de la página de perfil si existen
