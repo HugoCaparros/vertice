@@ -41,11 +41,24 @@
             <button class="filter-btn" data-filter="abstracto">Abstracto</button>
         </div>
         <div class="sort-box">
-            <select id="sortSelect">
+            <!-- Select nativo oculto para mantener lógica actual o formularios -->
+            <select id="sortSelect" style="display: none;">
                 <option value="defecto">Relevancia</option>
                 <option value="precio-asc">Precio: Menor a Mayor</option>
                 <option value="precio-desc">Precio: Mayor a Menor</option>
             </select>
+            <!-- Select custom Premium -->
+            <div class="custom-select-container" id="customSortContainer">
+                <div class="custom-select-trigger" id="customSortTrigger">
+                    <span id="customSortLabel">Relevancia</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="custom-select-options" id="customSortOptions">
+                    <div class="custom-option active" data-value="defecto">Relevancia</div>
+                    <div class="custom-option" data-value="precio-asc">Precio: Menor a Mayor</div>
+                    <div class="custom-option" data-value="precio-desc">Precio: Mayor a Menor</div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -14,11 +14,20 @@ export async function initGeneralCatalog() {
         container.innerHTML = '<div class="loader-v">Buscando en la galería...</div>';
 
         // Obtener obras desde el servicio
-        const [obras, favoriteIds] = await Promise.all([
+        const [obras, favoriteIds, artistas] = await Promise.all([
             DataLoader.getObras(),
-            DataLoader.getFavorites()
+            DataLoader.getFavorites(),
+            DataLoader.getArtistas()
         ]);
-        allObras = obras;
+
+        allObras = obras.map(o => {
+            const artista = artistas.find(a => a.id === o.artista_id);
+            return {
+                ...o,
+                artista: artista ? artista.nombre : 'Artista Vértice',
+                artista_data: artista
+            };
+        });
 
         const favIds = favoriteIds.map(f => f.id.toString());
 
@@ -94,6 +103,48 @@ function initFilterEvents(container, favoriteIds) {
     });
 
     sortSelect?.addEventListener('change', applyFilters);
+
+    // Lógica para Select Custom Premium
+    const customSortContainer = document.getElementById('customSortContainer');
+    const customSortTrigger = document.getElementById('customSortTrigger');
+    const customSortOptions = document.getElementById('customSortOptions');
+    const customSortLabel = document.getElementById('customSortLabel');
+    const customOptions = document.querySelectorAll('.custom-option');
+
+    if (customSortTrigger && customSortOptions && sortSelect) {
+        // Toggle dropdown
+        customSortTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSortOptions.classList.toggle('open');
+            customSortTrigger.classList.toggle('open');
+        });
+
+        // Seleccionar opción
+        customOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Actualizar UI
+                customOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                customSortLabel.textContent = option.textContent;
+
+                // Actualizar Native Select y disparar evento
+                sortSelect.value = option.dataset.value;
+                sortSelect.dispatchEvent(new Event('change'));
+
+                // Cerrar Dropdown
+                customSortOptions.classList.remove('open');
+                customSortTrigger.classList.remove('open');
+            });
+        });
+
+        // Cerrar al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!customSortContainer.contains(e.target)) {
+                customSortOptions.classList.remove('open');
+                customSortTrigger.classList.remove('open');
+            }
+        });
+    }
 }
 
 /**

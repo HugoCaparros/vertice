@@ -24,12 +24,22 @@ export async function initObraDetalle() {
     if (obra) {
         const base = DataLoader.getBasePath();
         const nombreArtista = obra.artista_data ? obra.artista_data.nombre : "Artista Vértice";
+        const idArtista = obra.artista_data ? obra.artista_data.id : "";
 
         // 1. Información Principal e Identidad
         safeText('obra-titulo', obra.titulo);
-        safeText('nombre-artista', nombreArtista);
+
+        const linkArtista = document.getElementById('link-artista-hero');
+        if (linkArtista) {
+            linkArtista.textContent = nombreArtista;
+            if (idArtista) {
+                linkArtista.href = `artista-detalle.html?id=${idArtista}`;
+            }
+        }
+
         safeText('obra-tecnica-label', obra.tecnica);
         safeText('obra-anio-label', obra.anio || 's/f');
+        safeText('obra-categoria-label', obra.categoria_data ? obra.categoria_data.nombre : 'Sin categoría');
 
         // 2. Narrativa y Contexto
         safeText('obra-descripcion-texto', obra.descripcion);
@@ -239,7 +249,7 @@ async function cargarArtistasSugeridos(actualId, disciplina) {
         container.innerHTML = sugeridos.map(a => `
             <div class="artist-mini-card" onclick="window.location.href='artista-detalle.html?id=${a.id}'">
                 <div class="artist-mini-avatar">
-                   <img src="${base}${a.imagen}" alt="${a.nombre}">
+                   <img src="${base}${a.imagen}" alt="${a.nombre}" loading="lazy">
                 </div>
                 <div class="artist-mini-info">
                    <h4>${a.nombre}</h4>

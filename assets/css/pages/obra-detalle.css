@@ -190,7 +190,8 @@
 
 .tech-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
     padding: 16px 0;
     border-bottom: 1px solid var(--border-sutil);
 }
@@ -205,6 +206,7 @@
 .tech-row dd {
     font-size: 0.9rem;
     font-weight: 600;
+    line-height: 1.5;
     color: var(--text-primary);
 }
 

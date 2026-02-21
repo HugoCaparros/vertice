@@ -116,8 +116,16 @@
     transition: all var(--transition-fast);
 }
 
-.btn-vrt-follow:hover { background: var(--hover-negro); transform: translateY(-2px); }
-.btn-vrt-follow.following { background: transparent; color: var(--color-negro); border: 1px solid var(--border-sutil); }
+.btn-vrt-follow:hover {
+    background: var(--hover-negro);
+    transform: translateY(-2px);
+}
+
+.btn-vrt-follow.following {
+    background: transparent;
+    color: var(--color-negro);
+    border: 1px solid var(--border-sutil);
+}
 
 .social-metrics {
     display: flex;
@@ -130,8 +138,16 @@
     align-items: center;
 }
 
-.m-val { font-size: 1.2rem; font-weight: 700; }
-.m-lbl { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1px; }
+.m-val {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.m-lbl {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
 
 .btn-vrt-share {
     width: 60px;
@@ -143,7 +159,10 @@
     transition: all 0.3s;
 }
 
-.btn-vrt-share:hover { border-color: var(--color-negro); color: var(--color-negro); }
+.btn-vrt-share:hover {
+    border-color: var(--color-negro);
+    color: var(--color-negro);
+}
 
 /* PORTRAIT */
 .portrait-container {
@@ -156,7 +175,7 @@
 .portrait-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     position: relative;
     z-index: 3;
     box-shadow: var(--shadow-floating);
@@ -186,9 +205,24 @@
     text-align: center;
 }
 
-.exhibition-header h2 { font-family: var(--font-serif); font-size: 2rem; letter-spacing: 4px; }
-.exhibition-count { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
-.exhibition-divider { width: 80px; height: 1px; background: var(--color-negro); margin: var(--space-6) auto; }
+.exhibition-header h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    letter-spacing: 4px;
+}
+
+.exhibition-count {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.exhibition-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--color-negro);
+    margin: var(--space-6) auto;
+}
 
 .works-grid-vrt {
     display: grid;
@@ -205,7 +239,10 @@
     overflow: hidden;
 }
 
-.mini-card:hover { border-color: var(--color-negro); transform: translateY(-4px); }
+.mini-card:hover {
+    border-color: var(--color-negro);
+    transform: translateY(-4px);
+}
 
 .mini-card-img-wrapper {
     position: relative;
@@ -216,11 +253,13 @@
 .mini-card-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 1.5s var(--transition-smooth);
 }
 
-.mini-card:hover img { transform: scale(1.08); }
+.mini-card:hover img {
+    transform: scale(1.08);
+}
 
 .mini-card-overlay {
     position: absolute;
@@ -237,7 +276,9 @@
     backdrop-filter: blur(4px);
 }
 
-.mini-card:hover .mini-card-overlay { opacity: 1; }
+.mini-card:hover .mini-card-overlay {
+    opacity: 1;
+}
 
 .mini-card-overlay span {
     color: var(--color-blanco);
@@ -247,9 +288,23 @@
     padding: 8px 16px;
 }
 
-.mini-card-info { padding: var(--space-4); }
-.mini-card-info h3 { font: var(--font-small); font-weight: 700; margin-bottom: 2px; text-transform: uppercase; }
-.mini-card-info p { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.mini-card-info {
+    padding: var(--space-4);
+}
+
+.mini-card-info h3 {
+    font: var(--font-small);
+    font-weight: 700;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.mini-card-info p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 /* DISCOVERY GRID SUGERIDOS */
 .relacionadas-grid {
@@ -273,9 +328,24 @@
 }
 
 @media (max-width: 1024px) {
-    .hero-content-grid { grid-template-columns: 1fr; text-align: center; }
-    .hero-bg-accent { display: none; }
-    .artist-quick-meta { justify-content: center; }
-    .artist-social-actions { flex-direction: column; }
-    .discovery-grid { grid-template-columns: 1fr; }
+    .hero-content-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-bg-accent {
+        display: none;
+    }
+
+    .artist-quick-meta {
+        justify-content: center;
+    }
+
+    .artist-social-actions {
+        flex-direction: column;
+    }
+
+    .discovery-grid {
+        grid-template-columns: 1fr;
+    }
 }
